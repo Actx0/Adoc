@@ -1,6 +1,6 @@
 # Commit
 
-Stage all changes and create a meaningful, SSH-signed commit.
+Stage all changes, create a meaningful SSH-signed commit, and push to the remote.
 
 ## Optional message
 
@@ -13,7 +13,9 @@ If the user typed text after `/commit`, treat it as the commit message hint or f
    - `git diff` and `git diff --cached`
    - `git log -5 --oneline` (match this repo's commit style)
 
-2. If there is nothing to commit (clean worktree and empty index), stop and say so. Do not create an empty commit.
+2. If the worktree and index are clean:
+   - If the branch is ahead of its remote, skip to step 8 (push only)
+   - Otherwise stop and say there is nothing to commit or push
 
 3. Stage everything:
 
@@ -46,17 +48,29 @@ Request `all` permissions for the Shell tool so the SSH key is readable outside 
 
 6. If the commit fails (hooks, signing, etc.), fix the issue and create a **new** commit. Do not amend unless the user explicitly asks and amend rules allow it.
 
-7. Run `git status` and report the commit hash and subject.
+7. Confirm the new commit with `git status` / `git log -1 --oneline`.
+
+8. Push the current branch to `origin` with the same SSH key:
+
+```bash
+GIT_SSH_COMMAND='ssh -i "$HOME/.ssh/vid_ed25519" -o IdentitiesOnly=yes' \
+  git push -u origin HEAD
+```
+
+Use `all` permissions for push (SSH key + network). If Auto-review blocks the push, retry with `request_smart_mode_approval` so the user can approve.
+
+9. Report the commit hash/subject and push result (remote URL / branch up to date).
 
 ## Examples
 
-- `/commit` → analyze diff, `git add --all`, sign-commit with a drafted message
-- `/commit feat: update api docs` → use that exact message
-- `/commit intro copy` → draft something like `docs: expand introduction and why Actx0`
+- `/commit` → analyze diff, `git add --all`, sign-commit, push
+- `/commit feat: update api docs` → use that exact message, then push
+- `/commit intro copy` → draft something like `docs: expand introduction and why Actx0`, then push
 
 ## Notes
 
-- Do not push unless the user also asks to push.
+- Always push after a successful commit (or when already ahead with a clean tree).
 - Do not update git config.
 - Do not skip hooks (`--no-verify`) unless the user explicitly asks.
-- Signing key is always `~/.ssh/vid_ed25519` for this command.
+- Do not force-push unless the user explicitly asks.
+- Signing and push key is always `~/.ssh/vid_ed25519` for this command.
