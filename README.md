@@ -25,20 +25,4 @@ Connect this `docs/` folder (or the repo with docs path set to `docs`) in the [M
 | `integrations/` | Integrations (in progress) |
 | `agent-plugins/` | Agent plugins (in progress) |
 | `release-notes/` | Platform and SDK release notes |
-| `logo.png` / `favicon.png` | Brand assets (add locally — see below) |
-
-## Brand assets
-
-Image writes are blocked in some agent environments. Add them manually once:
-
-```bash
-cp static/logo.png docs/logo.png
-cp static/logo.png docs/favicon.png
-```
-
-Then set in `docs.json`:
-
-```json
-"logo": { "light": "/logo.png", "dark": "/logo.png" },
-"favicon": "/favicon.png"
-```
+| `logo.png` / `favicon.png` | Actx0 brand mark (navbar + favicon) |
