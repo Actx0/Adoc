@@ -27,6 +27,16 @@
       "linkedin": "https://www.linkedin.com/company/actx0"
     }
   },
+  "api": {
+    "playground": {
+      "display": "interactive"
+    },
+    "examples": {
+      "languages": ["curl", "python", "javascript", "go"],
+      "defaults": "required",
+      "prefill": true
+    }
+  },
   "navigation": {
     "tabs": [
       {
@@ -67,102 +77,121 @@
             ]
           },
           {
+            "group": "API Keys",
+            "icon": "key",
+            "openapi": "openapi.yaml",
+            "pages": [
+              "POST /apiKeys",
+              "GET /apiKeys",
+              "GET /apiKeys/{apiKeyId}",
+              "DELETE /apiKeys/{apiKeyId}"
+            ]
+          },
+          {
             "group": "Workspaces",
             "icon": "building",
+            "openapi": "openapi.yaml",
             "pages": [
-              "api-reference/workspaces/create-workspace",
-              "api-reference/workspaces/list-workspaces",
-              "api-reference/workspaces/get-workspace",
-              "api-reference/workspaces/update-workspace",
-              "api-reference/workspaces/delete-workspace"
+              "POST /workspaces",
+              "GET /workspaces",
+              "GET /workspaces/{workspaceId}",
+              "PUT /workspaces/{workspaceId}",
+              "DELETE /workspaces/{workspaceId}"
             ]
           },
           {
             "group": "Access Keys",
-            "icon": "key",
+            "icon": "unlock-keyhole",
+            "openapi": "openapi.yaml",
             "pages": [
-              "api-reference/access-keys/create-access-key",
-              "api-reference/access-keys/list-access-keys",
-              "api-reference/access-keys/get-access-key",
-              "api-reference/access-keys/delete-access-key"
+              "POST /workspaces/{workspaceId}/keys",
+              "GET /workspaces/{workspaceId}/keys",
+              "GET /workspaces/{workspaceId}/keys/{keyId}",
+              "DELETE /workspaces/{workspaceId}/keys/{keyId}"
             ]
           },
           {
             "group": "Agents",
             "icon": "robot",
+            "openapi": "openapi.yaml",
             "pages": [
-              "api-reference/agents/create-agent",
-              "api-reference/agents/list-agents",
-              "api-reference/agents/get-agent",
-              "api-reference/agents/update-agent",
-              "api-reference/agents/delete-agent"
+              "POST /workspaces/{workspaceId}/agents",
+              "GET /workspaces/{workspaceId}/agents",
+              "GET /workspaces/{workspaceId}/agents/{agentId}",
+              "PUT /workspaces/{workspaceId}/agents/{agentId}",
+              "DELETE /workspaces/{workspaceId}/agents/{agentId}"
             ]
           },
           {
             "group": "Sessions",
             "icon": "comments",
+            "openapi": "openapi.yaml",
             "pages": [
-              "api-reference/sessions/create-session",
-              "api-reference/sessions/list-sessions",
-              "api-reference/sessions/get-session",
-              "api-reference/sessions/get-session-by-labels",
-              "api-reference/sessions/update-session-by-labels",
-              "api-reference/sessions/delete-session-by-labels"
+              "POST /workspaces/{workspaceId}/agents/{agentId}/sessions",
+              "GET /workspaces/{workspaceId}/agents/{agentId}/sessions",
+              "GET /workspaces/{workspaceId}/agents/{agentId}/sessions/{sessionId}",
+              "GET /workspaces/{workspaceId}/agents/{agentId}/sessions/by-labels",
+              "PUT /workspaces/{workspaceId}/agents/{agentId}/sessions/by-labels",
+              "DELETE /workspaces/{workspaceId}/agents/{agentId}/sessions/by-labels"
             ]
           },
           {
             "group": "Messages",
             "icon": "message",
+            "openapi": "openapi.yaml",
             "pages": [
-              "api-reference/messages/create-message",
-              "api-reference/messages/batch-create-messages",
-              "api-reference/messages/list-messages",
-              "api-reference/messages/search-messages",
-              "api-reference/messages/get-message",
-              "api-reference/messages/update-message",
-              "api-reference/messages/delete-message",
-              "api-reference/messages/batch-delete-messages"
+              "POST /workspaces/{workspaceId}/agents/{agentId}/sessions/{sessionId}/messages",
+              "POST /workspaces/{workspaceId}/agents/{agentId}/sessions/{sessionId}/messages/batch",
+              "GET /workspaces/{workspaceId}/agents/{agentId}/sessions/{sessionId}/messages",
+              "POST /workspaces/{workspaceId}/agents/{agentId}/sessions/{sessionId}/messages/search",
+              "GET /workspaces/{workspaceId}/agents/{agentId}/sessions/{sessionId}/messages/{messageId}",
+              "PUT /workspaces/{workspaceId}/agents/{agentId}/sessions/{sessionId}/messages/{messageId}",
+              "DELETE /workspaces/{workspaceId}/agents/{agentId}/sessions/{sessionId}/messages/{messageId}",
+              "DELETE /workspaces/{workspaceId}/agents/{agentId}/sessions/{sessionId}/messages/batch"
             ]
           },
           {
             "group": "Memories",
             "icon": "microchip",
+            "openapi": "openapi.yaml",
             "pages": [
-              "api-reference/memories/create-memory",
-              "api-reference/memories/batch-create-memories",
-              "api-reference/memories/list-memories",
-              "api-reference/memories/search-memories",
-              "api-reference/memories/get-memory",
-              "api-reference/memories/update-memory",
-              "api-reference/memories/delete-memory",
-              "api-reference/memories/batch-delete-memories",
-              "api-reference/memories/regenerate-memories"
+              "POST /workspaces/{workspaceId}/agents/{agentId}/sessions/{sessionId}/memories",
+              "POST /workspaces/{workspaceId}/agents/{agentId}/sessions/{sessionId}/memories/batch",
+              "GET /workspaces/{workspaceId}/agents/{agentId}/sessions/{sessionId}/memories",
+              "POST /workspaces/{workspaceId}/agents/{agentId}/sessions/{sessionId}/memories/search",
+              "GET /workspaces/{workspaceId}/agents/{agentId}/sessions/{sessionId}/memories/{memoryId}",
+              "PUT /workspaces/{workspaceId}/agents/{agentId}/sessions/{sessionId}/memories/{memoryId}",
+              "DELETE /workspaces/{workspaceId}/agents/{agentId}/sessions/{sessionId}/memories/{memoryId}",
+              "DELETE /workspaces/{workspaceId}/agents/{agentId}/sessions/{sessionId}/memories/batch",
+              "POST /workspaces/{workspaceId}/agents/{agentId}/sessions/{sessionId}/memories/regenerate"
             ]
           },
           {
             "group": "Prompts",
             "icon": "file-lines",
+            "openapi": "openapi.yaml",
             "pages": [
-              "api-reference/prompts/create-prompt",
-              "api-reference/prompts/list-prompts",
-              "api-reference/prompts/get-prompt",
-              "api-reference/prompts/delete-prompt",
-              "api-reference/prompts/create-prompt-version",
-              "api-reference/prompts/list-prompt-versions",
-              "api-reference/prompts/get-prompt-version",
-              "api-reference/prompts/update-prompt-version",
-              "api-reference/prompts/delete-prompt-version",
-              "api-reference/prompts/get-prompt-by-name"
+              "POST /workspaces/{workspaceId}/prompts",
+              "GET /workspaces/{workspaceId}/prompts",
+              "GET /workspaces/{workspaceId}/prompts/{promptId}",
+              "DELETE /workspaces/{workspaceId}/prompts/{promptId}",
+              "POST /workspaces/{workspaceId}/prompts/{promptId}/versions",
+              "GET /workspaces/{workspaceId}/prompts/{promptId}/versions",
+              "GET /workspaces/{workspaceId}/prompts/{promptId}/versions/{promptVersionId}",
+              "PUT /workspaces/{workspaceId}/prompts/{promptId}/versions/{promptVersionId}",
+              "DELETE /workspaces/{workspaceId}/prompts/{promptId}/versions/{promptVersionId}",
+              "GET /workspaces/{workspaceId}/promptsByName/{promptName}"
             ]
           },
           {
             "group": "Knowledge",
             "icon": "book",
+            "openapi": "openapi.yaml",
             "pages": [
-              "api-reference/knowledge/upload-document",
-              "api-reference/knowledge/list-documents",
-              "api-reference/knowledge/search-documents",
-              "api-reference/knowledge/delete-document"
+              "POST /workspaces/{workspaceId}/documents",
+              "GET /workspaces/{workspaceId}/documents",
+              "POST /workspaces/{workspaceId}/documents/search",
+              "DELETE /workspaces/{workspaceId}/documents/{documentId}"
             ]
           }
         ]

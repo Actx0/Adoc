@@ -1,87 +1,27 @@
 ---
 title: "Overview"
-description: "REST APIs for workspaces, agents, sessions, messages, memories, prompts, knowledge, and access keys"
+description: "REST APIs for workspaces, agents, sessions, messages, memories, prompts, knowledge, and keys"
 ---
 
 ## Actx0 REST API
 
-Actx0 provides a REST API for integrating durable agent memory into your applications. Manage workspaces, agents, sessions, messages, memories, prompts, knowledge documents, and access keys with simple HTTP requests.
+Actx0 exposes a versioned HTTP API under `/api/v1`. Use it to manage workspaces, issue keys, run agents and sessions, store messages and memories, version prompts, and search knowledge documents.
+
+Every endpoint page in this reference is generated from the OpenAPI spec — including typed parameters, request/response schemas, language examples, and an interactive **Try it** playground.
 
 <Info>
-  **Quick start:** Create a workspace access key in the Actx0 Dashboard, then make your first memory operation in minutes.
+  **Quick start:** Create a workspace access key in the Actx0 Dashboard, then call Create Memory with `X-Access-Key`.
 </Info>
 
 ***
 
-## Quick Start Guide
+## Base URL
 
-Get started with the Actx0 API in three simple steps:
+```text
+http://127.0.0.1:8000/api/v1
+```
 
-1. **[Create Memory](/api-reference/memories/create-memory)** — Store facts and preferences for a session
-2. **[Search Memories](/api-reference/memories/search-memories)** — Retrieve relevant memories with semantic search
-3. **[List Memories](/api-reference/memories/list-memories)** — Fetch memories for a session
-
-***
-
-## Core Operations
-
-<CardGroup cols={2}>
-  <Card title="Create Memory" icon="plus" href="/api-reference/memories/create-memory">
-    Store a new session memory
-  </Card>
-
-  <Card title="Search Memories" icon="magnifying-glass" href="/api-reference/memories/search-memories">
-    Find relevant memories with semantic search
-  </Card>
-
-  <Card title="Update Memory" icon="pen" href="/api-reference/memories/update-memory">
-    Modify existing memory content and metadata
-  </Card>
-
-  <Card title="Delete Memory" icon="trash" href="/api-reference/memories/delete-memory">
-    Remove a specific memory
-  </Card>
-</CardGroup>
-
-***
-
-## API Categories
-
-Explore the full API organized by functionality:
-
-<CardGroup cols={2}>
-  <Card title="Workspaces" icon="building" href="/api-reference/workspaces/create-workspace">
-    Multi-tenant workspaces and isolation
-  </Card>
-
-  <Card title="Agents" icon="robot" href="/api-reference/agents/create-agent">
-    Create and manage agents in a workspace
-  </Card>
-
-  <Card title="Sessions" icon="comments" href="/api-reference/sessions/create-session">
-    Agent conversation sessions and labels
-  </Card>
-
-  <Card title="Messages" icon="message" href="/api-reference/messages/create-message">
-    Session messages with semantic search
-  </Card>
-
-  <Card title="Memories" icon="microchip" href="/api-reference/memories/create-memory">
-    Session memory CRUD, search, batch, and regenerate
-  </Card>
-
-  <Card title="Prompts" icon="file-lines" href="/api-reference/prompts/create-prompt">
-    Versioned prompts and production labels
-  </Card>
-
-  <Card title="Knowledge" icon="book" href="/api-reference/knowledge/upload-document">
-    Document upload and semantic search
-  </Card>
-
-  <Card title="Access Keys" icon="key" href="/api-reference/access-keys/create-access-key">
-    Scoped workspace keys for agents and SDKs
-  </Card>
-</CardGroup>
+Self-hosted deployments use your own host with the same `/api/v1` prefix.
 
 ***
 
@@ -90,25 +30,25 @@ Explore the full API organized by functionality:
 API requests authenticate with one of:
 
 ```bash
-X-Access-Key: <your-access-key>
+X-Access-Key: <workspace-access-key>
 ```
 
 ```bash
-X-API-Key: <your-api-key>
+X-API-Key: <user-api-key>
 ```
 
 Or a browser session cookie (`_actx0_session`) for dashboard flows.
 
 | Mode | Header / cookie | Typical use |
 | --- | --- | --- |
-| Access key | `X-Access-Key` | Agents, SDKs, and server integrations |
-| User API key | `X-API-Key` | User-scoped automation |
+| Access key | `X-Access-Key` | Agents, SDKs, MCP, and server integrations |
+| User API key | `X-API-Key` | User-scoped automation and workspace management |
 | Session | `_actx0_session` | Dashboard and interactive apps |
 
-Workspace and access-key management require a user principal (`X-API-Key` or session). Agents, sessions, messages, memories, prompts, and knowledge accept workspace access keys with matching permissions.
+Workspace create/list and `/keys` / `/apiKeys` management require a **user** principal (`X-API-Key` or session). Agents, sessions, messages, memories, prompts, and knowledge accept workspace access keys when the key includes the matching permission.
 
 <Warning>
-  **Keep your keys secure.** Never expose them in client-side code or public repositories. Use environment variables and server-side requests only.
+  **Keep your keys secure.** Never expose them in client-side code or public repositories. Use environment variables and server-side requests only. Create responses return the raw key once — store it immediately.
 </Warning>
 
 ***
@@ -116,30 +56,88 @@ Workspace and access-key management require a user principal (`X-API-Key` or ses
 ## Resource hierarchy
 
 ```text
-/api/v1/workspaces/{workspaceId}
-  /keys
-  /prompts
-  /documents
-  /agents/{agentId}
-    /sessions/{sessionId}
-      /messages
-      /memories
+/api/v1
+  /apiKeys
+  /workspaces/{workspaceId}
+    /keys
+    /prompts
+    /promptsByName/{promptName}
+    /documents
+    /agents/{agentId}
+      /sessions/{sessionId}
+        /messages
+        /memories
+```
+
+Sessions can also be addressed by external `id` and/or label query params via `/sessions/by-labels`.
+
+***
+
+## Conventions
+
+- **IDs** are UUIDs.
+- **Timestamps** are RFC3339 UTC strings.
+- **Pagination** uses `limit` (default `50`, max `100`) and `offset` (default `0`).
+- **List responses** use a collection key plus `_meta`:
+
+```json
+{
+  "memories": [],
+  "_meta": { "limit": 50, "offset": 0, "total": 0 }
+}
+```
+
+- **`meta` fields** on messages/memories: send a JSON **string** in requests; responses return parsed JSON.
+- **Errors** always look like:
+
+```json
+{ "errorMessage": "Human-readable message" }
 ```
 
 ***
 
-## Next Steps
+## Core memory loop
 
-<CardGroup cols={3}>
-  <Card title="Create Your First Memory" icon="rocket" href="/api-reference/memories/create-memory">
-    Start storing memories via the REST API
+1. **[Create Access Key](/api-reference/create-access-key)** — issue a scoped runtime key
+2. **[Create Agent](/api-reference/create-agent)** — create an agent in the workspace
+3. **[Create Session](/api-reference/create-session)** — open a conversation session
+4. **[Create Memory](/api-reference/create-memory)** — store facts and preferences
+5. **[Search Memories](/api-reference/search-memories)** — retrieve relevant context
+
+***
+
+## API categories
+
+<CardGroup cols={2}>
+  <Card title="Workspaces" icon="building" href="/api-reference/create-workspace">
+    Multi-tenant workspaces and isolation
   </Card>
 
-  <Card title="Search Memories" icon="magnifying-glass" href="/api-reference/memories/search-memories">
-    Retrieve context with semantic search
+  <Card title="Access Keys" icon="unlock-keyhole" href="/api-reference/create-access-key">
+    Scoped workspace keys for agents and SDKs
   </Card>
 
-  <Card title="Create Access Key" icon="key" href="/api-reference/access-keys/create-access-key">
-    Issue a scoped key for your agent
+  <Card title="Agents" icon="robot" href="/api-reference/create-agent">
+    Create and manage agents in a workspace
+  </Card>
+
+  <Card title="Sessions" icon="comments" href="/api-reference/create-session">
+    Agent conversation sessions and labels
+  </Card>
+
+  <Card title="Messages" icon="message" href="/api-reference/create-message">
+    Session messages with semantic search
+  </Card>
+
+  <Card title="Memories" icon="microchip" href="/api-reference/create-memory">
+    Session memory CRUD, search, batch, and regenerate
+  </Card>
+
+  <Card title="Prompts" icon="file-lines" href="/api-reference/create-prompt">
+    Versioned prompts and production labels
+  </Card>
+
+  <Card title="Knowledge" icon="book" href="/api-reference/upload-document">
+    Document upload and semantic search
   </Card>
 </CardGroup>
