@@ -25,10 +25,11 @@ git add --all
 
 4. Draft a concise conventional commit message (1 line, optional short body):
    - Prefer `feat:`, `fix:`, `docs:`, `chore:`, `refactor:`, `style:`
+   - **Entire message must be lowercase** (type and subject), e.g. `feat: update api docs`
    - Focus on why, not a file list
-   - Follow recent `git log` style (e.g. `feat: update api docs`)
-   - If the user provided a full message after `/commit`, use it (trim whitespace only)
-   - If they provided a short hint, expand it into a proper conventional message
+   - Follow recent `git log` style
+   - If the user provided a message after `/commit`, lowercase it before use (unless they explicitly ask to preserve casing)
+   - If they provided a short hint, expand it into a proper conventional lowercase message
    - Never commit secrets (`.env`, credentials, private keys). Warn and unstage those files if present.
 
 5. Commit with SSH signing using `~/.ssh/vid_ed25519` (do not change global git config). Use a HEREDOC for the message:
@@ -64,12 +65,13 @@ Use `all` permissions for push (SSH key + network). If Auto-review blocks the pu
 ## Examples
 
 - `/commit` → analyze diff, `git add --all`, sign-commit, push
-- `/commit feat: update api docs` → use that exact message, then push
-- `/commit intro copy` → draft something like `docs: expand introduction and why Actx0`, then push
+- `/commit feat: update api docs` → use that exact message (already lowercase), then push
+- `/commit Intro Copy` → draft/lowercase to `docs: expand introduction and why actx0`, then push
 
 ## Notes
 
 - Always push after a successful commit (or when already ahead with a clean tree).
+- Commit subjects are always lowercase (see `.cursor/rules/commit-lowercase.mdc`).
 - Do not update git config.
 - Do not skip hooks (`--no-verify`) unless the user explicitly asks.
 - Do not force-push unless the user explicitly asks.
