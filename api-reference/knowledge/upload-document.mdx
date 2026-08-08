@@ -1,0 +1,42 @@
+---
+title: "Upload Document"
+description: "Upload a `.txt` or `.md` knowledge document."
+---
+
+Upload a `.txt` or `.md` knowledge document. Indexing runs asynchronously after upload.
+
+## Endpoint
+
+- **Method**: `POST`
+- **URL**: `/api/v1/workspaces/{workspaceId}/documents`
+- **Content-Type**: `multipart/form-data`
+
+## Required headers
+
+| Header | Required | Description |
+| --- | --- | --- |
+| `X-Access-Key: <ACCESS_KEY>` | Yes* | Workspace access key. Session cookie or `X-API-Key` also work when the user has permission. |
+| `Accept: application/json` | Yes | Ensures a JSON response. |
+
+## Request body
+
+Send a multipart form with the document file (`.txt` or `.md`).
+
+## Response
+
+```json
+{
+  "id": "doc_...",
+  "workspaceId": "ws_...",
+  "title": "Refund policy",
+  "filename": "refund-policy.md",
+  "contentType": "text/markdown",
+  "status": "indexing",
+  "createdAt": "2026-07-01T12:00:00Z",
+  "updatedAt": "2026-07-01T12:00:00Z"
+}
+```
+
+<Info>
+  Document status transitions while chunks are indexed for semantic search.
+</Info>

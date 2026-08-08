@@ -1,0 +1,71 @@
+---
+title: "Overview"
+description: "How the Actx0 platform is organized: workspaces, agents, sessions, and memory."
+---
+
+## Actx0 Platform
+
+Actx0 is a hosted memory platform for AI agents. Everything is scoped to a **workspace**. Inside a workspace you create **agents**, run **sessions**, store **messages** and **memories**, manage **prompts** and **knowledge**, and issue **access keys** for SDKs and agents.
+
+```text
+Workspace
+  ├── Access keys
+  ├── Prompts
+  ├── Knowledge documents
+  └── Agents
+        └── Sessions
+              ├── Messages
+              └── Memories
+```
+
+***
+
+## Core concepts
+
+<CardGroup cols={2}>
+  <Card title="Workspaces" icon="building">
+    Multi-tenant isolation for teams, billing, and access control
+  </Card>
+
+  <Card title="Agents" icon="robot">
+    Named agents that own sessions and memory within a workspace
+  </Card>
+
+  <Card title="Sessions" icon="comments">
+    Conversation runs identified by external id and optional labels
+  </Card>
+
+  <Card title="Memories" icon="microchip">
+    Durable facts, preferences, and summaries with semantic search
+  </Card>
+
+  <Card title="Messages" icon="message">
+    Conversation turns that can trigger automatic memory extraction
+  </Card>
+
+  <Card title="Knowledge" icon="book">
+    Uploaded documents indexed for semantic retrieval
+  </Card>
+
+  <Card title="Prompts" icon="file-lines">
+    Versioned prompt templates with production labels
+  </Card>
+
+  <Card title="Access keys" icon="key">
+    Scoped credentials for SDKs, MCP, and server integrations
+  </Card>
+</CardGroup>
+
+***
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Quickstart" icon="rocket" href="/actx0-platform/quickstart">
+    Create an access key and write your first memory
+  </Card>
+
+  <Card title="API Reference" icon="code" href="/api-reference/overview">
+    Full REST surface for every resource
+  </Card>
+</CardGroup>

@@ -1,0 +1,40 @@
+---
+title: "Batch Delete Memories"
+description: "Delete up to 100 memories by ID."
+---
+
+Delete up to 100 memories by ID.
+
+## Endpoint
+
+- **Method**: `DELETE`
+- **URL**: `/api/v1/workspaces/{workspaceId}/agents/{agentId}/sessions/{sessionId}/memories/batch`
+
+## Required headers
+
+| Header | Required | Description |
+| --- | --- | --- |
+| `X-Access-Key: <ACCESS_KEY>` | Yes* | Workspace access key. Session cookie or `X-API-Key` also work when the user has permission. |
+| `Accept: application/json` | Yes | Ensures a JSON response. |
+
+## Request body
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `ids` | string[] | Yes | Memory IDs to delete. |
+
+<CodeGroup>
+```json Request
+{
+  "ids": ["mem_1", "mem_2"]
+}
+```
+</CodeGroup>
+
+## Response
+
+<CodeGroup>
+```json Response
+{ }
+```
+</CodeGroup>

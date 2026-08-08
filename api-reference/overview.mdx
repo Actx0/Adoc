@@ -1,0 +1,145 @@
+---
+title: "Overview"
+description: "REST APIs for workspaces, agents, sessions, messages, memories, prompts, knowledge, and access keys"
+---
+
+## Actx0 REST API
+
+Actx0 provides a REST API for integrating durable agent memory into your applications. Manage workspaces, agents, sessions, messages, memories, prompts, knowledge documents, and access keys with simple HTTP requests.
+
+<Info>
+  **Quick start:** Create a workspace access key in the Actx0 Dashboard, then make your first memory operation in minutes.
+</Info>
+
+***
+
+## Quick Start Guide
+
+Get started with the Actx0 API in three simple steps:
+
+1. **[Create Memory](/api-reference/memories/create-memory)** — Store facts and preferences for a session
+2. **[Search Memories](/api-reference/memories/search-memories)** — Retrieve relevant memories with semantic search
+3. **[List Memories](/api-reference/memories/list-memories)** — Fetch memories for a session
+
+***
+
+## Core Operations
+
+<CardGroup cols={2}>
+  <Card title="Create Memory" icon="plus" href="/api-reference/memories/create-memory">
+    Store a new session memory
+  </Card>
+
+  <Card title="Search Memories" icon="magnifying-glass" href="/api-reference/memories/search-memories">
+    Find relevant memories with semantic search
+  </Card>
+
+  <Card title="Update Memory" icon="pen" href="/api-reference/memories/update-memory">
+    Modify existing memory content and metadata
+  </Card>
+
+  <Card title="Delete Memory" icon="trash" href="/api-reference/memories/delete-memory">
+    Remove a specific memory
+  </Card>
+</CardGroup>
+
+***
+
+## API Categories
+
+Explore the full API organized by functionality:
+
+<CardGroup cols={2}>
+  <Card title="Workspaces" icon="building" href="/api-reference/workspaces/create-workspace">
+    Multi-tenant workspaces and isolation
+  </Card>
+
+  <Card title="Agents" icon="robot" href="/api-reference/agents/create-agent">
+    Create and manage agents in a workspace
+  </Card>
+
+  <Card title="Sessions" icon="comments" href="/api-reference/sessions/create-session">
+    Agent conversation sessions and labels
+  </Card>
+
+  <Card title="Messages" icon="message" href="/api-reference/messages/create-message">
+    Session messages with semantic search
+  </Card>
+
+  <Card title="Memories" icon="microchip" href="/api-reference/memories/create-memory">
+    Session memory CRUD, search, batch, and regenerate
+  </Card>
+
+  <Card title="Prompts" icon="file-lines" href="/api-reference/prompts/create-prompt">
+    Versioned prompts and production labels
+  </Card>
+
+  <Card title="Knowledge" icon="book" href="/api-reference/knowledge/upload-document">
+    Document upload and semantic search
+  </Card>
+
+  <Card title="Access Keys" icon="key" href="/api-reference/access-keys/create-access-key">
+    Scoped workspace keys for agents and SDKs
+  </Card>
+</CardGroup>
+
+***
+
+## Authentication
+
+API requests authenticate with one of:
+
+```bash
+X-Access-Key: <your-access-key>
+```
+
+```bash
+X-API-Key: <your-api-key>
+```
+
+Or a browser session cookie (`_actx0_session`) for dashboard flows.
+
+| Mode | Header / cookie | Typical use |
+| --- | --- | --- |
+| Access key | `X-Access-Key` | Agents, SDKs, and server integrations |
+| User API key | `X-API-Key` | User-scoped automation |
+| Session | `_actx0_session` | Dashboard and interactive apps |
+
+Workspace and access-key management require a user principal (`X-API-Key` or session). Agents, sessions, messages, memories, prompts, and knowledge accept workspace access keys with matching permissions.
+
+<Warning>
+  **Keep your keys secure.** Never expose them in client-side code or public repositories. Use environment variables and server-side requests only.
+</Warning>
+
+***
+
+## Resource hierarchy
+
+```text
+/api/v1/workspaces/{workspaceId}
+  /keys
+  /prompts
+  /documents
+  /agents/{agentId}
+    /sessions/{sessionId}
+      /messages
+      /memories
+```
+
+***
+
+## Next Steps
+
+<CardGroup cols={3}>
+  <Card title="Create Your First Memory" icon="rocket" href="/api-reference/memories/create-memory">
+    Start storing memories via the REST API
+  </Card>
+
+  <Card title="Search Memories" icon="magnifying-glass" href="/api-reference/memories/search-memories">
+    Retrieve context with semantic search
+  </Card>
+
+  <Card title="Create Access Key" icon="key" href="/api-reference/access-keys/create-access-key">
+    Issue a scoped key for your agent
+  </Card>
+</CardGroup>

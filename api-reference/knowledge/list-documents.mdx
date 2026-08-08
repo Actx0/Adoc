@@ -1,0 +1,29 @@
+---
+title: "List Documents"
+description: "List knowledge documents in a workspace."
+---
+
+List knowledge documents in a workspace.
+
+## Endpoint
+
+- **Method**: `GET`
+- **URL**: `/api/v1/workspaces/{workspaceId}/documents`
+
+## Required headers
+
+| Header | Required | Description |
+| --- | --- | --- |
+| `X-Access-Key: <ACCESS_KEY>` | Yes* | Workspace access key. Session cookie or `X-API-Key` also work when the user has permission. |
+| `Accept: application/json` | Yes | Ensures a JSON response. |
+
+## Response
+
+<CodeGroup>
+```json Response
+{
+  "documents": [],
+  "_meta": { "total": 0 }
+}
+```
+</CodeGroup>

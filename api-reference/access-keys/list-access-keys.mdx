@@ -1,0 +1,29 @@
+---
+title: "List Access Keys"
+description: "List access keys for a workspace (metadata only)."
+---
+
+List access keys for a workspace (metadata only).
+
+## Endpoint
+
+- **Method**: `GET`
+- **URL**: `/api/v1/workspaces/{workspaceId}/keys`
+
+## Required headers
+
+| Header | Required | Description |
+| --- | --- | --- |
+| `X-API-Key: <API_KEY>` or session cookie | Yes | User authentication. Access keys are not accepted for this endpoint. |
+| `Accept: application/json` | Yes | Ensures a JSON response. |
+
+## Response
+
+<CodeGroup>
+```json Response
+{
+  "keys": [],
+  "_meta": { "total": 0 }
+}
+```
+</CodeGroup>

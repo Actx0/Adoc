@@ -1,0 +1,47 @@
+---
+title: "Search Messages"
+description: "Semantic search over session messages."
+---
+
+Semantic search over session messages.
+
+## Endpoint
+
+- **Method**: `POST`
+- **URL**: `/api/v1/workspaces/{workspaceId}/agents/{agentId}/sessions/{sessionId}/messages/search`
+- **Content-Type**: `application/json`
+
+## Required headers
+
+| Header | Required | Description |
+| --- | --- | --- |
+| `X-Access-Key: <ACCESS_KEY>` | Yes* | Workspace access key. Session cookie or `X-API-Key` also work when the user has permission. |
+| `Accept: application/json` | Yes | Ensures a JSON response. |
+
+## Request body
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `query` | string | Yes | Search query. |
+| `limit` | integer | No | Max results (1–100). |
+
+<CodeGroup>
+```json Request
+{
+  "query": "dark mode preference",
+  "limit": 10
+}
+```
+</CodeGroup>
+
+## Response
+
+<CodeGroup>
+```json Response
+{
+  "results": [
+    { "id": "msg_...", "role": "user", "score": 0.91, "text": "I prefer dark mode." }
+  ]
+}
+```
+</CodeGroup>

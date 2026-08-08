@@ -1,0 +1,26 @@
+---
+title: "Delete Access Key"
+description: "Revoke and delete an access key."
+---
+
+Revoke and delete an access key.
+
+## Endpoint
+
+- **Method**: `DELETE`
+- **URL**: `/api/v1/workspaces/{workspaceId}/keys/{keyId}`
+
+## Required headers
+
+| Header | Required | Description |
+| --- | --- | --- |
+| `X-API-Key: <API_KEY>` or session cookie | Yes | User authentication. Access keys are not accepted for this endpoint. |
+| `Accept: application/json` | Yes | Ensures a JSON response. |
+
+## Response
+
+<CodeGroup>
+```json Response
+{ }
+```
+</CodeGroup>

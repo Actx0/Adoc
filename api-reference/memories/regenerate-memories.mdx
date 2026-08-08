@@ -1,0 +1,32 @@
+---
+title: "Regenerate Memories"
+description: "Clear and queue regeneration of session memories from messages."
+---
+
+Clear and queue regeneration of session memories from messages.
+
+## Endpoint
+
+- **Method**: `POST`
+- **URL**: `/api/v1/workspaces/{workspaceId}/agents/{agentId}/sessions/{sessionId}/memories/regenerate`
+
+## Required headers
+
+| Header | Required | Description |
+| --- | --- | --- |
+| `X-Access-Key: <ACCESS_KEY>` | Yes* | Workspace access key. Session cookie or `X-API-Key` also work when the user has permission. |
+| `Accept: application/json` | Yes | Ensures a JSON response. |
+
+## Response
+
+<CodeGroup>
+```json Response
+{
+  "queued": 12
+}
+```
+</CodeGroup>
+
+<Info>
+  Returns `202 Accepted`. Memories are rebuilt asynchronously from the session message history.
+</Info>

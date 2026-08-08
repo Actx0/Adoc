@@ -1,0 +1,204 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "name": "Actx0",
+  "description": "Zero-latency memory platform for AI agents",
+  "theme": "mint",
+  "colors": {
+    "primary": "#37352F",
+    "light": "#6B6966",
+    "dark": "#F7F6F3"
+  },
+  "navbar": {
+    "links": [
+      {
+        "label": "Home",
+        "href": "https://actx0.com"
+      }
+    ]
+  },
+  "footer": {
+    "socials": {
+      "github": "https://github.com/Actx0/Actx0",
+      "linkedin": "https://www.linkedin.com/company/actx0"
+    }
+  },
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Get Started",
+        "groups": [
+          {
+            "group": "Start Here",
+            "icon": "home",
+            "pages": [
+              "index",
+              "actx0-platform/overview",
+              "actx0-platform/quickstart"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Platform",
+        "groups": [
+          {
+            "group": "Actx0 Platform",
+            "icon": "rocket",
+            "pages": [
+              "actx0-platform/overview",
+              "actx0-platform/quickstart"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "API Reference",
+        "groups": [
+          {
+            "group": "Getting Started",
+            "icon": "rocket",
+            "pages": [
+              "api-reference/overview"
+            ]
+          },
+          {
+            "group": "Workspaces",
+            "icon": "building",
+            "pages": [
+              "api-reference/workspaces/create-workspace",
+              "api-reference/workspaces/list-workspaces",
+              "api-reference/workspaces/get-workspace",
+              "api-reference/workspaces/update-workspace",
+              "api-reference/workspaces/delete-workspace"
+            ]
+          },
+          {
+            "group": "Access Keys",
+            "icon": "key",
+            "pages": [
+              "api-reference/access-keys/create-access-key",
+              "api-reference/access-keys/list-access-keys",
+              "api-reference/access-keys/get-access-key",
+              "api-reference/access-keys/delete-access-key"
+            ]
+          },
+          {
+            "group": "Agents",
+            "icon": "robot",
+            "pages": [
+              "api-reference/agents/create-agent",
+              "api-reference/agents/list-agents",
+              "api-reference/agents/get-agent",
+              "api-reference/agents/update-agent",
+              "api-reference/agents/delete-agent"
+            ]
+          },
+          {
+            "group": "Sessions",
+            "icon": "comments",
+            "pages": [
+              "api-reference/sessions/create-session",
+              "api-reference/sessions/list-sessions",
+              "api-reference/sessions/get-session",
+              "api-reference/sessions/get-session-by-labels",
+              "api-reference/sessions/update-session-by-labels",
+              "api-reference/sessions/delete-session-by-labels"
+            ]
+          },
+          {
+            "group": "Messages",
+            "icon": "message",
+            "pages": [
+              "api-reference/messages/create-message",
+              "api-reference/messages/batch-create-messages",
+              "api-reference/messages/list-messages",
+              "api-reference/messages/search-messages",
+              "api-reference/messages/get-message",
+              "api-reference/messages/update-message",
+              "api-reference/messages/delete-message",
+              "api-reference/messages/batch-delete-messages"
+            ]
+          },
+          {
+            "group": "Memories",
+            "icon": "microchip",
+            "pages": [
+              "api-reference/memories/create-memory",
+              "api-reference/memories/batch-create-memories",
+              "api-reference/memories/list-memories",
+              "api-reference/memories/search-memories",
+              "api-reference/memories/get-memory",
+              "api-reference/memories/update-memory",
+              "api-reference/memories/delete-memory",
+              "api-reference/memories/batch-delete-memories",
+              "api-reference/memories/regenerate-memories"
+            ]
+          },
+          {
+            "group": "Prompts",
+            "icon": "file-lines",
+            "pages": [
+              "api-reference/prompts/create-prompt",
+              "api-reference/prompts/list-prompts",
+              "api-reference/prompts/get-prompt",
+              "api-reference/prompts/delete-prompt",
+              "api-reference/prompts/create-prompt-version",
+              "api-reference/prompts/list-prompt-versions",
+              "api-reference/prompts/get-prompt-version",
+              "api-reference/prompts/update-prompt-version",
+              "api-reference/prompts/delete-prompt-version",
+              "api-reference/prompts/get-prompt-by-name"
+            ]
+          },
+          {
+            "group": "Knowledge",
+            "icon": "book",
+            "pages": [
+              "api-reference/knowledge/upload-document",
+              "api-reference/knowledge/list-documents",
+              "api-reference/knowledge/search-documents",
+              "api-reference/knowledge/delete-document"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Integrations",
+        "groups": [
+          {
+            "group": "Overview",
+            "icon": "plug",
+            "pages": [
+              "integrations/overview"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Agent Plugins",
+        "groups": [
+          {
+            "group": "Overview",
+            "icon": "puzzle-piece",
+            "pages": [
+              "agent-plugins/overview"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Release Notes",
+        "groups": [
+          {
+            "group": "Release Notes",
+            "icon": "rocket",
+            "pages": [
+              "release-notes/platform",
+              "release-notes/sdk_tools"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

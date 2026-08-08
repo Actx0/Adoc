@@ -1,0 +1,26 @@
+---
+title: "Delete Prompt Version"
+description: "Delete a prompt version."
+---
+
+Delete a prompt version.
+
+## Endpoint
+
+- **Method**: `DELETE`
+- **URL**: `/api/v1/workspaces/{workspaceId}/prompts/{promptId}/versions/{promptVersionId}`
+
+## Required headers
+
+| Header | Required | Description |
+| --- | --- | --- |
+| `X-Access-Key: <ACCESS_KEY>` | Yes* | Workspace access key. Session cookie or `X-API-Key` also work when the user has permission. |
+| `Accept: application/json` | Yes | Ensures a JSON response. |
+
+## Response
+
+<CodeGroup>
+```json Response
+{ }
+```
+</CodeGroup>

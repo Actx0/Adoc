@@ -1,0 +1,35 @@
+---
+title: "Update Session by Labels"
+description: "Update a session resolved by external `id` and/or labels."
+---
+
+Update a session resolved by external `id` and/or labels.
+
+## Endpoint
+
+- **Method**: `PUT`
+- **URL**: `/api/v1/workspaces/{workspaceId}/agents/{agentId}/sessions/by-labels`
+- **Content-Type**: `application/json`
+
+## Required headers
+
+| Header | Required | Description |
+| --- | --- | --- |
+| `X-Access-Key: <ACCESS_KEY>` | Yes* | Workspace access key. Session cookie or `X-API-Key` also work when the user has permission. |
+| `Accept: application/json` | Yes | Ensures a JSON response. |
+
+## Request body
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `title` | string | No | Updated title. |
+| `labels` | object | No | Label map to set on the session. |
+
+<CodeGroup>
+```json Request
+{
+  "title": "Checkout help",
+  "labels": { "channel": "web" }
+}
+```
+</CodeGroup>

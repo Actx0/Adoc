@@ -1,0 +1,47 @@
+---
+title: "Platform"
+description: "Release notes for the Actx0 hosted platform: backend, dashboard, billing, and infrastructure changes."
+mode: "wide"
+---
+
+<Update label="2026-08-07" description="Dashboard">
+
+**New Features:**
+
+- **UI:** Top agents widget on the workspace dashboard
+
+**Improvements:**
+
+- **Sessions:** Last activity tracking on agent sessions
+
+</Update>
+
+<Update label="2026-08-02" description="OAuth and plan limits">
+
+**New Features:**
+
+- **Auth:** Google OAuth sign-in alongside GitHub OAuth
+- **Billing:** Free (Hobby) users limited to one owned workspace unless they own a paid workspace
+
+**Improvements:**
+
+- **Billing:** Plan capacity enforcement across agents, sessions, memories, documents, prompts, members, API calls, storage, and AI usage
+
+</Update>
+
+<Update label="2026-07-01" description="v0.1.0 platform">
+
+**New Features:**
+
+- **Memory:** Multi-tenant memory platform for AI agents — workspaces, agents, sessions, messages, and session memories with kinds `summary`, `fact`, `preference`, `short_lived`, and `long_lived`
+- **Memory:** Async LLM extraction and consolidation on user message create, plus memory regenerate from session history
+- **Search:** Semantic search over session memories, session messages, and knowledge documents
+- **Knowledge:** Document upload (`.txt` / `.md`) with async indexing
+- **Prompts:** Versioned workspace prompts with get-by-name
+- **Auth:** Email register/login, verify, forgot/reset password; GitHub OAuth; API keys and scoped workspace access keys
+- **Workspaces:** Members, invites, roles (`owner` / `admin`), audit log, and notifications
+- **Billing:** Stripe Checkout and Customer Portal with Hobby, Starter, Growth, and Pro plans
+- **UI:** Dashboard, Agents, Knowledge, Prompts, Integrations, Audits, Billing, Members, Settings (en/fr)
+- **API:** `/api/v1` management API with `X-API-Key`, `X-Access-Key`, or session cookie auth
+
+</Update>

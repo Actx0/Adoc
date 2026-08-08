@@ -1,0 +1,72 @@
+---
+title: "Quickstart"
+description: "Create a workspace access key and store your first memory with the Actx0 API."
+---
+
+## Quickstart
+
+Get from zero to a stored memory in a few minutes.
+
+### 1. Create a workspace access key
+
+In the Actx0 Dashboard, open **Settings → Access keys** and create a key with memory permissions (create, list, query, update, delete).
+
+Copy the key immediately — it is shown only once.
+
+### 2. Create an agent and session
+
+Use the dashboard or API to create an agent, then create a session (pass an external `id` query param such as `?id=demo-1`).
+
+### 3. Store a memory
+
+```bash
+curl -X POST \
+  "https://api.actx0.io/api/v1/workspaces/{workspaceId}/agents/{agentId}/sessions/{sessionId}/memories" \
+  -H "X-Access-Key: $ACTX0_ACCESS_KEY" \
+  -H "Content-Type: application/json" \
+  -H "Accept: application/json" \
+  -d '{
+    "kind": "preference",
+    "content": "User prefers dark mode"
+  }'
+```
+
+### 4. Search memories
+
+```bash
+curl -X POST \
+  "https://api.actx0.io/api/v1/workspaces/{workspaceId}/agents/{agentId}/sessions/{sessionId}/memories/search" \
+  -H "X-Access-Key: $ACTX0_ACCESS_KEY" \
+  -H "Content-Type: application/json" \
+  -H "Accept: application/json" \
+  -d '{
+    "query": "UI preferences",
+    "limit": 10
+  }'
+```
+
+***
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Create Memory" icon="plus" href="/api-reference/memories/create-memory">
+    Full request and response reference
+  </Card>
+
+  <Card title="Search Memories" icon="magnifying-glass" href="/api-reference/memories/search-memories">
+    Semantic retrieval options
+  </Card>
+
+  <Card title="Access Keys" icon="key" href="/api-reference/access-keys/create-access-key">
+    Scoped keys for agents and SDKs
+  </Card>
+
+  <Card title="SDK & Tools" icon="cube" href="/release-notes/sdk_tools">
+    Python, Node.js, Go, and MCP releases
+  </Card>
+</CardGroup>
+
+<Warning>
+  Keep access keys server-side. Never expose them in browser or mobile clients.
+</Warning>

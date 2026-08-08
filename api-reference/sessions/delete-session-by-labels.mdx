@@ -1,0 +1,26 @@
+---
+title: "Delete Session by Labels"
+description: "Delete a session resolved by external `id` and/or labels."
+---
+
+Delete a session resolved by external `id` and/or labels.
+
+## Endpoint
+
+- **Method**: `DELETE`
+- **URL**: `/api/v1/workspaces/{workspaceId}/agents/{agentId}/sessions/by-labels`
+
+## Required headers
+
+| Header | Required | Description |
+| --- | --- | --- |
+| `X-Access-Key: <ACCESS_KEY>` | Yes* | Workspace access key. Session cookie or `X-API-Key` also work when the user has permission. |
+| `Accept: application/json` | Yes | Ensures a JSON response. |
+
+## Response
+
+<CodeGroup>
+```json Response
+{ }
+```
+</CodeGroup>

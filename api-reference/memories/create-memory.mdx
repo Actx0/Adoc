@@ -1,0 +1,51 @@
+---
+title: "Create Memory"
+description: "Store a session memory."
+---
+
+Store a session memory.
+
+## Endpoint
+
+- **Method**: `POST`
+- **URL**: `/api/v1/workspaces/{workspaceId}/agents/{agentId}/sessions/{sessionId}/memories`
+- **Content-Type**: `application/json`
+
+## Required headers
+
+| Header | Required | Description |
+| --- | --- | --- |
+| `X-Access-Key: <ACCESS_KEY>` | Yes* | Workspace access key. Session cookie or `X-API-Key` also work when the user has permission. |
+| `Accept: application/json` | Yes | Ensures a JSON response. |
+
+## Request body
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `kind` | string | Yes | `summary`, `fact`, `preference`, `short_lived`, or `long_lived`. |
+| `content` | string | Yes | Memory content. |
+| `meta` | string | No | Optional JSON string metadata. |
+
+<CodeGroup>
+```json Request
+{
+  "kind": "preference",
+  "content": "User prefers dark mode"
+}
+```
+</CodeGroup>
+
+## Response
+
+<CodeGroup>
+```json Response
+{
+  "id": "mem_...",
+  "sessionId": "ses_...",
+  "kind": "preference",
+  "content": "User prefers dark mode",
+  "createdAt": "2026-07-01T12:00:00Z",
+  "updatedAt": "2026-07-01T12:00:00Z"
+}
+```
+</CodeGroup>

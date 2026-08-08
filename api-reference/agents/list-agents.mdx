@@ -1,0 +1,29 @@
+---
+title: "List Agents"
+description: "List agents in a workspace."
+---
+
+List agents in a workspace.
+
+## Endpoint
+
+- **Method**: `GET`
+- **URL**: `/api/v1/workspaces/{workspaceId}/agents`
+
+## Required headers
+
+| Header | Required | Description |
+| --- | --- | --- |
+| `X-Access-Key: <ACCESS_KEY>` | Yes* | Workspace access key. Session cookie or `X-API-Key` also work when the user has permission. |
+| `Accept: application/json` | Yes | Ensures a JSON response. |
+
+## Response
+
+<CodeGroup>
+```json Response
+{
+  "agents": [],
+  "_meta": { "total": 0 }
+}
+```
+</CodeGroup>

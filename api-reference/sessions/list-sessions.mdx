@@ -1,0 +1,29 @@
+---
+title: "List Sessions"
+description: "List sessions for an agent. Optional `id` and label query filters."
+---
+
+List sessions for an agent. Optional `id` and label query filters.
+
+## Endpoint
+
+- **Method**: `GET`
+- **URL**: `/api/v1/workspaces/{workspaceId}/agents/{agentId}/sessions`
+
+## Required headers
+
+| Header | Required | Description |
+| --- | --- | --- |
+| `X-Access-Key: <ACCESS_KEY>` | Yes* | Workspace access key. Session cookie or `X-API-Key` also work when the user has permission. |
+| `Accept: application/json` | Yes | Ensures a JSON response. |
+
+## Response
+
+<CodeGroup>
+```json Response
+{
+  "sessions": [],
+  "_meta": { "total": 0 }
+}
+```
+</CodeGroup>

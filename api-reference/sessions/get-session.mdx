@@ -1,0 +1,18 @@
+---
+title: "Get Session"
+description: "Fetch a session by internal ID."
+---
+
+Fetch a session by internal ID.
+
+## Endpoint
+
+- **Method**: `GET`
+- **URL**: `/api/v1/workspaces/{workspaceId}/agents/{agentId}/sessions/{sessionId}`
+
+## Required headers
+
+| Header | Required | Description |
+| --- | --- | --- |
+| `X-Access-Key: <ACCESS_KEY>` | Yes* | Workspace access key. Session cookie or `X-API-Key` also work when the user has permission. |
+| `Accept: application/json` | Yes | Ensures a JSON response. |

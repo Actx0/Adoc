@@ -1,0 +1,29 @@
+---
+title: "List Workspaces"
+description: "List workspaces for the authenticated user."
+---
+
+List workspaces for the authenticated user.
+
+## Endpoint
+
+- **Method**: `GET`
+- **URL**: `/api/v1/workspaces`
+
+## Required headers
+
+| Header | Required | Description |
+| --- | --- | --- |
+| `X-API-Key: <API_KEY>` or session cookie | Yes | User authentication. Access keys are not accepted for this endpoint. |
+| `Accept: application/json` | Yes | Ensures a JSON response. |
+
+## Response
+
+<CodeGroup>
+```json Response
+{
+  "workspaces": [],
+  "_meta": { "total": 0 }
+}
+```
+</CodeGroup>

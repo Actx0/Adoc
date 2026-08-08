@@ -1,0 +1,49 @@
+---
+title: "Update Workspace"
+description: "Update workspace settings."
+---
+
+Update workspace settings.
+
+## Endpoint
+
+- **Method**: `PUT`
+- **URL**: `/api/v1/workspaces/{workspaceId}`
+- **Content-Type**: `application/json`
+
+## Required headers
+
+| Header | Required | Description |
+| --- | --- | --- |
+| `X-API-Key: <API_KEY>` or session cookie | Yes | User authentication. Access keys are not accepted for this endpoint. |
+| `Accept: application/json` | Yes | Ensures a JSON response. |
+
+## Request body
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `name` | string | Yes | Updated workspace name (3–60 characters). |
+
+<CodeGroup>
+```json Request
+{
+  "name": "Production US"
+}
+```
+</CodeGroup>
+
+## Response
+
+<CodeGroup>
+```json Response
+{
+  "id": "ws_...",
+  "name": "Production US",
+  "handle": "production",
+  "membersCount": 3,
+  "role": "owner",
+  "createdAt": "2026-07-01T12:00:00Z",
+  "updatedAt": "2026-08-01T12:00:00Z"
+}
+```
+</CodeGroup>

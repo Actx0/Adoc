@@ -1,0 +1,58 @@
+---
+title: "Create Access Key"
+description: "Create a workspace access key. The raw key is returned once."
+---
+
+Create a workspace access key. The raw key is returned once.
+
+## Endpoint
+
+- **Method**: `POST`
+- **URL**: `/api/v1/workspaces/{workspaceId}/keys`
+- **Content-Type**: `application/json`
+
+## Required headers
+
+| Header | Required | Description |
+| --- | --- | --- |
+| `X-API-Key: <API_KEY>` or session cookie | Yes | User authentication. Access keys are not accepted for this endpoint. |
+| `Accept: application/json` | Yes | Ensures a JSON response. |
+
+## Request body
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `name` | string | Yes | Key name (max 60 characters). |
+| `permissions` | string[] | Yes | Permission strings granted to the key. |
+| `expiresAt` | string | No | Optional expiration timestamp. |
+
+<CodeGroup>
+```json Request
+{
+  "name": "Agent runtime",
+  "permissions": ["Create session memories", "List session memories", "Query session memories"],
+  "expiresAt": "2027-01-01T00:00:00Z"
+}
+```
+</CodeGroup>
+
+## Response
+
+<CodeGroup>
+```json Response
+{
+  "id": "key_...",
+  "workspaceId": "ws_...",
+  "name": "Agent runtime",
+  "permissions": ["Create session memories", "List session memories", "Query session memories"],
+  "expiresAt": "2027-01-01T00:00:00Z",
+  "createdAt": "2026-07-01T12:00:00Z",
+  "updatedAt": "2026-07-01T12:00:00Z",
+  "key": "actx0_..."
+}
+```
+</CodeGroup>
+
+<Warning>
+  Store the `key` value immediately. It is only returned on create.
+</Warning>

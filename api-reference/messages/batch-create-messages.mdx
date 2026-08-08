@@ -1,0 +1,36 @@
+---
+title: "Batch Create Messages"
+description: "Create up to 100 messages in one request."
+---
+
+Create up to 100 messages in one request.
+
+## Endpoint
+
+- **Method**: `POST`
+- **URL**: `/api/v1/workspaces/{workspaceId}/agents/{agentId}/sessions/{sessionId}/messages/batch`
+- **Content-Type**: `application/json`
+
+## Required headers
+
+| Header | Required | Description |
+| --- | --- | --- |
+| `X-Access-Key: <ACCESS_KEY>` | Yes* | Workspace access key. Session cookie or `X-API-Key` also work when the user has permission. |
+| `Accept: application/json` | Yes | Ensures a JSON response. |
+
+## Request body
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `messages` | array | Yes | Array of message objects (`role`, `content`, optional `meta`). |
+
+<CodeGroup>
+```json Request
+{
+  "messages": [
+    { "role": "user", "content": "Hello" },
+    { "role": "assistant", "content": "Hi!" }
+  ]
+}
+```
+</CodeGroup>

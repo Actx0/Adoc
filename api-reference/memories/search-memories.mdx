@@ -1,0 +1,47 @@
+---
+title: "Search Memories"
+description: "Semantic search over session memories."
+---
+
+Semantic search over session memories.
+
+## Endpoint
+
+- **Method**: `POST`
+- **URL**: `/api/v1/workspaces/{workspaceId}/agents/{agentId}/sessions/{sessionId}/memories/search`
+- **Content-Type**: `application/json`
+
+## Required headers
+
+| Header | Required | Description |
+| --- | --- | --- |
+| `X-Access-Key: <ACCESS_KEY>` | Yes* | Workspace access key. Session cookie or `X-API-Key` also work when the user has permission. |
+| `Accept: application/json` | Yes | Ensures a JSON response. |
+
+## Request body
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `query` | string | Yes | Search query. |
+| `limit` | integer | No | Max results (1–100). |
+
+<CodeGroup>
+```json Request
+{
+  "query": "UI preferences",
+  "limit": 10
+}
+```
+</CodeGroup>
+
+## Response
+
+<CodeGroup>
+```json Response
+{
+  "results": [
+    { "id": "mem_...", "kind": "preference", "score": 0.94, "text": "User prefers dark mode" }
+  ]
+}
+```
+</CodeGroup>
