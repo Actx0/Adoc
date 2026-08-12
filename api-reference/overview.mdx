@@ -1,16 +1,16 @@
 ---
 title: "Overview"
-description: "REST APIs for workspaces, agents, sessions, messages, memories, prompts, knowledge, and keys"
+description: "REST APIs for agents, sessions, messages, memories, prompts, and knowledge"
 icon: "code"
 ---
 
 ## Actx0 REST API
 
-Actx0 exposes a versioned HTTP API under `/api/v1`. Use it to manage workspaces, issue keys, run agents and sessions, store messages and memories, version prompts, and search knowledge documents.
+Actx0 exposes a versioned HTTP API under `/api/v1`. Use it to run agents and sessions, store messages and memories, version prompts, and search knowledge documents.
 
 Every endpoint page in this reference is generated from the OpenAPI spec — including typed parameters, request/response schemas, language examples, and an interactive **Try it** playground.
 
-Agent, session, message, memory, prompt, and knowledge endpoints include package samples for **pctx0** (Python), **nctx0** (Node.js), **gtcx0** (Go), and **acli** (CLI), alongside curl.
+Endpoints include package samples for **pctx0** (Python), **nctx0** (Node.js), **gtcx0** (Go), and **acli** (CLI), alongside curl.
 
 <Info>
   **Quick start:** Create a workspace access key in the Actx0 Dashboard, then call Create Memory with `X-Access-Key`.
@@ -27,7 +27,7 @@ Agent, session, message, memory, prompt, and knowledge endpoints include package
 | [gtcx0](https://github.com/Actx0/Gctx0) | Go | `go get github.com/Actx0/Gctx0` |
 | [acli](https://github.com/Actx0/Acli) | CLI | `go install github.com/Actx0/Acli/cmd/acli@latest` |
 
-These clients authenticate with a workspace access key (`X-Access-Key`). API key, workspace, and access-key management endpoints are REST/curl only.
+These clients authenticate with a workspace access key (`X-Access-Key`). Create workspaces and access keys in the Actx0 Dashboard.
 
 ```python
 from pctx0 import Pctx0Client
@@ -75,28 +75,16 @@ Self-hosted or local deployments use your own host with the same `/api/v1` prefi
 
 ## Authentication
 
-API requests authenticate with one of:
+API requests authenticate with a workspace access key:
 
 ```bash
 X-Access-Key: <workspace-access-key>
 ```
 
-```bash
-X-API-Key: <user-api-key>
-```
-
-Or a browser session cookie (`_actx0_session`) for dashboard flows.
-
-| Mode | Header / cookie | Typical use |
-| --- | --- | --- |
-| Access key | `X-Access-Key` | Agents, SDKs, MCP, and server integrations |
-| User API key | `X-API-Key` | User-scoped automation and workspace management |
-| Session | `_actx0_session` | Dashboard and interactive apps |
-
-Workspace create/list and `/keys` / `/apiKeys` management require a **user** principal (`X-API-Key` or session). Agents, sessions, messages, memories, prompts, and knowledge accept workspace access keys when the key includes the matching permission.
+Create access keys in the Actx0 Dashboard with the permissions your agents need. Agents, sessions, messages, memories, prompts, and knowledge accept the key when it includes the matching permission.
 
 <Warning>
-  **Keep your keys secure.** Never expose them in client-side code or public repositories. Use environment variables and server-side requests only. Create responses return the raw key once — store it immediately.
+  **Keep your keys secure.** Never expose them in client-side code or public repositories. Use environment variables and server-side requests only.
 </Warning>
 
 ***
@@ -105,9 +93,7 @@ Workspace create/list and `/keys` / `/apiKeys` management require a **user** pri
 
 ```text
 /api/v1
-  /apiKeys
   /workspaces/{workspaceId}
-    /keys
     /prompts
     /promptsByName/{promptName}
     /documents
@@ -146,7 +132,7 @@ Sessions can also be addressed by external `id` and/or label query params via `/
 
 ## Core memory loop
 
-1. **[Create Access Key](/api-reference/create-access-key)** — issue a scoped runtime key
+1. Create a workspace access key in the Actx0 Dashboard
 2. **[Create Agent](/api-reference/create-agent)** — create an agent in the workspace
 3. **[Create Session](/api-reference/create-session)** — open a conversation session
 4. **[Create Memory](/api-reference/create-memory)** — store facts and preferences
@@ -157,14 +143,6 @@ Sessions can also be addressed by external `id` and/or label query params via `/
 ## API categories
 
 <CardGroup cols={2}>
-  <Card title="Workspaces" icon="building-2" href="/api-reference/create-workspace">
-    Multi-tenant workspaces and isolation
-  </Card>
-
-  <Card title="Access Keys" icon="key-round" href="/api-reference/create-access-key">
-    Scoped workspace keys for agents and SDKs
-  </Card>
-
   <Card title="Agents" icon="bot" href="/api-reference/create-agent">
     Create and manage agents in a workspace
   </Card>
@@ -178,7 +156,7 @@ Sessions can also be addressed by external `id` and/or label query params via `/
   </Card>
 
   <Card title="Memories" icon="cpu" href="/api-reference/create-memory">
-    Session memory CRUD, search, batch, and regenerate
+    Session memory CRUD, search, and batch
   </Card>
 
   <Card title="Prompts" icon="file-text" href="/api-reference/create-prompt">

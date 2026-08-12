@@ -667,7 +667,7 @@ paths:
       x-mint:
         href: /api-reference/list-agents
       x-codeSamples:
-        - lang: python
+        - lang: Python
           label: pctx0
           source: |
             from pctx0 import Pctx0Client
@@ -678,7 +678,7 @@ paths:
             )
 
             agents = client.agent.list(limit=50, offset=0)
-        - lang: javascript
+        - lang: JavaScript
           label: nctx0
           source: |
             import { Nctx0Client } from "@actx0/nctx0";
@@ -689,7 +689,7 @@ paths:
             });
 
             const agents = await client.agent.list({ limit: 50, offset: 0 });
-        - lang: go
+        - lang: Go
           label: gtcx0
           source: |
             package main
@@ -712,7 +712,7 @@ paths:
             	_ = err
             }
         - lang: bash
-          label: cli
+          label: CLI
           source: |
             export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
             export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
@@ -769,7 +769,7 @@ paths:
       x-mint:
         href: /api-reference/create-agent
       x-codeSamples:
-        - lang: python
+        - lang: Python
           label: pctx0
           source: |
             from pctx0 import Pctx0Client
@@ -783,7 +783,7 @@ paths:
                 name="Support bot",
                 description="Handles customer tickets",
             )
-        - lang: javascript
+        - lang: JavaScript
           label: nctx0
           source: |
             import { Nctx0Client } from "@actx0/nctx0";
@@ -797,7 +797,7 @@ paths:
               name: "Support bot",
               description: "Handles customer tickets",
             });
-        - lang: go
+        - lang: Go
           label: gtcx0
           source: |
             package main
@@ -820,7 +820,7 @@ paths:
             	_ = err
             }
         - lang: bash
-          label: cli
+          label: CLI
           source: |
             export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
             export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
@@ -879,7 +879,7 @@ paths:
       x-mint:
         href: /api-reference/get-agent
       x-codeSamples:
-        - lang: python
+        - lang: Python
           label: pctx0
           source: |
             from pctx0 import Pctx0Client
@@ -890,7 +890,7 @@ paths:
             )
 
             agent = client.agent.get("AGENT_ID")
-        - lang: javascript
+        - lang: JavaScript
           label: nctx0
           source: |
             import { Nctx0Client } from "@actx0/nctx0";
@@ -901,7 +901,7 @@ paths:
             });
 
             const agent = await client.agent.get("AGENT_ID");
-        - lang: go
+        - lang: Go
           label: gtcx0
           source: |
             package main
@@ -924,7 +924,7 @@ paths:
             	_ = err
             }
         - lang: bash
-          label: cli
+          label: CLI
           source: |
             export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
             export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
@@ -980,7 +980,7 @@ paths:
       x-mint:
         href: /api-reference/update-agent
       x-codeSamples:
-        - lang: python
+        - lang: Python
           label: pctx0
           source: |
             from pctx0 import Pctx0Client
@@ -995,7 +995,7 @@ paths:
                 name="Support bot",
                 description="Updated description",
             )
-        - lang: javascript
+        - lang: JavaScript
           label: nctx0
           source: |
             import { Nctx0Client } from "@actx0/nctx0";
@@ -1009,7 +1009,7 @@ paths:
               name: "Support bot",
               description: "Updated description",
             });
-        - lang: go
+        - lang: Go
           label: gtcx0
           source: |
             package main
@@ -1032,7 +1032,7 @@ paths:
             	_ = err
             }
         - lang: bash
-          label: cli
+          label: CLI
           source: |
             export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
             export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
@@ -1087,7 +1087,7 @@ paths:
       x-mint:
         href: /api-reference/delete-agent
       x-codeSamples:
-        - lang: python
+        - lang: Python
           label: pctx0
           source: |
             from pctx0 import Pctx0Client
@@ -1098,7 +1098,7 @@ paths:
             )
 
             client.agent.delete("AGENT_ID")
-        - lang: javascript
+        - lang: JavaScript
           label: nctx0
           source: |
             import { Nctx0Client } from "@actx0/nctx0";
@@ -1109,7 +1109,7 @@ paths:
             });
 
             await client.agent.delete("AGENT_ID");
-        - lang: go
+        - lang: Go
           label: gtcx0
           source: |
             package main
@@ -1131,7 +1131,7 @@ paths:
             	_ = err
             }
         - lang: bash
-          label: cli
+          label: CLI
           source: |
             export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
             export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
@@ -1190,7 +1190,7 @@ paths:
       x-mint:
         href: /api-reference/list-sessions
       x-codeSamples:
-        - lang: python
+        - lang: Python
           label: pctx0
           source: |
             from pctx0 import Pctx0Client
@@ -1201,7 +1201,7 @@ paths:
             )
 
             sessions = client.session.list("AGENT_ID", limit=50, offset=0)
-        - lang: javascript
+        - lang: JavaScript
           label: nctx0
           source: |
             import { Nctx0Client } from "@actx0/nctx0";
@@ -1212,7 +1212,7 @@ paths:
             });
 
             const sessions = await client.session.list("AGENT_ID", { limit: 50, offset: 0 });
-        - lang: go
+        - lang: Go
           label: gtcx0
           source: |
             package main
@@ -1235,7 +1235,7 @@ paths:
             	_ = err
             }
         - lang: bash
-          label: cli
+          label: CLI
           source: |
             export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
             export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
@@ -1303,7 +1303,7 @@ paths:
       x-mint:
         href: /api-reference/create-session
       x-codeSamples:
-        - lang: python
+        - lang: Python
           label: pctx0
           source: |
             from pctx0 import Pctx0Client
@@ -1318,7 +1318,7 @@ paths:
                 external_id="support-ticket-42",
                 title="Support ticket #42",
             )
-        - lang: javascript
+        - lang: JavaScript
           label: nctx0
           source: |
             import { Nctx0Client } from "@actx0/nctx0";
@@ -1332,7 +1332,7 @@ paths:
               externalId: "support-ticket-42",
               title: "Support ticket #42",
             });
-        - lang: go
+        - lang: Go
           label: gtcx0
           source: |
             package main
@@ -1360,7 +1360,7 @@ paths:
             	_ = err
             }
         - lang: bash
-          label: cli
+          label: CLI
           source: |
             export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
             export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
@@ -1431,7 +1431,7 @@ paths:
       x-mint:
         href: /api-reference/get-session-by-labels
       x-codeSamples:
-        - lang: python
+        - lang: Python
           label: pctx0
           source: |
             from pctx0 import Pctx0Client
@@ -1445,7 +1445,7 @@ paths:
                 "AGENT_ID",
                 external_id="support-ticket-42",
             )
-        - lang: javascript
+        - lang: JavaScript
           label: nctx0
           source: |
             import { Nctx0Client } from "@actx0/nctx0";
@@ -1458,7 +1458,7 @@ paths:
             const session = await client.session.getByLabels("AGENT_ID", {
               externalId: "support-ticket-42",
             });
-        - lang: go
+        - lang: Go
           label: gtcx0
           source: |
             package main
@@ -1485,7 +1485,7 @@ paths:
             	_ = err
             }
         - lang: bash
-          label: cli
+          label: CLI
           source: |
             export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
             export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
@@ -1544,7 +1544,7 @@ paths:
       x-mint:
         href: /api-reference/update-session-by-labels
       x-codeSamples:
-        - lang: python
+        - lang: Python
           label: pctx0
           source: |
             from pctx0 import Pctx0Client
@@ -1560,7 +1560,7 @@ paths:
                 title="Renamed ticket",
                 new_labels={"channel": "email"},
             )
-        - lang: javascript
+        - lang: JavaScript
           label: nctx0
           source: |
             import { Nctx0Client } from "@actx0/nctx0";
@@ -1575,7 +1575,7 @@ paths:
               title: "Renamed ticket",
               newLabels: { channel: "email" },
             });
-        - lang: go
+        - lang: Go
           label: gtcx0
           source: |
             package main
@@ -1604,7 +1604,7 @@ paths:
             	_ = err
             }
         - lang: bash
-          label: cli
+          label: CLI
           source: |
             export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
             export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
@@ -1674,7 +1674,7 @@ paths:
       x-mint:
         href: /api-reference/delete-session-by-labels
       x-codeSamples:
-        - lang: python
+        - lang: Python
           label: pctx0
           source: |
             from pctx0 import Pctx0Client
@@ -1688,7 +1688,7 @@ paths:
                 "AGENT_ID",
                 external_id="support-ticket-42",
             )
-        - lang: javascript
+        - lang: JavaScript
           label: nctx0
           source: |
             import { Nctx0Client } from "@actx0/nctx0";
@@ -1701,7 +1701,7 @@ paths:
             await client.session.delete("AGENT_ID", {
               externalId: "support-ticket-42",
             });
-        - lang: go
+        - lang: Go
           label: gtcx0
           source: |
             package main
@@ -1727,7 +1727,7 @@ paths:
             	_ = err
             }
         - lang: bash
-          label: cli
+          label: CLI
           source: |
             export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
             export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
@@ -1779,7 +1779,7 @@ paths:
       x-mint:
         href: /api-reference/get-session
       x-codeSamples:
-        - lang: python
+        - lang: Python
           label: pctx0
           source: |
             from pctx0 import Pctx0Client
@@ -1790,7 +1790,7 @@ paths:
             )
 
             session = client.session.get("AGENT_ID", "SESSION_ID")
-        - lang: javascript
+        - lang: JavaScript
           label: nctx0
           source: |
             import { Nctx0Client } from "@actx0/nctx0";
@@ -1801,7 +1801,7 @@ paths:
             });
 
             const session = await client.session.get("AGENT_ID", "SESSION_ID");
-        - lang: go
+        - lang: Go
           label: gtcx0
           source: |
             package main
@@ -1824,7 +1824,7 @@ paths:
             	_ = err
             }
         - lang: bash
-          label: cli
+          label: CLI
           source: |
             export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
             export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
@@ -1876,7 +1876,7 @@ paths:
       x-mint:
         href: /api-reference/list-messages
       x-codeSamples:
-        - lang: python
+        - lang: Python
           label: pctx0
           source: |
             from pctx0 import Pctx0Client
@@ -1887,7 +1887,7 @@ paths:
             )
 
             messages = client.message.list("AGENT_ID", "SESSION_ID", limit=50, offset=0)
-        - lang: javascript
+        - lang: JavaScript
           label: nctx0
           source: |
             import { Nctx0Client } from "@actx0/nctx0";
@@ -1898,7 +1898,7 @@ paths:
             });
 
             const messages = await client.message.list("AGENT_ID", "SESSION_ID", { limit: 50, offset: 0 });
-        - lang: go
+        - lang: Go
           label: gtcx0
           source: |
             package main
@@ -1921,7 +1921,7 @@ paths:
             	_ = err
             }
         - lang: bash
-          label: cli
+          label: CLI
           source: |
             export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
             export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
@@ -1981,7 +1981,7 @@ paths:
       x-mint:
         href: /api-reference/create-message
       x-codeSamples:
-        - lang: python
+        - lang: Python
           label: pctx0
           source: |
             from pctx0 import Pctx0Client
@@ -1996,7 +1996,7 @@ paths:
                 "SESSION_ID",
                 {"role": "user", "content": "What are my preferences?"},
             )
-        - lang: javascript
+        - lang: JavaScript
           label: nctx0
           source: |
             import { Nctx0Client } from "@actx0/nctx0";
@@ -2010,7 +2010,7 @@ paths:
               role: "user",
               content: "What are my preferences?",
             });
-        - lang: go
+        - lang: Go
           label: gtcx0
           source: |
             package main
@@ -2036,7 +2036,7 @@ paths:
             	_ = err
             }
         - lang: bash
-          label: cli
+          label: CLI
           source: |
             export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
             export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
@@ -2107,7 +2107,7 @@ paths:
       x-mint:
         href: /api-reference/search-messages
       x-codeSamples:
-        - lang: python
+        - lang: Python
           label: pctx0
           source: |
             from pctx0 import Pctx0Client
@@ -2123,7 +2123,7 @@ paths:
                 query="onboarding",
                 limit=10,
             )
-        - lang: javascript
+        - lang: JavaScript
           label: nctx0
           source: |
             import { Nctx0Client } from "@actx0/nctx0";
@@ -2137,7 +2137,7 @@ paths:
               query: "onboarding",
               limit: 10,
             });
-        - lang: go
+        - lang: Go
           label: gtcx0
           source: |
             package main
@@ -2160,7 +2160,7 @@ paths:
             	_ = err
             }
         - lang: bash
-          label: cli
+          label: CLI
           source: |
             export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
             export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
@@ -2230,7 +2230,7 @@ paths:
       x-mint:
         href: /api-reference/batch-create-messages
       x-codeSamples:
-        - lang: python
+        - lang: Python
           label: pctx0
           source: |
             from pctx0 import Pctx0Client
@@ -2248,7 +2248,7 @@ paths:
                     {"role": "assistant", "content": "Hi there"},
                 ],
             )
-        - lang: javascript
+        - lang: JavaScript
           label: nctx0
           source: |
             import { Nctx0Client } from "@actx0/nctx0";
@@ -2262,7 +2262,7 @@ paths:
               { role: "user", content: "Hello" },
               { role: "assistant", content: "Hi there" },
             ]);
-        - lang: go
+        - lang: Go
           label: gtcx0
           source: |
             package main
@@ -2346,7 +2346,7 @@ paths:
       x-mint:
         href: /api-reference/batch-delete-messages
       x-codeSamples:
-        - lang: python
+        - lang: Python
           label: pctx0
           source: |
             from pctx0 import Pctx0Client
@@ -2357,7 +2357,7 @@ paths:
             )
 
             client.message.delete("AGENT_ID", "SESSION_ID", ["MESSAGE_ID_1", "MESSAGE_ID_2"])
-        - lang: javascript
+        - lang: JavaScript
           label: nctx0
           source: |
             import { Nctx0Client } from "@actx0/nctx0";
@@ -2368,7 +2368,7 @@ paths:
             });
 
             await client.message.delete("AGENT_ID", "SESSION_ID", ["MESSAGE_ID_1", "MESSAGE_ID_2"]);
-        - lang: go
+        - lang: Go
           label: gtcx0
           source: |
             package main
@@ -2444,7 +2444,7 @@ paths:
       x-mint:
         href: /api-reference/get-message
       x-codeSamples:
-        - lang: python
+        - lang: Python
           label: pctx0
           source: |
             from pctx0 import Pctx0Client
@@ -2455,7 +2455,7 @@ paths:
             )
 
             message = client.message.get("AGENT_ID", "SESSION_ID", "MESSAGE_ID")
-        - lang: javascript
+        - lang: JavaScript
           label: nctx0
           source: |
             import { Nctx0Client } from "@actx0/nctx0";
@@ -2466,7 +2466,7 @@ paths:
             });
 
             const message = await client.message.get("AGENT_ID", "SESSION_ID", "MESSAGE_ID");
-        - lang: go
+        - lang: Go
           label: gtcx0
           source: |
             package main
@@ -2489,7 +2489,7 @@ paths:
             	_ = err
             }
         - lang: bash
-          label: cli
+          label: CLI
           source: |
             export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
             export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
@@ -2547,7 +2547,7 @@ paths:
       x-mint:
         href: /api-reference/update-message
       x-codeSamples:
-        - lang: python
+        - lang: Python
           label: pctx0
           source: |
             from pctx0 import Pctx0Client
@@ -2564,7 +2564,7 @@ paths:
                 content="Updated content",
                 role="user",
             )
-        - lang: javascript
+        - lang: JavaScript
           label: nctx0
           source: |
             import { Nctx0Client } from "@actx0/nctx0";
@@ -2578,7 +2578,7 @@ paths:
               content: "Updated content",
               role: "user",
             });
-        - lang: go
+        - lang: Go
           label: gtcx0
           source: |
             package main
@@ -2658,7 +2658,7 @@ paths:
       x-mint:
         href: /api-reference/delete-message
       x-codeSamples:
-        - lang: python
+        - lang: Python
           label: pctx0
           source: |
             from pctx0 import Pctx0Client
@@ -2669,7 +2669,7 @@ paths:
             )
 
             client.message.delete("AGENT_ID", "SESSION_ID", "MESSAGE_ID")
-        - lang: javascript
+        - lang: JavaScript
           label: nctx0
           source: |
             import { Nctx0Client } from "@actx0/nctx0";
@@ -2680,7 +2680,7 @@ paths:
             });
 
             await client.message.delete("AGENT_ID", "SESSION_ID", "MESSAGE_ID");
-        - lang: go
+        - lang: Go
           label: gtcx0
           source: |
             package main
@@ -2702,7 +2702,7 @@ paths:
             	_ = err
             }
         - lang: bash
-          label: cli
+          label: CLI
           source: |
             export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
             export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
@@ -2767,7 +2767,7 @@ paths:
       x-mint:
         href: /api-reference/list-memories
       x-codeSamples:
-        - lang: python
+        - lang: Python
           label: pctx0
           source: |
             from pctx0 import Pctx0Client
@@ -2778,7 +2778,7 @@ paths:
             )
 
             memories = client.memory.list("AGENT_ID", "SESSION_ID", limit=50, offset=0)
-        - lang: javascript
+        - lang: JavaScript
           label: nctx0
           source: |
             import { Nctx0Client } from "@actx0/nctx0";
@@ -2789,7 +2789,7 @@ paths:
             });
 
             const memories = await client.memory.list("AGENT_ID", "SESSION_ID", { limit: 50, offset: 0 });
-        - lang: go
+        - lang: Go
           label: gtcx0
           source: |
             package main
@@ -2812,7 +2812,7 @@ paths:
             	_ = err
             }
         - lang: bash
-          label: cli
+          label: CLI
           source: |
             export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
             export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
@@ -2872,7 +2872,7 @@ paths:
       x-mint:
         href: /api-reference/create-memory
       x-codeSamples:
-        - lang: python
+        - lang: Python
           label: pctx0
           source: |
             from pctx0 import Pctx0Client
@@ -2887,7 +2887,7 @@ paths:
                 "SESSION_ID",
                 {"kind": "preference", "content": "Prefers concise answers"},
             )
-        - lang: javascript
+        - lang: JavaScript
           label: nctx0
           source: |
             import { Nctx0Client } from "@actx0/nctx0";
@@ -2901,7 +2901,7 @@ paths:
               kind: "preference",
               content: "Prefers concise answers",
             });
-        - lang: go
+        - lang: Go
           label: gtcx0
           source: |
             package main
@@ -2927,7 +2927,7 @@ paths:
             	_ = err
             }
         - lang: bash
-          label: cli
+          label: CLI
           source: |
             export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
             export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
@@ -3004,7 +3004,7 @@ paths:
       x-mint:
         href: /api-reference/search-memories
       x-codeSamples:
-        - lang: python
+        - lang: Python
           label: pctx0
           source: |
             from pctx0 import Pctx0Client
@@ -3020,7 +3020,7 @@ paths:
                 query="preferences",
                 limit=5,
             )
-        - lang: javascript
+        - lang: JavaScript
           label: nctx0
           source: |
             import { Nctx0Client } from "@actx0/nctx0";
@@ -3034,7 +3034,7 @@ paths:
               query: "preferences",
               limit: 5,
             });
-        - lang: go
+        - lang: Go
           label: gtcx0
           source: |
             package main
@@ -3057,7 +3057,7 @@ paths:
             	_ = err
             }
         - lang: bash
-          label: cli
+          label: CLI
           source: |
             export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
             export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
@@ -3127,7 +3127,7 @@ paths:
       x-mint:
         href: /api-reference/batch-create-memories
       x-codeSamples:
-        - lang: python
+        - lang: Python
           label: pctx0
           source: |
             from pctx0 import Pctx0Client
@@ -3145,7 +3145,7 @@ paths:
                     {"kind": "preference", "content": "Prefers dark mode"},
                 ],
             )
-        - lang: javascript
+        - lang: JavaScript
           label: nctx0
           source: |
             import { Nctx0Client } from "@actx0/nctx0";
@@ -3159,7 +3159,7 @@ paths:
               { kind: "fact", content: "Uses TypeScript" },
               { kind: "preference", content: "Prefers dark mode" },
             ]);
-        - lang: go
+        - lang: Go
           label: gtcx0
           source: |
             package main
@@ -3243,7 +3243,7 @@ paths:
       x-mint:
         href: /api-reference/batch-delete-memories
       x-codeSamples:
-        - lang: python
+        - lang: Python
           label: pctx0
           source: |
             from pctx0 import Pctx0Client
@@ -3254,7 +3254,7 @@ paths:
             )
 
             client.memory.delete("AGENT_ID", "SESSION_ID", ["MEMORY_ID_1", "MEMORY_ID_2"])
-        - lang: javascript
+        - lang: JavaScript
           label: nctx0
           source: |
             import { Nctx0Client } from "@actx0/nctx0";
@@ -3265,7 +3265,7 @@ paths:
             });
 
             await client.memory.delete("AGENT_ID", "SESSION_ID", ["MEMORY_ID_1", "MEMORY_ID_2"]);
-        - lang: go
+        - lang: Go
           label: gtcx0
           source: |
             package main
@@ -3388,7 +3388,7 @@ paths:
       x-mint:
         href: /api-reference/get-memory
       x-codeSamples:
-        - lang: python
+        - lang: Python
           label: pctx0
           source: |
             from pctx0 import Pctx0Client
@@ -3399,7 +3399,7 @@ paths:
             )
 
             memory = client.memory.get("AGENT_ID", "SESSION_ID", "MEMORY_ID")
-        - lang: javascript
+        - lang: JavaScript
           label: nctx0
           source: |
             import { Nctx0Client } from "@actx0/nctx0";
@@ -3410,7 +3410,7 @@ paths:
             });
 
             const memory = await client.memory.get("AGENT_ID", "SESSION_ID", "MEMORY_ID");
-        - lang: go
+        - lang: Go
           label: gtcx0
           source: |
             package main
@@ -3433,7 +3433,7 @@ paths:
             	_ = err
             }
         - lang: bash
-          label: cli
+          label: CLI
           source: |
             export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
             export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
@@ -3491,7 +3491,7 @@ paths:
       x-mint:
         href: /api-reference/update-memory
       x-codeSamples:
-        - lang: python
+        - lang: Python
           label: pctx0
           source: |
             from pctx0 import Pctx0Client
@@ -3508,7 +3508,7 @@ paths:
                 content="Prefers short bullet points",
                 kind="preference",
             )
-        - lang: javascript
+        - lang: JavaScript
           label: nctx0
           source: |
             import { Nctx0Client } from "@actx0/nctx0";
@@ -3522,7 +3522,7 @@ paths:
               content: "Prefers short bullet points",
               kind: "preference",
             });
-        - lang: go
+        - lang: Go
           label: gtcx0
           source: |
             package main
@@ -3553,7 +3553,7 @@ paths:
             	_ = err
             }
         - lang: bash
-          label: cli
+          label: CLI
           source: |
             export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
             export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
@@ -3613,7 +3613,7 @@ paths:
       x-mint:
         href: /api-reference/delete-memory
       x-codeSamples:
-        - lang: python
+        - lang: Python
           label: pctx0
           source: |
             from pctx0 import Pctx0Client
@@ -3624,7 +3624,7 @@ paths:
             )
 
             client.memory.delete("AGENT_ID", "SESSION_ID", "MEMORY_ID")
-        - lang: javascript
+        - lang: JavaScript
           label: nctx0
           source: |
             import { Nctx0Client } from "@actx0/nctx0";
@@ -3635,7 +3635,7 @@ paths:
             });
 
             await client.memory.delete("AGENT_ID", "SESSION_ID", "MEMORY_ID");
-        - lang: go
+        - lang: Go
           label: gtcx0
           source: |
             package main
@@ -3657,7 +3657,7 @@ paths:
             	_ = err
             }
         - lang: bash
-          label: cli
+          label: CLI
           source: |
             export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
             export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
@@ -3710,7 +3710,7 @@ paths:
       x-mint:
         href: /api-reference/list-prompts
       x-codeSamples:
-        - lang: python
+        - lang: Python
           label: pctx0
           source: |
             from pctx0 import Pctx0Client
@@ -3721,7 +3721,7 @@ paths:
             )
 
             prompts = client.prompt.list(limit=50, offset=0)
-        - lang: javascript
+        - lang: JavaScript
           label: nctx0
           source: |
             import { Nctx0Client } from "@actx0/nctx0";
@@ -3732,7 +3732,7 @@ paths:
             });
 
             const prompts = await client.prompt.list({ limit: 50, offset: 0 });
-        - lang: go
+        - lang: Go
           label: gtcx0
           source: |
             package main
@@ -3755,7 +3755,7 @@ paths:
             	_ = err
             }
         - lang: bash
-          label: cli
+          label: CLI
           source: |
             export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
             export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
@@ -3818,7 +3818,7 @@ paths:
       x-mint:
         href: /api-reference/create-prompt
       x-codeSamples:
-        - lang: python
+        - lang: Python
           label: pctx0
           source: |
             from pctx0 import Pctx0Client
@@ -3834,7 +3834,7 @@ paths:
                 content="You are Mara. Be concise.",
                 description="Support assistant prompt",
             )
-        - lang: javascript
+        - lang: JavaScript
           label: nctx0
           source: |
             import { Nctx0Client } from "@actx0/nctx0";
@@ -3850,7 +3850,7 @@ paths:
               content: "You are Mara. Be concise.",
               description: "Support assistant prompt",
             });
-        - lang: go
+        - lang: Go
           label: gtcx0
           source: |
             package main
@@ -3879,7 +3879,7 @@ paths:
             	_ = err
             }
         - lang: bash
-          label: cli
+          label: CLI
           source: |
             export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
             export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
@@ -3945,7 +3945,7 @@ paths:
       x-mint:
         href: /api-reference/get-prompt
       x-codeSamples:
-        - lang: python
+        - lang: Python
           label: pctx0
           source: |
             from pctx0 import Pctx0Client
@@ -3956,7 +3956,7 @@ paths:
             )
 
             prompt = client.prompt.get("PROMPT_ID")
-        - lang: javascript
+        - lang: JavaScript
           label: nctx0
           source: |
             import { Nctx0Client } from "@actx0/nctx0";
@@ -3967,7 +3967,7 @@ paths:
             });
 
             const prompt = await client.prompt.get("PROMPT_ID");
-        - lang: go
+        - lang: Go
           label: gtcx0
           source: |
             package main
@@ -3990,7 +3990,7 @@ paths:
             	_ = err
             }
         - lang: bash
-          label: cli
+          label: CLI
           source: |
             export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
             export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
@@ -4036,7 +4036,7 @@ paths:
       x-mint:
         href: /api-reference/delete-prompt
       x-codeSamples:
-        - lang: python
+        - lang: Python
           label: pctx0
           source: |
             from pctx0 import Pctx0Client
@@ -4047,7 +4047,7 @@ paths:
             )
 
             client.prompt.delete("PROMPT_ID")
-        - lang: javascript
+        - lang: JavaScript
           label: nctx0
           source: |
             import { Nctx0Client } from "@actx0/nctx0";
@@ -4058,7 +4058,7 @@ paths:
             });
 
             await client.prompt.delete("PROMPT_ID");
-        - lang: go
+        - lang: Go
           label: gtcx0
           source: |
             package main
@@ -4080,7 +4080,7 @@ paths:
             	_ = err
             }
         - lang: bash
-          label: cli
+          label: CLI
           source: |
             export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
             export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
@@ -4138,7 +4138,7 @@ paths:
       x-mint:
         href: /api-reference/get-prompt-by-name
       x-codeSamples:
-        - lang: python
+        - lang: Python
           label: pctx0
           source: |
             from pctx0 import Pctx0Client
@@ -4149,7 +4149,7 @@ paths:
             )
 
             prompt = client.prompt.get_by_name("mara-guide", version="production")
-        - lang: javascript
+        - lang: JavaScript
           label: nctx0
           source: |
             import { Nctx0Client } from "@actx0/nctx0";
@@ -4160,7 +4160,7 @@ paths:
             });
 
             const prompt = await client.prompt.getByName("mara-guide", { version: "production" });
-        - lang: go
+        - lang: Go
           label: gtcx0
           source: |
             package main
@@ -4183,7 +4183,7 @@ paths:
             	_ = err
             }
         - lang: bash
-          label: cli
+          label: CLI
           source: |
             export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
             export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
@@ -4235,7 +4235,7 @@ paths:
       x-mint:
         href: /api-reference/list-prompt-versions
       x-codeSamples:
-        - lang: python
+        - lang: Python
           label: pctx0
           source: |
             from pctx0 import Pctx0Client
@@ -4246,7 +4246,7 @@ paths:
             )
 
             versions = client.prompt.list_versions("PROMPT_ID", limit=50, offset=0)
-        - lang: javascript
+        - lang: JavaScript
           label: nctx0
           source: |
             import { Nctx0Client } from "@actx0/nctx0";
@@ -4257,7 +4257,7 @@ paths:
             });
 
             const versions = await client.prompt.listVersions("PROMPT_ID", { limit: 50, offset: 0 });
-        - lang: go
+        - lang: Go
           label: gtcx0
           source: |
             package main
@@ -4280,7 +4280,7 @@ paths:
             	_ = err
             }
         - lang: bash
-          label: cli
+          label: CLI
           source: |
             export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
             export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
@@ -4338,7 +4338,7 @@ paths:
       x-mint:
         href: /api-reference/create-prompt-version
       x-codeSamples:
-        - lang: python
+        - lang: Python
           label: pctx0
           source: |
             from pctx0 import Pctx0Client
@@ -4353,7 +4353,7 @@ paths:
                 type="text",
                 content="You are Mara. Prefer short answers.",
             )
-        - lang: javascript
+        - lang: JavaScript
           label: nctx0
           source: |
             import { Nctx0Client } from "@actx0/nctx0";
@@ -4367,7 +4367,7 @@ paths:
               type: "text",
               content: "You are Mara. Prefer short answers.",
             });
-        - lang: go
+        - lang: Go
           label: gtcx0
           source: |
             package main
@@ -4396,7 +4396,7 @@ paths:
             	_ = err
             }
         - lang: bash
-          label: cli
+          label: CLI
           source: |
             export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
             export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
@@ -4460,7 +4460,7 @@ paths:
       x-mint:
         href: /api-reference/get-prompt-version
       x-codeSamples:
-        - lang: python
+        - lang: Python
           label: pctx0
           source: |
             from pctx0 import Pctx0Client
@@ -4471,7 +4471,7 @@ paths:
             )
 
             version = client.prompt.get_version("PROMPT_ID", "VERSION_ID")
-        - lang: javascript
+        - lang: JavaScript
           label: nctx0
           source: |
             import { Nctx0Client } from "@actx0/nctx0";
@@ -4482,7 +4482,7 @@ paths:
             });
 
             const version = await client.prompt.getVersion("PROMPT_ID", "VERSION_ID");
-        - lang: go
+        - lang: Go
           label: gtcx0
           source: |
             package main
@@ -4505,7 +4505,7 @@ paths:
             	_ = err
             }
         - lang: bash
-          label: cli
+          label: CLI
           source: |
             export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
             export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
@@ -4562,7 +4562,7 @@ paths:
       x-mint:
         href: /api-reference/update-prompt-version
       x-codeSamples:
-        - lang: python
+        - lang: Python
           label: pctx0
           source: |
             from pctx0 import Pctx0Client
@@ -4578,7 +4578,7 @@ paths:
                 content="You are Mara. Prefer short answers.",
                 production=True,
             )
-        - lang: javascript
+        - lang: JavaScript
           label: nctx0
           source: |
             import { Nctx0Client } from "@actx0/nctx0";
@@ -4592,7 +4592,7 @@ paths:
               content: "You are Mara. Prefer short answers.",
               production: true,
             });
-        - lang: go
+        - lang: Go
           label: gtcx0
           source: |
             package main
@@ -4672,7 +4672,7 @@ paths:
       x-mint:
         href: /api-reference/delete-prompt-version
       x-codeSamples:
-        - lang: python
+        - lang: Python
           label: pctx0
           source: |
             from pctx0 import Pctx0Client
@@ -4683,7 +4683,7 @@ paths:
             )
 
             client.prompt.delete_version("PROMPT_ID", "VERSION_ID")
-        - lang: javascript
+        - lang: JavaScript
           label: nctx0
           source: |
             import { Nctx0Client } from "@actx0/nctx0";
@@ -4694,7 +4694,7 @@ paths:
             });
 
             await client.prompt.deleteVersion("PROMPT_ID", "VERSION_ID");
-        - lang: go
+        - lang: Go
           label: gtcx0
           source: |
             package main
@@ -4716,7 +4716,7 @@ paths:
             	_ = err
             }
         - lang: bash
-          label: cli
+          label: CLI
           source: |
             export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
             export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
@@ -4768,7 +4768,7 @@ paths:
       x-mint:
         href: /api-reference/list-documents
       x-codeSamples:
-        - lang: python
+        - lang: Python
           label: pctx0
           source: |
             from pctx0 import Pctx0Client
@@ -4779,7 +4779,7 @@ paths:
             )
 
             docs = client.knowledge.list(limit=50, offset=0)
-        - lang: javascript
+        - lang: JavaScript
           label: nctx0
           source: |
             import { Nctx0Client } from "@actx0/nctx0";
@@ -4790,7 +4790,7 @@ paths:
             });
 
             const docs = await client.knowledge.list({ limit: 50, offset: 0 });
-        - lang: go
+        - lang: Go
           label: gtcx0
           source: |
             package main
@@ -4813,7 +4813,7 @@ paths:
             	_ = err
             }
         - lang: bash
-          label: cli
+          label: CLI
           source: |
             export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
             export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
@@ -4872,7 +4872,7 @@ paths:
       x-mint:
         href: /api-reference/upload-document
       x-codeSamples:
-        - lang: python
+        - lang: Python
           label: pctx0
           source: |
             from pctx0 import Pctx0Client
@@ -4887,7 +4887,7 @@ paths:
                 title="Onboarding notes",
                 labels={"tag": "docs", "team": "platform"},
             )
-        - lang: javascript
+        - lang: JavaScript
           label: nctx0
           source: |
             import { Nctx0Client } from "@actx0/nctx0";
@@ -4902,7 +4902,7 @@ paths:
               title: "Onboarding notes",
               labels: { tag: "docs", team: "platform" },
             });
-        - lang: go
+        - lang: Go
           label: gtcx0
           source: |
             package main
@@ -4930,7 +4930,7 @@ paths:
             	_ = err
             }
         - lang: bash
-          label: cli
+          label: CLI
           source: |
             export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
             export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
@@ -5011,7 +5011,7 @@ paths:
       x-mint:
         href: /api-reference/search-documents
       x-codeSamples:
-        - lang: python
+        - lang: Python
           label: pctx0
           source: |
             from pctx0 import Pctx0Client
@@ -5025,7 +5025,7 @@ paths:
                 query="onboarding checklist",
                 limit=10,
             )
-        - lang: javascript
+        - lang: JavaScript
           label: nctx0
           source: |
             import { Nctx0Client } from "@actx0/nctx0";
@@ -5039,7 +5039,7 @@ paths:
               query: "onboarding checklist",
               limit: 10,
             });
-        - lang: go
+        - lang: Go
           label: gtcx0
           source: |
             package main
@@ -5062,7 +5062,7 @@ paths:
             	_ = err
             }
         - lang: bash
-          label: cli
+          label: CLI
           source: |
             export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
             export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
@@ -5117,7 +5117,7 @@ paths:
       x-mint:
         href: /api-reference/delete-document
       x-codeSamples:
-        - lang: python
+        - lang: Python
           label: pctx0
           source: |
             from pctx0 import Pctx0Client
@@ -5128,7 +5128,7 @@ paths:
             )
 
             client.knowledge.delete("DOCUMENT_ID")
-        - lang: javascript
+        - lang: JavaScript
           label: nctx0
           source: |
             import { Nctx0Client } from "@actx0/nctx0";
@@ -5139,7 +5139,7 @@ paths:
             });
 
             await client.knowledge.delete("DOCUMENT_ID");
-        - lang: go
+        - lang: Go
           label: gtcx0
           source: |
             package main
@@ -5161,7 +5161,7 @@ paths:
             	_ = err
             }
         - lang: bash
-          label: cli
+          label: CLI
           source: |
             export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
             export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"

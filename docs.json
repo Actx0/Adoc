@@ -35,9 +35,10 @@
       "display": "interactive"
     },
     "examples": {
-      "languages": ["curl", "python", "javascript", "go", "cli"],
+      "languages": ["curl"],
       "defaults": "required",
-      "prefill": true
+      "prefill": true,
+      "autogenerate": true
     }
   },
   "navigation": {
@@ -80,40 +81,6 @@
             "icon": "rocket",
             "pages": [
               "api-reference/overview"
-            ]
-          },
-          {
-            "group": "API Keys",
-            "icon": "key",
-            "openapi": "openapi.yaml",
-            "pages": [
-              "POST /apiKeys",
-              "GET /apiKeys",
-              "GET /apiKeys/{apiKeyId}",
-              "DELETE /apiKeys/{apiKeyId}"
-            ]
-          },
-          {
-            "group": "Workspaces",
-            "icon": "building-2",
-            "openapi": "openapi.yaml",
-            "pages": [
-              "POST /workspaces",
-              "GET /workspaces",
-              "GET /workspaces/{workspaceId}",
-              "PUT /workspaces/{workspaceId}",
-              "DELETE /workspaces/{workspaceId}"
-            ]
-          },
-          {
-            "group": "Access Keys",
-            "icon": "key-round",
-            "openapi": "openapi.yaml",
-            "pages": [
-              "POST /workspaces/{workspaceId}/keys",
-              "GET /workspaces/{workspaceId}/keys",
-              "GET /workspaces/{workspaceId}/keys/{keyId}",
-              "DELETE /workspaces/{workspaceId}/keys/{keyId}"
             ]
           },
           {
@@ -168,8 +135,7 @@
               "GET /workspaces/{workspaceId}/agents/{agentId}/sessions/{sessionId}/memories/{memoryId}",
               "PUT /workspaces/{workspaceId}/agents/{agentId}/sessions/{sessionId}/memories/{memoryId}",
               "DELETE /workspaces/{workspaceId}/agents/{agentId}/sessions/{sessionId}/memories/{memoryId}",
-              "DELETE /workspaces/{workspaceId}/agents/{agentId}/sessions/{sessionId}/memories/batch",
-              "POST /workspaces/{workspaceId}/agents/{agentId}/sessions/{sessionId}/memories/regenerate"
+              "DELETE /workspaces/{workspaceId}/agents/{agentId}/sessions/{sessionId}/memories/batch"
             ]
           },
           {
