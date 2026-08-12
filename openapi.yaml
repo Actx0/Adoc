@@ -7,13 +7,15 @@ info:
 
     Authenticate with `X-Access-Key` (workspace runtime), `X-API-Key` (user), or the `_actx0_session` cookie (dashboard).
 servers:
+- url: https://app.actx0.com/api/v1
+  description: Actx0 cloud
 - url: http://127.0.0.1:8000/api/v1
   description: Local Actx0 server
 - url: https://{host}/api/v1
   description: Custom host
   variables:
     host:
-      default: api.actx0.com
+      default: app.actx0.com
       description: Actx0 API host
 tags:
 - name: API Keys
