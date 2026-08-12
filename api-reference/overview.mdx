@@ -11,7 +11,7 @@ Actx0 exposes a versioned HTTP API under `/api/v1`. Use it to run agents and ses
 Endpoints include package samples for **Pctx0** (Python), **Nctx0** (Node.js), and **Gtcx0** (Go), plus a combined **cURL / Acli** sample.
 
 <Info>
-  **Quick start:** Create a workspace access key in the Actx0 Dashboard, then call Create Memory with `X-Access-Key`.
+  **Quick start:** [Create a workspace access key in the Actx0 Dashboard](https://app.actx0.com/settings), then call Create Memory with `X-Access-Key`.
 </Info>
 
 ***
@@ -25,7 +25,7 @@ Endpoints include package samples for **Pctx0** (Python), **Nctx0** (Node.js), a
 | [Gtcx0](https://github.com/Actx0/Gctx0) | Go | `go get github.com/Actx0/Gctx0` |
 | [Acli](https://github.com/Actx0/Acli) | CLI | `go install github.com/Actx0/Acli/cmd/acli@latest` |
 
-These clients authenticate with a workspace access key (`X-Access-Key`). Create workspaces and access keys in the Actx0 Dashboard.
+These clients authenticate with a workspace access key (`X-Access-Key`). Create workspaces and access keys in the [Actx0 Dashboard](https://app.actx0.com/settings).
 
 ```python
 from pctx0 import Pctx0Client
@@ -77,7 +77,7 @@ API requests authenticate with a workspace access key:
 X-Access-Key: <workspace-access-key>
 ```
 
-Create access keys in the Actx0 Dashboard with the permissions your agents need. Agents, sessions, messages, memories, prompts, and knowledge accept the key when it includes the matching permission.
+[Create access keys in the Actx0 Dashboard](https://app.actx0.com/settings) with the permissions your agents need. Agents, sessions, messages, memories, prompts, and knowledge accept the key when it includes the matching permission.
 
 <Warning>
   **Keep your keys secure.** Never expose them in client-side code or public repositories. Use environment variables and server-side requests only.
@@ -128,7 +128,7 @@ Sessions can also be addressed by external `id` and/or label query params via `/
 
 ## Core memory loop
 
-1. Create a workspace access key in the Actx0 Dashboard
+1. [Create a workspace access key in the Actx0 Dashboard](https://app.actx0.com/settings)
 2. **[Create Agent](/api-reference/create-agent)** — create an agent in the workspace
 3. **[Create Session](/api-reference/create-session)** — open a conversation session
 4. **[Create Memory](/api-reference/create-memory)** — store facts and preferences
