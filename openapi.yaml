@@ -660,44 +660,52 @@ paths:
         href: /api-reference/list-agents
       x-codeSamples:
         - lang: curl
-          label: curl
+          label: curl / acli
           source: |
             curl -X GET 'https://app.actx0.com/api/v1/workspaces/<workspaceId>/agents' \
               -H "X-Access-Key: YOUR_ACCESS_KEY" \
               -H "Accept: application/json"
+            
+            # ---
+            
+            # acli
+            export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
+            export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
+            
+            acli agent list --limit 50 --offset 0
         - lang: python
           label: pctx0
           source: |
             from pctx0 import Pctx0Client
-
+            
             client = Pctx0Client(
                 access_key="YOUR_ACCESS_KEY",
                 workspace_id="YOUR_WORKSPACE_ID",
             )
-
+            
             agents = client.agent.list(limit=50, offset=0)
         - lang: javascript
           label: nctx0
           source: |
             import { Nctx0Client } from "@actx0/nctx0";
-
+            
             const client = new Nctx0Client({
               accessKey: "YOUR_ACCESS_KEY",
               workspaceId: "YOUR_WORKSPACE_ID",
             });
-
+            
             const agents = await client.agent.list({ limit: 50, offset: 0 });
         - lang: go
           label: gtcx0
           source: |
             package main
-
+            
             import (
             	"context"
-
+            
             	"github.com/Actx0/Gctx0"
             )
-
+            
             func main() {
             	client := gctx0.NewClient(
             		gctx0.WithAccessKey("YOUR_ACCESS_KEY"),
@@ -709,13 +717,6 @@ paths:
             	_ = agents
             	_ = err
             }
-        - lang: bash
-          label: bash
-          source: |
-            export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
-            export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
-
-            acli agent list --limit 50 --offset 0
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/Limit'
@@ -768,23 +769,31 @@ paths:
         href: /api-reference/create-agent
       x-codeSamples:
         - lang: curl
-          label: curl
+          label: curl / acli
           source: |
             curl -X POST 'https://app.actx0.com/api/v1/workspaces/<workspaceId>/agents' \
               -H "X-Access-Key: YOUR_ACCESS_KEY" \
               -H "Content-Type: application/json" \
               -H "Accept: application/json" \
               -d '{"name": "Support bot", "description": "Handles customer support conversations"}'
+            
+            # ---
+            
+            # acli
+            export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
+            export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
+            
+            acli agent create "Support bot" --description "Handles customer tickets"
         - lang: python
           label: pctx0
           source: |
             from pctx0 import Pctx0Client
-
+            
             client = Pctx0Client(
                 access_key="YOUR_ACCESS_KEY",
                 workspace_id="YOUR_WORKSPACE_ID",
             )
-
+            
             agent = client.agent.create(
                 name="Support bot",
                 description="Handles customer tickets",
@@ -793,12 +802,12 @@ paths:
           label: nctx0
           source: |
             import { Nctx0Client } from "@actx0/nctx0";
-
+            
             const client = new Nctx0Client({
               accessKey: "YOUR_ACCESS_KEY",
               workspaceId: "YOUR_WORKSPACE_ID",
             });
-
+            
             const agent = await client.agent.create({
               name: "Support bot",
               description: "Handles customer tickets",
@@ -807,13 +816,13 @@ paths:
           label: gtcx0
           source: |
             package main
-
+            
             import (
             	"context"
-
+            
             	"github.com/Actx0/Gctx0"
             )
-
+            
             func main() {
             	client := gctx0.NewClient(
             		gctx0.WithAccessKey("YOUR_ACCESS_KEY"),
@@ -825,13 +834,6 @@ paths:
             	_ = agent
             	_ = err
             }
-        - lang: bash
-          label: bash
-          source: |
-            export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
-            export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
-
-            acli agent create "Support bot" --description "Handles customer tickets"
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -886,44 +888,52 @@ paths:
         href: /api-reference/get-agent
       x-codeSamples:
         - lang: curl
-          label: curl
+          label: curl / acli
           source: |
             curl -X GET 'https://app.actx0.com/api/v1/workspaces/<workspaceId>/agents/<agentId>' \
               -H "X-Access-Key: YOUR_ACCESS_KEY" \
               -H "Accept: application/json"
+            
+            # ---
+            
+            # acli
+            export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
+            export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
+            
+            acli agent get AGENT_ID
         - lang: python
           label: pctx0
           source: |
             from pctx0 import Pctx0Client
-
+            
             client = Pctx0Client(
                 access_key="YOUR_ACCESS_KEY",
                 workspace_id="YOUR_WORKSPACE_ID",
             )
-
+            
             agent = client.agent.get("AGENT_ID")
         - lang: javascript
           label: nctx0
           source: |
             import { Nctx0Client } from "@actx0/nctx0";
-
+            
             const client = new Nctx0Client({
               accessKey: "YOUR_ACCESS_KEY",
               workspaceId: "YOUR_WORKSPACE_ID",
             });
-
+            
             const agent = await client.agent.get("AGENT_ID");
         - lang: go
           label: gtcx0
           source: |
             package main
-
+            
             import (
             	"context"
-
+            
             	"github.com/Actx0/Gctx0"
             )
-
+            
             func main() {
             	client := gctx0.NewClient(
             		gctx0.WithAccessKey("YOUR_ACCESS_KEY"),
@@ -935,13 +945,6 @@ paths:
             	_ = agent
             	_ = err
             }
-        - lang: bash
-          label: bash
-          source: |
-            export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
-            export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
-
-            acli agent get AGENT_ID
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/AgentId'
@@ -993,23 +996,31 @@ paths:
         href: /api-reference/update-agent
       x-codeSamples:
         - lang: curl
-          label: curl
+          label: curl / acli
           source: |
             curl -X PUT 'https://app.actx0.com/api/v1/workspaces/<workspaceId>/agents/<agentId>' \
               -H "X-Access-Key: YOUR_ACCESS_KEY" \
               -H "Content-Type: application/json" \
               -H "Accept: application/json" \
               -d '{"name": "Support bot", "description": "Handles customer support conversations"}'
+            
+            # ---
+            
+            # acli
+            export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
+            export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
+            
+            acli agent update AGENT_ID --name "Support bot" --description "Updated description"
         - lang: python
           label: pctx0
           source: |
             from pctx0 import Pctx0Client
-
+            
             client = Pctx0Client(
                 access_key="YOUR_ACCESS_KEY",
                 workspace_id="YOUR_WORKSPACE_ID",
             )
-
+            
             agent = client.agent.update(
                 "AGENT_ID",
                 name="Support bot",
@@ -1019,12 +1030,12 @@ paths:
           label: nctx0
           source: |
             import { Nctx0Client } from "@actx0/nctx0";
-
+            
             const client = new Nctx0Client({
               accessKey: "YOUR_ACCESS_KEY",
               workspaceId: "YOUR_WORKSPACE_ID",
             });
-
+            
             const agent = await client.agent.update("AGENT_ID", {
               name: "Support bot",
               description: "Updated description",
@@ -1033,13 +1044,13 @@ paths:
           label: gtcx0
           source: |
             package main
-
+            
             import (
             	"context"
-
+            
             	"github.com/Actx0/Gctx0"
             )
-
+            
             func main() {
             	client := gctx0.NewClient(
             		gctx0.WithAccessKey("YOUR_ACCESS_KEY"),
@@ -1051,13 +1062,6 @@ paths:
             	_ = agent
             	_ = err
             }
-        - lang: bash
-          label: bash
-          source: |
-            export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
-            export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
-
-            acli agent update AGENT_ID --name "Support bot" --description "Updated description"
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/AgentId'
@@ -1108,44 +1112,52 @@ paths:
         href: /api-reference/delete-agent
       x-codeSamples:
         - lang: curl
-          label: curl
+          label: curl / acli
           source: |
             curl -X DELETE 'https://app.actx0.com/api/v1/workspaces/<workspaceId>/agents/<agentId>' \
               -H "X-Access-Key: YOUR_ACCESS_KEY" \
               -H "Accept: application/json"
+            
+            # ---
+            
+            # acli
+            export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
+            export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
+            
+            acli agent delete AGENT_ID
         - lang: python
           label: pctx0
           source: |
             from pctx0 import Pctx0Client
-
+            
             client = Pctx0Client(
                 access_key="YOUR_ACCESS_KEY",
                 workspace_id="YOUR_WORKSPACE_ID",
             )
-
+            
             client.agent.delete("AGENT_ID")
         - lang: javascript
           label: nctx0
           source: |
             import { Nctx0Client } from "@actx0/nctx0";
-
+            
             const client = new Nctx0Client({
               accessKey: "YOUR_ACCESS_KEY",
               workspaceId: "YOUR_WORKSPACE_ID",
             });
-
+            
             await client.agent.delete("AGENT_ID");
         - lang: go
           label: gtcx0
           source: |
             package main
-
+            
             import (
             	"context"
-
+            
             	"github.com/Actx0/Gctx0"
             )
-
+            
             func main() {
             	client := gctx0.NewClient(
             		gctx0.WithAccessKey("YOUR_ACCESS_KEY"),
@@ -1156,13 +1168,6 @@ paths:
             	err := client.Agent.Delete(ctx, "AGENT_ID")
             	_ = err
             }
-        - lang: bash
-          label: bash
-          source: |
-            export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
-            export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
-
-            acli agent delete AGENT_ID
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/AgentId'
@@ -1217,44 +1222,52 @@ paths:
         href: /api-reference/list-sessions
       x-codeSamples:
         - lang: curl
-          label: curl
+          label: curl / acli
           source: |
             curl -X GET 'https://app.actx0.com/api/v1/workspaces/<workspaceId>/agents/<agentId>/sessions' \
               -H "X-Access-Key: YOUR_ACCESS_KEY" \
               -H "Accept: application/json"
+            
+            # ---
+            
+            # acli
+            export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
+            export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
+            
+            acli session list --agent-id AGENT_ID
         - lang: python
           label: pctx0
           source: |
             from pctx0 import Pctx0Client
-
+            
             client = Pctx0Client(
                 access_key="YOUR_ACCESS_KEY",
                 workspace_id="YOUR_WORKSPACE_ID",
             )
-
+            
             sessions = client.session.list("AGENT_ID", limit=50, offset=0)
         - lang: javascript
           label: nctx0
           source: |
             import { Nctx0Client } from "@actx0/nctx0";
-
+            
             const client = new Nctx0Client({
               accessKey: "YOUR_ACCESS_KEY",
               workspaceId: "YOUR_WORKSPACE_ID",
             });
-
+            
             const sessions = await client.session.list("AGENT_ID", { limit: 50, offset: 0 });
         - lang: go
           label: gtcx0
           source: |
             package main
-
+            
             import (
             	"context"
-
+            
             	"github.com/Actx0/Gctx0"
             )
-
+            
             func main() {
             	client := gctx0.NewClient(
             		gctx0.WithAccessKey("YOUR_ACCESS_KEY"),
@@ -1266,13 +1279,6 @@ paths:
             	_ = sessions
             	_ = err
             }
-        - lang: bash
-          label: bash
-          source: |
-            export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
-            export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
-
-            acli session list --agent-id AGENT_ID
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/AgentId'
@@ -1336,23 +1342,34 @@ paths:
         href: /api-reference/create-session
       x-codeSamples:
         - lang: curl
-          label: curl
+          label: curl / acli
           source: |
             curl -X POST 'https://app.actx0.com/api/v1/workspaces/<workspaceId>/agents/<agentId>/sessions' \
               -H "X-Access-Key: YOUR_ACCESS_KEY" \
               -H "Content-Type: application/json" \
               -H "Accept: application/json" \
               -d '{"title": "Ticket #4821"}'
+            
+            # ---
+            
+            # acli
+            export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
+            export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
+            
+            acli session create \
+              --agent-id AGENT_ID \
+              --external-id support-ticket-42 \
+              --title "Support ticket #42"
         - lang: python
           label: pctx0
           source: |
             from pctx0 import Pctx0Client
-
+            
             client = Pctx0Client(
                 access_key="YOUR_ACCESS_KEY",
                 workspace_id="YOUR_WORKSPACE_ID",
             )
-
+            
             session = client.session.create(
                 "AGENT_ID",
                 external_id="support-ticket-42",
@@ -1362,12 +1379,12 @@ paths:
           label: nctx0
           source: |
             import { Nctx0Client } from "@actx0/nctx0";
-
+            
             const client = new Nctx0Client({
               accessKey: "YOUR_ACCESS_KEY",
               workspaceId: "YOUR_WORKSPACE_ID",
             });
-
+            
             const session = await client.session.create("AGENT_ID", {
               externalId: "support-ticket-42",
               title: "Support ticket #42",
@@ -1376,13 +1393,13 @@ paths:
           label: gtcx0
           source: |
             package main
-
+            
             import (
             	"context"
-
+            
             	"github.com/Actx0/Gctx0"
             )
-
+            
             func main() {
             	client := gctx0.NewClient(
             		gctx0.WithAccessKey("YOUR_ACCESS_KEY"),
@@ -1399,16 +1416,6 @@ paths:
             	_ = session
             	_ = err
             }
-        - lang: bash
-          label: bash
-          source: |
-            export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
-            export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
-
-            acli session create \
-              --agent-id AGENT_ID \
-              --external-id support-ticket-42 \
-              --title "Support ticket #42"
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/AgentId'
@@ -1472,21 +1479,29 @@ paths:
         href: /api-reference/get-session-by-labels
       x-codeSamples:
         - lang: curl
-          label: curl
+          label: curl / acli
           source: |
             curl -X GET 'https://app.actx0.com/api/v1/workspaces/<workspaceId>/agents/<agentId>/sessions/by-labels' \
               -H "X-Access-Key: YOUR_ACCESS_KEY" \
               -H "Accept: application/json"
+            
+            # ---
+            
+            # acli
+            export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
+            export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
+            
+            acli session get --agent-id AGENT_ID --external-id support-ticket-42
         - lang: python
           label: pctx0
           source: |
             from pctx0 import Pctx0Client
-
+            
             client = Pctx0Client(
                 access_key="YOUR_ACCESS_KEY",
                 workspace_id="YOUR_WORKSPACE_ID",
             )
-
+            
             session = client.session.get_by_labels(
                 "AGENT_ID",
                 external_id="support-ticket-42",
@@ -1495,12 +1510,12 @@ paths:
           label: nctx0
           source: |
             import { Nctx0Client } from "@actx0/nctx0";
-
+            
             const client = new Nctx0Client({
               accessKey: "YOUR_ACCESS_KEY",
               workspaceId: "YOUR_WORKSPACE_ID",
             });
-
+            
             const session = await client.session.getByLabels("AGENT_ID", {
               externalId: "support-ticket-42",
             });
@@ -1508,13 +1523,13 @@ paths:
           label: gtcx0
           source: |
             package main
-
+            
             import (
             	"context"
-
+            
             	"github.com/Actx0/Gctx0"
             )
-
+            
             func main() {
             	client := gctx0.NewClient(
             		gctx0.WithAccessKey("YOUR_ACCESS_KEY"),
@@ -1530,13 +1545,6 @@ paths:
             	_ = session
             	_ = err
             }
-        - lang: bash
-          label: bash
-          source: |
-            export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
-            export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
-
-            acli session get --agent-id AGENT_ID --external-id support-ticket-42
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/AgentId'
@@ -1591,23 +1599,35 @@ paths:
         href: /api-reference/update-session-by-labels
       x-codeSamples:
         - lang: curl
-          label: curl
+          label: curl / acli
           source: |
             curl -X PUT 'https://app.actx0.com/api/v1/workspaces/<workspaceId>/agents/<agentId>/sessions/by-labels' \
               -H "X-Access-Key: YOUR_ACCESS_KEY" \
               -H "Content-Type: application/json" \
               -H "Accept: application/json" \
               -d '{"title": "Ticket #4821", "labels": {"userId": "alice", "channel": "web"}}'
+            
+            # ---
+            
+            # acli
+            export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
+            export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
+            
+            acli session update \
+              --agent-id AGENT_ID \
+              --external-id support-ticket-42 \
+              --title "Renamed ticket" \
+              --set-label channel=email
         - lang: python
           label: pctx0
           source: |
             from pctx0 import Pctx0Client
-
+            
             client = Pctx0Client(
                 access_key="YOUR_ACCESS_KEY",
                 workspace_id="YOUR_WORKSPACE_ID",
             )
-
+            
             session = client.session.update(
                 "AGENT_ID",
                 external_id="support-ticket-42",
@@ -1618,12 +1638,12 @@ paths:
           label: nctx0
           source: |
             import { Nctx0Client } from "@actx0/nctx0";
-
+            
             const client = new Nctx0Client({
               accessKey: "YOUR_ACCESS_KEY",
               workspaceId: "YOUR_WORKSPACE_ID",
             });
-
+            
             const session = await client.session.update("AGENT_ID", {
               externalId: "support-ticket-42",
               title: "Renamed ticket",
@@ -1633,13 +1653,13 @@ paths:
           label: gtcx0
           source: |
             package main
-
+            
             import (
             	"context"
-
+            
             	"github.com/Actx0/Gctx0"
             )
-
+            
             func main() {
             	client := gctx0.NewClient(
             		gctx0.WithAccessKey("YOUR_ACCESS_KEY"),
@@ -1657,17 +1677,6 @@ paths:
             	_ = session
             	_ = err
             }
-        - lang: bash
-          label: bash
-          source: |
-            export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
-            export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
-
-            acli session update \
-              --agent-id AGENT_ID \
-              --external-id support-ticket-42 \
-              --title "Renamed ticket" \
-              --set-label channel=email
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/AgentId'
@@ -1729,21 +1738,29 @@ paths:
         href: /api-reference/delete-session-by-labels
       x-codeSamples:
         - lang: curl
-          label: curl
+          label: curl / acli
           source: |
             curl -X DELETE 'https://app.actx0.com/api/v1/workspaces/<workspaceId>/agents/<agentId>/sessions/by-labels' \
               -H "X-Access-Key: YOUR_ACCESS_KEY" \
               -H "Accept: application/json"
+            
+            # ---
+            
+            # acli
+            export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
+            export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
+            
+            acli session delete --agent-id AGENT_ID --external-id support-ticket-42
         - lang: python
           label: pctx0
           source: |
             from pctx0 import Pctx0Client
-
+            
             client = Pctx0Client(
                 access_key="YOUR_ACCESS_KEY",
                 workspace_id="YOUR_WORKSPACE_ID",
             )
-
+            
             client.session.delete(
                 "AGENT_ID",
                 external_id="support-ticket-42",
@@ -1752,12 +1769,12 @@ paths:
           label: nctx0
           source: |
             import { Nctx0Client } from "@actx0/nctx0";
-
+            
             const client = new Nctx0Client({
               accessKey: "YOUR_ACCESS_KEY",
               workspaceId: "YOUR_WORKSPACE_ID",
             });
-
+            
             await client.session.delete("AGENT_ID", {
               externalId: "support-ticket-42",
             });
@@ -1765,13 +1782,13 @@ paths:
           label: gtcx0
           source: |
             package main
-
+            
             import (
             	"context"
-
+            
             	"github.com/Actx0/Gctx0"
             )
-
+            
             func main() {
             	client := gctx0.NewClient(
             		gctx0.WithAccessKey("YOUR_ACCESS_KEY"),
@@ -1786,13 +1803,6 @@ paths:
             	)
             	_ = err
             }
-        - lang: bash
-          label: bash
-          source: |
-            export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
-            export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
-
-            acli session delete --agent-id AGENT_ID --external-id support-ticket-42
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/AgentId'
@@ -1840,44 +1850,52 @@ paths:
         href: /api-reference/get-session
       x-codeSamples:
         - lang: curl
-          label: curl
+          label: curl / acli
           source: |
             curl -X GET 'https://app.actx0.com/api/v1/workspaces/<workspaceId>/agents/<agentId>/sessions/<sessionId>' \
               -H "X-Access-Key: YOUR_ACCESS_KEY" \
               -H "Accept: application/json"
+            
+            # ---
+            
+            # acli
+            export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
+            export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
+            
+            acli session get --agent-id AGENT_ID --session-id SESSION_ID
         - lang: python
           label: pctx0
           source: |
             from pctx0 import Pctx0Client
-
+            
             client = Pctx0Client(
                 access_key="YOUR_ACCESS_KEY",
                 workspace_id="YOUR_WORKSPACE_ID",
             )
-
+            
             session = client.session.get("AGENT_ID", "SESSION_ID")
         - lang: javascript
           label: nctx0
           source: |
             import { Nctx0Client } from "@actx0/nctx0";
-
+            
             const client = new Nctx0Client({
               accessKey: "YOUR_ACCESS_KEY",
               workspaceId: "YOUR_WORKSPACE_ID",
             });
-
+            
             const session = await client.session.get("AGENT_ID", "SESSION_ID");
         - lang: go
           label: gtcx0
           source: |
             package main
-
+            
             import (
             	"context"
-
+            
             	"github.com/Actx0/Gctx0"
             )
-
+            
             func main() {
             	client := gctx0.NewClient(
             		gctx0.WithAccessKey("YOUR_ACCESS_KEY"),
@@ -1889,13 +1907,6 @@ paths:
             	_ = session
             	_ = err
             }
-        - lang: bash
-          label: bash
-          source: |
-            export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
-            export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
-
-            acli session get --agent-id AGENT_ID --session-id SESSION_ID
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/AgentId'
@@ -1943,44 +1954,52 @@ paths:
         href: /api-reference/list-messages
       x-codeSamples:
         - lang: curl
-          label: curl
+          label: curl / acli
           source: |
             curl -X GET 'https://app.actx0.com/api/v1/workspaces/<workspaceId>/agents/<agentId>/sessions/<sessionId>/messages' \
               -H "X-Access-Key: YOUR_ACCESS_KEY" \
               -H "Accept: application/json"
+            
+            # ---
+            
+            # acli
+            export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
+            export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
+            
+            acli message list --agent-id AGENT_ID --session-id SESSION_ID
         - lang: python
           label: pctx0
           source: |
             from pctx0 import Pctx0Client
-
+            
             client = Pctx0Client(
                 access_key="YOUR_ACCESS_KEY",
                 workspace_id="YOUR_WORKSPACE_ID",
             )
-
+            
             messages = client.message.list("AGENT_ID", "SESSION_ID", limit=50, offset=0)
         - lang: javascript
           label: nctx0
           source: |
             import { Nctx0Client } from "@actx0/nctx0";
-
+            
             const client = new Nctx0Client({
               accessKey: "YOUR_ACCESS_KEY",
               workspaceId: "YOUR_WORKSPACE_ID",
             });
-
+            
             const messages = await client.message.list("AGENT_ID", "SESSION_ID", { limit: 50, offset: 0 });
         - lang: go
           label: gtcx0
           source: |
             package main
-
+            
             import (
             	"context"
-
+            
             	"github.com/Actx0/Gctx0"
             )
-
+            
             func main() {
             	client := gctx0.NewClient(
             		gctx0.WithAccessKey("YOUR_ACCESS_KEY"),
@@ -1992,13 +2011,6 @@ paths:
             	_ = messages
             	_ = err
             }
-        - lang: bash
-          label: bash
-          source: |
-            export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
-            export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
-
-            acli message list --agent-id AGENT_ID --session-id SESSION_ID
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/AgentId'
@@ -2054,23 +2066,34 @@ paths:
         href: /api-reference/create-message
       x-codeSamples:
         - lang: curl
-          label: curl
+          label: curl / acli
           source: |
             curl -X POST 'https://app.actx0.com/api/v1/workspaces/<workspaceId>/agents/<agentId>/sessions/<sessionId>/messages' \
               -H "X-Access-Key: YOUR_ACCESS_KEY" \
               -H "Content-Type: application/json" \
               -H "Accept: application/json" \
               -d '{"role": "user", "content": "I prefer dark mode in the dashboard", "meta": "{\"source\":\"chat\"}"}'
+            
+            # ---
+            
+            # acli
+            export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
+            export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
+            
+            acli message create "What are my preferences?" \
+              --agent-id AGENT_ID \
+              --session-id SESSION_ID \
+              --role user
         - lang: python
           label: pctx0
           source: |
             from pctx0 import Pctx0Client
-
+            
             client = Pctx0Client(
                 access_key="YOUR_ACCESS_KEY",
                 workspace_id="YOUR_WORKSPACE_ID",
             )
-
+            
             message = client.message.create(
                 "AGENT_ID",
                 "SESSION_ID",
@@ -2080,12 +2103,12 @@ paths:
           label: nctx0
           source: |
             import { Nctx0Client } from "@actx0/nctx0";
-
+            
             const client = new Nctx0Client({
               accessKey: "YOUR_ACCESS_KEY",
               workspaceId: "YOUR_WORKSPACE_ID",
             });
-
+            
             const message = await client.message.create("AGENT_ID", "SESSION_ID", {
               role: "user",
               content: "What are my preferences?",
@@ -2094,13 +2117,13 @@ paths:
           label: gtcx0
           source: |
             package main
-
+            
             import (
             	"context"
-
+            
             	"github.com/Actx0/Gctx0"
             )
-
+            
             func main() {
             	client := gctx0.NewClient(
             		gctx0.WithAccessKey("YOUR_ACCESS_KEY"),
@@ -2115,16 +2138,6 @@ paths:
             	_ = message
             	_ = err
             }
-        - lang: bash
-          label: bash
-          source: |
-            export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
-            export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
-
-            acli message create "What are my preferences?" \
-              --agent-id AGENT_ID \
-              --session-id SESSION_ID \
-              --role user
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/AgentId'
@@ -2188,23 +2201,34 @@ paths:
         href: /api-reference/search-messages
       x-codeSamples:
         - lang: curl
-          label: curl
+          label: curl / acli
           source: |
             curl -X POST 'https://app.actx0.com/api/v1/workspaces/<workspaceId>/agents/<agentId>/sessions/<sessionId>/messages/search' \
               -H "X-Access-Key: YOUR_ACCESS_KEY" \
               -H "Content-Type: application/json" \
               -H "Accept: application/json" \
               -d '{"query": "UI preferences", "limit": 10}'
+            
+            # ---
+            
+            # acli
+            export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
+            export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
+            
+            acli message search "onboarding" \
+              --agent-id AGENT_ID \
+              --session-id SESSION_ID \
+              --limit 10
         - lang: python
           label: pctx0
           source: |
             from pctx0 import Pctx0Client
-
+            
             client = Pctx0Client(
                 access_key="YOUR_ACCESS_KEY",
                 workspace_id="YOUR_WORKSPACE_ID",
             )
-
+            
             hits = client.message.search(
                 "AGENT_ID",
                 "SESSION_ID",
@@ -2215,12 +2239,12 @@ paths:
           label: nctx0
           source: |
             import { Nctx0Client } from "@actx0/nctx0";
-
+            
             const client = new Nctx0Client({
               accessKey: "YOUR_ACCESS_KEY",
               workspaceId: "YOUR_WORKSPACE_ID",
             });
-
+            
             const hits = await client.message.search("AGENT_ID", "SESSION_ID", {
               query: "onboarding",
               limit: 10,
@@ -2229,13 +2253,13 @@ paths:
           label: gtcx0
           source: |
             package main
-
+            
             import (
             	"context"
-
+            
             	"github.com/Actx0/Gctx0"
             )
-
+            
             func main() {
             	client := gctx0.NewClient(
             		gctx0.WithAccessKey("YOUR_ACCESS_KEY"),
@@ -2247,16 +2271,6 @@ paths:
             	_ = hits
             	_ = err
             }
-        - lang: bash
-          label: bash
-          source: |
-            export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
-            export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
-
-            acli message search "onboarding" \
-              --agent-id AGENT_ID \
-              --session-id SESSION_ID \
-              --limit 10
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/AgentId'
@@ -2330,12 +2344,12 @@ paths:
           label: pctx0
           source: |
             from pctx0 import Pctx0Client
-
+            
             client = Pctx0Client(
                 access_key="YOUR_ACCESS_KEY",
                 workspace_id="YOUR_WORKSPACE_ID",
             )
-
+            
             messages = client.message.create(
                 "AGENT_ID",
                 "SESSION_ID",
@@ -2348,12 +2362,12 @@ paths:
           label: nctx0
           source: |
             import { Nctx0Client } from "@actx0/nctx0";
-
+            
             const client = new Nctx0Client({
               accessKey: "YOUR_ACCESS_KEY",
               workspaceId: "YOUR_WORKSPACE_ID",
             });
-
+            
             const messages = await client.message.create("AGENT_ID", "SESSION_ID", [
               { role: "user", content: "Hello" },
               { role: "assistant", content: "Hi there" },
@@ -2362,13 +2376,13 @@ paths:
           label: gtcx0
           source: |
             package main
-
+            
             import (
             	"context"
-
+            
             	"github.com/Actx0/Gctx0"
             )
-
+            
             func main() {
             	client := gctx0.NewClient(
             		gctx0.WithAccessKey("YOUR_ACCESS_KEY"),
@@ -2454,35 +2468,35 @@ paths:
           label: pctx0
           source: |
             from pctx0 import Pctx0Client
-
+            
             client = Pctx0Client(
                 access_key="YOUR_ACCESS_KEY",
                 workspace_id="YOUR_WORKSPACE_ID",
             )
-
+            
             client.message.delete("AGENT_ID", "SESSION_ID", ["MESSAGE_ID_1", "MESSAGE_ID_2"])
         - lang: javascript
           label: nctx0
           source: |
             import { Nctx0Client } from "@actx0/nctx0";
-
+            
             const client = new Nctx0Client({
               accessKey: "YOUR_ACCESS_KEY",
               workspaceId: "YOUR_WORKSPACE_ID",
             });
-
+            
             await client.message.delete("AGENT_ID", "SESSION_ID", ["MESSAGE_ID_1", "MESSAGE_ID_2"]);
         - lang: go
           label: gtcx0
           source: |
             package main
-
+            
             import (
             	"context"
-
+            
             	"github.com/Actx0/Gctx0"
             )
-
+            
             func main() {
             	client := gctx0.NewClient(
             		gctx0.WithAccessKey("YOUR_ACCESS_KEY"),
@@ -2549,44 +2563,52 @@ paths:
         href: /api-reference/get-message
       x-codeSamples:
         - lang: curl
-          label: curl
+          label: curl / acli
           source: |
             curl -X GET 'https://app.actx0.com/api/v1/workspaces/<workspaceId>/agents/<agentId>/sessions/<sessionId>/messages/<messageId>' \
               -H "X-Access-Key: YOUR_ACCESS_KEY" \
               -H "Accept: application/json"
+            
+            # ---
+            
+            # acli
+            export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
+            export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
+            
+            acli message get MESSAGE_ID --agent-id AGENT_ID --session-id SESSION_ID
         - lang: python
           label: pctx0
           source: |
             from pctx0 import Pctx0Client
-
+            
             client = Pctx0Client(
                 access_key="YOUR_ACCESS_KEY",
                 workspace_id="YOUR_WORKSPACE_ID",
             )
-
+            
             message = client.message.get("AGENT_ID", "SESSION_ID", "MESSAGE_ID")
         - lang: javascript
           label: nctx0
           source: |
             import { Nctx0Client } from "@actx0/nctx0";
-
+            
             const client = new Nctx0Client({
               accessKey: "YOUR_ACCESS_KEY",
               workspaceId: "YOUR_WORKSPACE_ID",
             });
-
+            
             const message = await client.message.get("AGENT_ID", "SESSION_ID", "MESSAGE_ID");
         - lang: go
           label: gtcx0
           source: |
             package main
-
+            
             import (
             	"context"
-
+            
             	"github.com/Actx0/Gctx0"
             )
-
+            
             func main() {
             	client := gctx0.NewClient(
             		gctx0.WithAccessKey("YOUR_ACCESS_KEY"),
@@ -2598,13 +2620,6 @@ paths:
             	_ = message
             	_ = err
             }
-        - lang: bash
-          label: bash
-          source: |
-            export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
-            export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
-
-            acli message get MESSAGE_ID --agent-id AGENT_ID --session-id SESSION_ID
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/AgentId'
@@ -2669,12 +2684,12 @@ paths:
           label: pctx0
           source: |
             from pctx0 import Pctx0Client
-
+            
             client = Pctx0Client(
                 access_key="YOUR_ACCESS_KEY",
                 workspace_id="YOUR_WORKSPACE_ID",
             )
-
+            
             message = client.message.update(
                 "AGENT_ID",
                 "SESSION_ID",
@@ -2686,12 +2701,12 @@ paths:
           label: nctx0
           source: |
             import { Nctx0Client } from "@actx0/nctx0";
-
+            
             const client = new Nctx0Client({
               accessKey: "YOUR_ACCESS_KEY",
               workspaceId: "YOUR_WORKSPACE_ID",
             });
-
+            
             const message = await client.message.update("AGENT_ID", "SESSION_ID", "MESSAGE_ID", {
               content: "Updated content",
               role: "user",
@@ -2700,13 +2715,13 @@ paths:
           label: gtcx0
           source: |
             package main
-
+            
             import (
             	"context"
-
+            
             	"github.com/Actx0/Gctx0"
             )
-
+            
             func main() {
             	client := gctx0.NewClient(
             		gctx0.WithAccessKey("YOUR_ACCESS_KEY"),
@@ -2777,44 +2792,52 @@ paths:
         href: /api-reference/delete-message
       x-codeSamples:
         - lang: curl
-          label: curl
+          label: curl / acli
           source: |
             curl -X DELETE 'https://app.actx0.com/api/v1/workspaces/<workspaceId>/agents/<agentId>/sessions/<sessionId>/messages/<messageId>' \
               -H "X-Access-Key: YOUR_ACCESS_KEY" \
               -H "Accept: application/json"
+            
+            # ---
+            
+            # acli
+            export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
+            export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
+            
+            acli message delete MESSAGE_ID --agent-id AGENT_ID --session-id SESSION_ID
         - lang: python
           label: pctx0
           source: |
             from pctx0 import Pctx0Client
-
+            
             client = Pctx0Client(
                 access_key="YOUR_ACCESS_KEY",
                 workspace_id="YOUR_WORKSPACE_ID",
             )
-
+            
             client.message.delete("AGENT_ID", "SESSION_ID", "MESSAGE_ID")
         - lang: javascript
           label: nctx0
           source: |
             import { Nctx0Client } from "@actx0/nctx0";
-
+            
             const client = new Nctx0Client({
               accessKey: "YOUR_ACCESS_KEY",
               workspaceId: "YOUR_WORKSPACE_ID",
             });
-
+            
             await client.message.delete("AGENT_ID", "SESSION_ID", "MESSAGE_ID");
         - lang: go
           label: gtcx0
           source: |
             package main
-
+            
             import (
             	"context"
-
+            
             	"github.com/Actx0/Gctx0"
             )
-
+            
             func main() {
             	client := gctx0.NewClient(
             		gctx0.WithAccessKey("YOUR_ACCESS_KEY"),
@@ -2825,13 +2848,6 @@ paths:
             	err := client.Message.Delete(ctx, "AGENT_ID", "SESSION_ID", "MESSAGE_ID")
             	_ = err
             }
-        - lang: bash
-          label: bash
-          source: |
-            export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
-            export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
-
-            acli message delete MESSAGE_ID --agent-id AGENT_ID --session-id SESSION_ID
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/AgentId'
@@ -2892,44 +2908,52 @@ paths:
         href: /api-reference/list-memories
       x-codeSamples:
         - lang: curl
-          label: curl
+          label: curl / acli
           source: |
             curl -X GET 'https://app.actx0.com/api/v1/workspaces/<workspaceId>/agents/<agentId>/sessions/<sessionId>/memories' \
               -H "X-Access-Key: YOUR_ACCESS_KEY" \
               -H "Accept: application/json"
+            
+            # ---
+            
+            # acli
+            export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
+            export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
+            
+            acli memory list --agent-id AGENT_ID --session-id SESSION_ID
         - lang: python
           label: pctx0
           source: |
             from pctx0 import Pctx0Client
-
+            
             client = Pctx0Client(
                 access_key="YOUR_ACCESS_KEY",
                 workspace_id="YOUR_WORKSPACE_ID",
             )
-
+            
             memories = client.memory.list("AGENT_ID", "SESSION_ID", limit=50, offset=0)
         - lang: javascript
           label: nctx0
           source: |
             import { Nctx0Client } from "@actx0/nctx0";
-
+            
             const client = new Nctx0Client({
               accessKey: "YOUR_ACCESS_KEY",
               workspaceId: "YOUR_WORKSPACE_ID",
             });
-
+            
             const memories = await client.memory.list("AGENT_ID", "SESSION_ID", { limit: 50, offset: 0 });
         - lang: go
           label: gtcx0
           source: |
             package main
-
+            
             import (
             	"context"
-
+            
             	"github.com/Actx0/Gctx0"
             )
-
+            
             func main() {
             	client := gctx0.NewClient(
             		gctx0.WithAccessKey("YOUR_ACCESS_KEY"),
@@ -2941,13 +2965,6 @@ paths:
             	_ = memories
             	_ = err
             }
-        - lang: bash
-          label: bash
-          source: |
-            export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
-            export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
-
-            acli memory list --agent-id AGENT_ID --session-id SESSION_ID
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/AgentId'
@@ -3003,23 +3020,34 @@ paths:
         href: /api-reference/create-memory
       x-codeSamples:
         - lang: curl
-          label: curl
+          label: curl / acli
           source: |
             curl -X POST 'https://app.actx0.com/api/v1/workspaces/<workspaceId>/agents/<agentId>/sessions/<sessionId>/memories' \
               -H "X-Access-Key: YOUR_ACCESS_KEY" \
               -H "Content-Type: application/json" \
               -H "Accept: application/json" \
               -d '{"kind": "preference", "content": "User prefers dark mode", "meta": "{\"source\":\"chat\"}"}'
+            
+            # ---
+            
+            # acli
+            export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
+            export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
+            
+            acli memory add "Prefers concise answers" \
+              --agent-id AGENT_ID \
+              --session-id SESSION_ID \
+              --kind preference
         - lang: python
           label: pctx0
           source: |
             from pctx0 import Pctx0Client
-
+            
             client = Pctx0Client(
                 access_key="YOUR_ACCESS_KEY",
                 workspace_id="YOUR_WORKSPACE_ID",
             )
-
+            
             memory = client.memory.create(
                 "AGENT_ID",
                 "SESSION_ID",
@@ -3029,12 +3057,12 @@ paths:
           label: nctx0
           source: |
             import { Nctx0Client } from "@actx0/nctx0";
-
+            
             const client = new Nctx0Client({
               accessKey: "YOUR_ACCESS_KEY",
               workspaceId: "YOUR_WORKSPACE_ID",
             });
-
+            
             const memory = await client.memory.create("AGENT_ID", "SESSION_ID", {
               kind: "preference",
               content: "Prefers concise answers",
@@ -3043,13 +3071,13 @@ paths:
           label: gtcx0
           source: |
             package main
-
+            
             import (
             	"context"
-
+            
             	"github.com/Actx0/Gctx0"
             )
-
+            
             func main() {
             	client := gctx0.NewClient(
             		gctx0.WithAccessKey("YOUR_ACCESS_KEY"),
@@ -3064,16 +3092,6 @@ paths:
             	_ = memory
             	_ = err
             }
-        - lang: bash
-          label: bash
-          source: |
-            export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
-            export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
-
-            acli memory add "Prefers concise answers" \
-              --agent-id AGENT_ID \
-              --session-id SESSION_ID \
-              --kind preference
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/AgentId'
@@ -3143,23 +3161,34 @@ paths:
         href: /api-reference/search-memories
       x-codeSamples:
         - lang: curl
-          label: curl
+          label: curl / acli
           source: |
             curl -X POST 'https://app.actx0.com/api/v1/workspaces/<workspaceId>/agents/<agentId>/sessions/<sessionId>/memories/search' \
               -H "X-Access-Key: YOUR_ACCESS_KEY" \
               -H "Content-Type: application/json" \
               -H "Accept: application/json" \
               -d '{"query": "UI preferences", "limit": 10}'
+            
+            # ---
+            
+            # acli
+            export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
+            export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
+            
+            acli memory search "preferences" \
+              --agent-id AGENT_ID \
+              --session-id SESSION_ID \
+              --limit 5
         - lang: python
           label: pctx0
           source: |
             from pctx0 import Pctx0Client
-
+            
             client = Pctx0Client(
                 access_key="YOUR_ACCESS_KEY",
                 workspace_id="YOUR_WORKSPACE_ID",
             )
-
+            
             hits = client.memory.search(
                 "AGENT_ID",
                 "SESSION_ID",
@@ -3170,12 +3199,12 @@ paths:
           label: nctx0
           source: |
             import { Nctx0Client } from "@actx0/nctx0";
-
+            
             const client = new Nctx0Client({
               accessKey: "YOUR_ACCESS_KEY",
               workspaceId: "YOUR_WORKSPACE_ID",
             });
-
+            
             const hits = await client.memory.search("AGENT_ID", "SESSION_ID", {
               query: "preferences",
               limit: 5,
@@ -3184,13 +3213,13 @@ paths:
           label: gtcx0
           source: |
             package main
-
+            
             import (
             	"context"
-
+            
             	"github.com/Actx0/Gctx0"
             )
-
+            
             func main() {
             	client := gctx0.NewClient(
             		gctx0.WithAccessKey("YOUR_ACCESS_KEY"),
@@ -3202,16 +3231,6 @@ paths:
             	_ = hits
             	_ = err
             }
-        - lang: bash
-          label: bash
-          source: |
-            export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
-            export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
-
-            acli memory search "preferences" \
-              --agent-id AGENT_ID \
-              --session-id SESSION_ID \
-              --limit 5
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/AgentId'
@@ -3285,12 +3304,12 @@ paths:
           label: pctx0
           source: |
             from pctx0 import Pctx0Client
-
+            
             client = Pctx0Client(
                 access_key="YOUR_ACCESS_KEY",
                 workspace_id="YOUR_WORKSPACE_ID",
             )
-
+            
             memories = client.memory.create(
                 "AGENT_ID",
                 "SESSION_ID",
@@ -3303,12 +3322,12 @@ paths:
           label: nctx0
           source: |
             import { Nctx0Client } from "@actx0/nctx0";
-
+            
             const client = new Nctx0Client({
               accessKey: "YOUR_ACCESS_KEY",
               workspaceId: "YOUR_WORKSPACE_ID",
             });
-
+            
             const memories = await client.memory.create("AGENT_ID", "SESSION_ID", [
               { kind: "fact", content: "Uses TypeScript" },
               { kind: "preference", content: "Prefers dark mode" },
@@ -3317,13 +3336,13 @@ paths:
           label: gtcx0
           source: |
             package main
-
+            
             import (
             	"context"
-
+            
             	"github.com/Actx0/Gctx0"
             )
-
+            
             func main() {
             	client := gctx0.NewClient(
             		gctx0.WithAccessKey("YOUR_ACCESS_KEY"),
@@ -3409,35 +3428,35 @@ paths:
           label: pctx0
           source: |
             from pctx0 import Pctx0Client
-
+            
             client = Pctx0Client(
                 access_key="YOUR_ACCESS_KEY",
                 workspace_id="YOUR_WORKSPACE_ID",
             )
-
+            
             client.memory.delete("AGENT_ID", "SESSION_ID", ["MEMORY_ID_1", "MEMORY_ID_2"])
         - lang: javascript
           label: nctx0
           source: |
             import { Nctx0Client } from "@actx0/nctx0";
-
+            
             const client = new Nctx0Client({
               accessKey: "YOUR_ACCESS_KEY",
               workspaceId: "YOUR_WORKSPACE_ID",
             });
-
+            
             await client.memory.delete("AGENT_ID", "SESSION_ID", ["MEMORY_ID_1", "MEMORY_ID_2"]);
         - lang: go
           label: gtcx0
           source: |
             package main
-
+            
             import (
             	"context"
-
+            
             	"github.com/Actx0/Gctx0"
             )
-
+            
             func main() {
             	client := gctx0.NewClient(
             		gctx0.WithAccessKey("YOUR_ACCESS_KEY"),
@@ -3551,44 +3570,52 @@ paths:
         href: /api-reference/get-memory
       x-codeSamples:
         - lang: curl
-          label: curl
+          label: curl / acli
           source: |
             curl -X GET 'https://app.actx0.com/api/v1/workspaces/<workspaceId>/agents/<agentId>/sessions/<sessionId>/memories/<memoryId>' \
               -H "X-Access-Key: YOUR_ACCESS_KEY" \
               -H "Accept: application/json"
+            
+            # ---
+            
+            # acli
+            export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
+            export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
+            
+            acli memory get MEMORY_ID --agent-id AGENT_ID --session-id SESSION_ID
         - lang: python
           label: pctx0
           source: |
             from pctx0 import Pctx0Client
-
+            
             client = Pctx0Client(
                 access_key="YOUR_ACCESS_KEY",
                 workspace_id="YOUR_WORKSPACE_ID",
             )
-
+            
             memory = client.memory.get("AGENT_ID", "SESSION_ID", "MEMORY_ID")
         - lang: javascript
           label: nctx0
           source: |
             import { Nctx0Client } from "@actx0/nctx0";
-
+            
             const client = new Nctx0Client({
               accessKey: "YOUR_ACCESS_KEY",
               workspaceId: "YOUR_WORKSPACE_ID",
             });
-
+            
             const memory = await client.memory.get("AGENT_ID", "SESSION_ID", "MEMORY_ID");
         - lang: go
           label: gtcx0
           source: |
             package main
-
+            
             import (
             	"context"
-
+            
             	"github.com/Actx0/Gctx0"
             )
-
+            
             func main() {
             	client := gctx0.NewClient(
             		gctx0.WithAccessKey("YOUR_ACCESS_KEY"),
@@ -3600,13 +3627,6 @@ paths:
             	_ = memory
             	_ = err
             }
-        - lang: bash
-          label: bash
-          source: |
-            export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
-            export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
-
-            acli memory get MEMORY_ID --agent-id AGENT_ID --session-id SESSION_ID
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/AgentId'
@@ -3660,23 +3680,34 @@ paths:
         href: /api-reference/update-memory
       x-codeSamples:
         - lang: curl
-          label: curl
+          label: curl / acli
           source: |
             curl -X PUT 'https://app.actx0.com/api/v1/workspaces/<workspaceId>/agents/<agentId>/sessions/<sessionId>/memories/<memoryId>' \
               -H "X-Access-Key: YOUR_ACCESS_KEY" \
               -H "Content-Type: application/json" \
               -H "Accept: application/json" \
               -d '{"kind": "preference", "content": "User prefers dark mode and compact layout"}'
+            
+            # ---
+            
+            # acli
+            export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
+            export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
+            
+            acli memory update MEMORY_ID "Prefers short bullet points" \
+              --agent-id AGENT_ID \
+              --session-id SESSION_ID \
+              --kind preference
         - lang: python
           label: pctx0
           source: |
             from pctx0 import Pctx0Client
-
+            
             client = Pctx0Client(
                 access_key="YOUR_ACCESS_KEY",
                 workspace_id="YOUR_WORKSPACE_ID",
             )
-
+            
             memory = client.memory.update(
                 "AGENT_ID",
                 "SESSION_ID",
@@ -3688,12 +3719,12 @@ paths:
           label: nctx0
           source: |
             import { Nctx0Client } from "@actx0/nctx0";
-
+            
             const client = new Nctx0Client({
               accessKey: "YOUR_ACCESS_KEY",
               workspaceId: "YOUR_WORKSPACE_ID",
             });
-
+            
             const memory = await client.memory.update("AGENT_ID", "SESSION_ID", "MEMORY_ID", {
               content: "Prefers short bullet points",
               kind: "preference",
@@ -3702,13 +3733,13 @@ paths:
           label: gtcx0
           source: |
             package main
-
+            
             import (
             	"context"
-
+            
             	"github.com/Actx0/Gctx0"
             )
-
+            
             func main() {
             	client := gctx0.NewClient(
             		gctx0.WithAccessKey("YOUR_ACCESS_KEY"),
@@ -3728,16 +3759,6 @@ paths:
             	_ = memory
             	_ = err
             }
-        - lang: bash
-          label: bash
-          source: |
-            export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
-            export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
-
-            acli memory update MEMORY_ID "Prefers short bullet points" \
-              --agent-id AGENT_ID \
-              --session-id SESSION_ID \
-              --kind preference
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/AgentId'
@@ -3790,44 +3811,52 @@ paths:
         href: /api-reference/delete-memory
       x-codeSamples:
         - lang: curl
-          label: curl
+          label: curl / acli
           source: |
             curl -X DELETE 'https://app.actx0.com/api/v1/workspaces/<workspaceId>/agents/<agentId>/sessions/<sessionId>/memories/<memoryId>' \
               -H "X-Access-Key: YOUR_ACCESS_KEY" \
               -H "Accept: application/json"
+            
+            # ---
+            
+            # acli
+            export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
+            export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
+            
+            acli memory delete MEMORY_ID --agent-id AGENT_ID --session-id SESSION_ID
         - lang: python
           label: pctx0
           source: |
             from pctx0 import Pctx0Client
-
+            
             client = Pctx0Client(
                 access_key="YOUR_ACCESS_KEY",
                 workspace_id="YOUR_WORKSPACE_ID",
             )
-
+            
             client.memory.delete("AGENT_ID", "SESSION_ID", "MEMORY_ID")
         - lang: javascript
           label: nctx0
           source: |
             import { Nctx0Client } from "@actx0/nctx0";
-
+            
             const client = new Nctx0Client({
               accessKey: "YOUR_ACCESS_KEY",
               workspaceId: "YOUR_WORKSPACE_ID",
             });
-
+            
             await client.memory.delete("AGENT_ID", "SESSION_ID", "MEMORY_ID");
         - lang: go
           label: gtcx0
           source: |
             package main
-
+            
             import (
             	"context"
-
+            
             	"github.com/Actx0/Gctx0"
             )
-
+            
             func main() {
             	client := gctx0.NewClient(
             		gctx0.WithAccessKey("YOUR_ACCESS_KEY"),
@@ -3838,13 +3867,6 @@ paths:
             	err := client.Memory.Delete(ctx, "AGENT_ID", "SESSION_ID", "MEMORY_ID")
             	_ = err
             }
-        - lang: bash
-          label: bash
-          source: |
-            export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
-            export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
-
-            acli memory delete MEMORY_ID --agent-id AGENT_ID --session-id SESSION_ID
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/AgentId'
@@ -3893,44 +3915,52 @@ paths:
         href: /api-reference/list-prompts
       x-codeSamples:
         - lang: curl
-          label: curl
+          label: curl / acli
           source: |
             curl -X GET 'https://app.actx0.com/api/v1/workspaces/<workspaceId>/prompts' \
               -H "X-Access-Key: YOUR_ACCESS_KEY" \
               -H "Accept: application/json"
+            
+            # ---
+            
+            # acli
+            export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
+            export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
+            
+            acli prompt list
         - lang: python
           label: pctx0
           source: |
             from pctx0 import Pctx0Client
-
+            
             client = Pctx0Client(
                 access_key="YOUR_ACCESS_KEY",
                 workspace_id="YOUR_WORKSPACE_ID",
             )
-
+            
             prompts = client.prompt.list(limit=50, offset=0)
         - lang: javascript
           label: nctx0
           source: |
             import { Nctx0Client } from "@actx0/nctx0";
-
+            
             const client = new Nctx0Client({
               accessKey: "YOUR_ACCESS_KEY",
               workspaceId: "YOUR_WORKSPACE_ID",
             });
-
+            
             const prompts = await client.prompt.list({ limit: 50, offset: 0 });
         - lang: go
           label: gtcx0
           source: |
             package main
-
+            
             import (
             	"context"
-
+            
             	"github.com/Actx0/Gctx0"
             )
-
+            
             func main() {
             	client := gctx0.NewClient(
             		gctx0.WithAccessKey("YOUR_ACCESS_KEY"),
@@ -3942,13 +3972,6 @@ paths:
             	_ = prompts
             	_ = err
             }
-        - lang: bash
-          label: bash
-          source: |
-            export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
-            export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
-
-            acli prompt list
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/Limit'
@@ -4007,23 +4030,34 @@ paths:
         href: /api-reference/create-prompt
       x-codeSamples:
         - lang: curl
-          label: curl
+          label: curl / acli
           source: |
             curl -X POST 'https://app.actx0.com/api/v1/workspaces/<workspaceId>/prompts' \
               -H "X-Access-Key: YOUR_ACCESS_KEY" \
               -H "Content-Type: application/json" \
               -H "Accept: application/json" \
               -d '{"name": "Support system prompt", "description": "Primary system prompt for support agents", "type": "text", "content": "You are a helpful support agent.", "commitMessage": "Initial version", "production": true}'
+            
+            # ---
+            
+            # acli
+            export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
+            export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
+            
+            acli prompt create "Mara Guide" \
+              --type text \
+              --content "You are Mara. Be concise." \
+              --description "Support assistant prompt"
         - lang: python
           label: pctx0
           source: |
             from pctx0 import Pctx0Client
-
+            
             client = Pctx0Client(
                 access_key="YOUR_ACCESS_KEY",
                 workspace_id="YOUR_WORKSPACE_ID",
             )
-
+            
             prompt = client.prompt.create(
                 name="Mara Guide",
                 type="text",
@@ -4034,12 +4068,12 @@ paths:
           label: nctx0
           source: |
             import { Nctx0Client } from "@actx0/nctx0";
-
+            
             const client = new Nctx0Client({
               accessKey: "YOUR_ACCESS_KEY",
               workspaceId: "YOUR_WORKSPACE_ID",
             });
-
+            
             const prompt = await client.prompt.create({
               name: "Mara Guide",
               type: "text",
@@ -4050,13 +4084,13 @@ paths:
           label: gtcx0
           source: |
             package main
-
+            
             import (
             	"context"
-
+            
             	"github.com/Actx0/Gctx0"
             )
-
+            
             func main() {
             	client := gctx0.NewClient(
             		gctx0.WithAccessKey("YOUR_ACCESS_KEY"),
@@ -4074,16 +4108,6 @@ paths:
             	_ = prompt
             	_ = err
             }
-        - lang: bash
-          label: bash
-          source: |
-            export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
-            export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
-
-            acli prompt create "Mara Guide" \
-              --type text \
-              --content "You are Mara. Be concise." \
-              --description "Support assistant prompt"
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -4142,44 +4166,52 @@ paths:
         href: /api-reference/get-prompt
       x-codeSamples:
         - lang: curl
-          label: curl
+          label: curl / acli
           source: |
             curl -X GET 'https://app.actx0.com/api/v1/workspaces/<workspaceId>/prompts/<promptId>' \
               -H "X-Access-Key: YOUR_ACCESS_KEY" \
               -H "Accept: application/json"
+            
+            # ---
+            
+            # acli
+            export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
+            export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
+            
+            acli prompt get PROMPT_ID
         - lang: python
           label: pctx0
           source: |
             from pctx0 import Pctx0Client
-
+            
             client = Pctx0Client(
                 access_key="YOUR_ACCESS_KEY",
                 workspace_id="YOUR_WORKSPACE_ID",
             )
-
+            
             prompt = client.prompt.get("PROMPT_ID")
         - lang: javascript
           label: nctx0
           source: |
             import { Nctx0Client } from "@actx0/nctx0";
-
+            
             const client = new Nctx0Client({
               accessKey: "YOUR_ACCESS_KEY",
               workspaceId: "YOUR_WORKSPACE_ID",
             });
-
+            
             const prompt = await client.prompt.get("PROMPT_ID");
         - lang: go
           label: gtcx0
           source: |
             package main
-
+            
             import (
             	"context"
-
+            
             	"github.com/Actx0/Gctx0"
             )
-
+            
             func main() {
             	client := gctx0.NewClient(
             		gctx0.WithAccessKey("YOUR_ACCESS_KEY"),
@@ -4191,13 +4223,6 @@ paths:
             	_ = prompt
             	_ = err
             }
-        - lang: bash
-          label: bash
-          source: |
-            export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
-            export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
-
-            acli prompt get PROMPT_ID
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/PromptId'
@@ -4239,44 +4264,52 @@ paths:
         href: /api-reference/delete-prompt
       x-codeSamples:
         - lang: curl
-          label: curl
+          label: curl / acli
           source: |
             curl -X DELETE 'https://app.actx0.com/api/v1/workspaces/<workspaceId>/prompts/<promptId>' \
               -H "X-Access-Key: YOUR_ACCESS_KEY" \
               -H "Accept: application/json"
+            
+            # ---
+            
+            # acli
+            export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
+            export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
+            
+            acli prompt delete PROMPT_ID
         - lang: python
           label: pctx0
           source: |
             from pctx0 import Pctx0Client
-
+            
             client = Pctx0Client(
                 access_key="YOUR_ACCESS_KEY",
                 workspace_id="YOUR_WORKSPACE_ID",
             )
-
+            
             client.prompt.delete("PROMPT_ID")
         - lang: javascript
           label: nctx0
           source: |
             import { Nctx0Client } from "@actx0/nctx0";
-
+            
             const client = new Nctx0Client({
               accessKey: "YOUR_ACCESS_KEY",
               workspaceId: "YOUR_WORKSPACE_ID",
             });
-
+            
             await client.prompt.delete("PROMPT_ID");
         - lang: go
           label: gtcx0
           source: |
             package main
-
+            
             import (
             	"context"
-
+            
             	"github.com/Actx0/Gctx0"
             )
-
+            
             func main() {
             	client := gctx0.NewClient(
             		gctx0.WithAccessKey("YOUR_ACCESS_KEY"),
@@ -4287,13 +4320,6 @@ paths:
             	err := client.Prompt.Delete(ctx, "PROMPT_ID")
             	_ = err
             }
-        - lang: bash
-          label: bash
-          source: |
-            export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
-            export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
-
-            acli prompt delete PROMPT_ID
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/PromptId'
@@ -4347,44 +4373,52 @@ paths:
         href: /api-reference/get-prompt-by-name
       x-codeSamples:
         - lang: curl
-          label: curl
+          label: curl / acli
           source: |
             curl -X GET 'https://app.actx0.com/api/v1/workspaces/<workspaceId>/promptsByName/<promptName>' \
               -H "X-Access-Key: YOUR_ACCESS_KEY" \
               -H "Accept: application/json"
+            
+            # ---
+            
+            # acli
+            export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
+            export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
+            
+            acli prompt get-by-name mara-guide --version production
         - lang: python
           label: pctx0
           source: |
             from pctx0 import Pctx0Client
-
+            
             client = Pctx0Client(
                 access_key="YOUR_ACCESS_KEY",
                 workspace_id="YOUR_WORKSPACE_ID",
             )
-
+            
             prompt = client.prompt.get_by_name("mara-guide", version="production")
         - lang: javascript
           label: nctx0
           source: |
             import { Nctx0Client } from "@actx0/nctx0";
-
+            
             const client = new Nctx0Client({
               accessKey: "YOUR_ACCESS_KEY",
               workspaceId: "YOUR_WORKSPACE_ID",
             });
-
+            
             const prompt = await client.prompt.getByName("mara-guide", { version: "production" });
         - lang: go
           label: gtcx0
           source: |
             package main
-
+            
             import (
             	"context"
-
+            
             	"github.com/Actx0/Gctx0"
             )
-
+            
             func main() {
             	client := gctx0.NewClient(
             		gctx0.WithAccessKey("YOUR_ACCESS_KEY"),
@@ -4396,13 +4430,6 @@ paths:
             	_ = prompt
             	_ = err
             }
-        - lang: bash
-          label: bash
-          source: |
-            export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
-            export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
-
-            acli prompt get-by-name mara-guide --version production
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/PromptName'
@@ -4450,44 +4477,52 @@ paths:
         href: /api-reference/list-prompt-versions
       x-codeSamples:
         - lang: curl
-          label: curl
+          label: curl / acli
           source: |
             curl -X GET 'https://app.actx0.com/api/v1/workspaces/<workspaceId>/prompts/<promptId>/versions' \
               -H "X-Access-Key: YOUR_ACCESS_KEY" \
               -H "Accept: application/json"
+            
+            # ---
+            
+            # acli
+            export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
+            export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
+            
+            acli prompt versions list PROMPT_ID
         - lang: python
           label: pctx0
           source: |
             from pctx0 import Pctx0Client
-
+            
             client = Pctx0Client(
                 access_key="YOUR_ACCESS_KEY",
                 workspace_id="YOUR_WORKSPACE_ID",
             )
-
+            
             versions = client.prompt.list_versions("PROMPT_ID", limit=50, offset=0)
         - lang: javascript
           label: nctx0
           source: |
             import { Nctx0Client } from "@actx0/nctx0";
-
+            
             const client = new Nctx0Client({
               accessKey: "YOUR_ACCESS_KEY",
               workspaceId: "YOUR_WORKSPACE_ID",
             });
-
+            
             const versions = await client.prompt.listVersions("PROMPT_ID", { limit: 50, offset: 0 });
         - lang: go
           label: gtcx0
           source: |
             package main
-
+            
             import (
             	"context"
-
+            
             	"github.com/Actx0/Gctx0"
             )
-
+            
             func main() {
             	client := gctx0.NewClient(
             		gctx0.WithAccessKey("YOUR_ACCESS_KEY"),
@@ -4499,13 +4534,6 @@ paths:
             	_ = versions
             	_ = err
             }
-        - lang: bash
-          label: bash
-          source: |
-            export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
-            export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
-
-            acli prompt versions list PROMPT_ID
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/PromptId'
@@ -4559,23 +4587,33 @@ paths:
         href: /api-reference/create-prompt-version
       x-codeSamples:
         - lang: curl
-          label: curl
+          label: curl / acli
           source: |
             curl -X POST 'https://app.actx0.com/api/v1/workspaces/<workspaceId>/prompts/<promptId>/versions' \
               -H "X-Access-Key: YOUR_ACCESS_KEY" \
               -H "Content-Type: application/json" \
               -H "Accept: application/json" \
               -d '{"type": "text", "content": "You are a concise support agent.", "commitMessage": "Tighten tone", "production": true}'
+            
+            # ---
+            
+            # acli
+            export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
+            export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
+            
+            acli prompt versions create PROMPT_ID \
+              --type text \
+              --content "You are Mara. Prefer short answers."
         - lang: python
           label: pctx0
           source: |
             from pctx0 import Pctx0Client
-
+            
             client = Pctx0Client(
                 access_key="YOUR_ACCESS_KEY",
                 workspace_id="YOUR_WORKSPACE_ID",
             )
-
+            
             version = client.prompt.create_version(
                 "PROMPT_ID",
                 type="text",
@@ -4585,12 +4623,12 @@ paths:
           label: nctx0
           source: |
             import { Nctx0Client } from "@actx0/nctx0";
-
+            
             const client = new Nctx0Client({
               accessKey: "YOUR_ACCESS_KEY",
               workspaceId: "YOUR_WORKSPACE_ID",
             });
-
+            
             const version = await client.prompt.createVersion("PROMPT_ID", {
               type: "text",
               content: "You are Mara. Prefer short answers.",
@@ -4599,13 +4637,13 @@ paths:
           label: gtcx0
           source: |
             package main
-
+            
             import (
             	"context"
-
+            
             	"github.com/Actx0/Gctx0"
             )
-
+            
             func main() {
             	client := gctx0.NewClient(
             		gctx0.WithAccessKey("YOUR_ACCESS_KEY"),
@@ -4623,15 +4661,6 @@ paths:
             	_ = version
             	_ = err
             }
-        - lang: bash
-          label: bash
-          source: |
-            export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
-            export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
-
-            acli prompt versions create PROMPT_ID \
-              --type text \
-              --content "You are Mara. Prefer short answers."
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/PromptId'
@@ -4689,44 +4718,52 @@ paths:
         href: /api-reference/get-prompt-version
       x-codeSamples:
         - lang: curl
-          label: curl
+          label: curl / acli
           source: |
             curl -X GET 'https://app.actx0.com/api/v1/workspaces/<workspaceId>/prompts/<promptId>/versions/<promptVersionId>' \
               -H "X-Access-Key: YOUR_ACCESS_KEY" \
               -H "Accept: application/json"
+            
+            # ---
+            
+            # acli
+            export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
+            export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
+            
+            acli prompt versions get PROMPT_ID VERSION_ID
         - lang: python
           label: pctx0
           source: |
             from pctx0 import Pctx0Client
-
+            
             client = Pctx0Client(
                 access_key="YOUR_ACCESS_KEY",
                 workspace_id="YOUR_WORKSPACE_ID",
             )
-
+            
             version = client.prompt.get_version("PROMPT_ID", "VERSION_ID")
         - lang: javascript
           label: nctx0
           source: |
             import { Nctx0Client } from "@actx0/nctx0";
-
+            
             const client = new Nctx0Client({
               accessKey: "YOUR_ACCESS_KEY",
               workspaceId: "YOUR_WORKSPACE_ID",
             });
-
+            
             const version = await client.prompt.getVersion("PROMPT_ID", "VERSION_ID");
         - lang: go
           label: gtcx0
           source: |
             package main
-
+            
             import (
             	"context"
-
+            
             	"github.com/Actx0/Gctx0"
             )
-
+            
             func main() {
             	client := gctx0.NewClient(
             		gctx0.WithAccessKey("YOUR_ACCESS_KEY"),
@@ -4738,13 +4775,6 @@ paths:
             	_ = version
             	_ = err
             }
-        - lang: bash
-          label: bash
-          source: |
-            export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
-            export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
-
-            acli prompt versions get PROMPT_ID VERSION_ID
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/PromptId'
@@ -4808,12 +4838,12 @@ paths:
           label: pctx0
           source: |
             from pctx0 import Pctx0Client
-
+            
             client = Pctx0Client(
                 access_key="YOUR_ACCESS_KEY",
                 workspace_id="YOUR_WORKSPACE_ID",
             )
-
+            
             version = client.prompt.update_version(
                 "PROMPT_ID",
                 "VERSION_ID",
@@ -4824,12 +4854,12 @@ paths:
           label: nctx0
           source: |
             import { Nctx0Client } from "@actx0/nctx0";
-
+            
             const client = new Nctx0Client({
               accessKey: "YOUR_ACCESS_KEY",
               workspaceId: "YOUR_WORKSPACE_ID",
             });
-
+            
             const version = await client.prompt.updateVersion("PROMPT_ID", "VERSION_ID", {
               content: "You are Mara. Prefer short answers.",
               production: true,
@@ -4838,13 +4868,13 @@ paths:
           label: gtcx0
           source: |
             package main
-
+            
             import (
             	"context"
-
+            
             	"github.com/Actx0/Gctx0"
             )
-
+            
             func main() {
             	client := gctx0.NewClient(
             		gctx0.WithAccessKey("YOUR_ACCESS_KEY"),
@@ -4915,44 +4945,52 @@ paths:
         href: /api-reference/delete-prompt-version
       x-codeSamples:
         - lang: curl
-          label: curl
+          label: curl / acli
           source: |
             curl -X DELETE 'https://app.actx0.com/api/v1/workspaces/<workspaceId>/prompts/<promptId>/versions/<promptVersionId>' \
               -H "X-Access-Key: YOUR_ACCESS_KEY" \
               -H "Accept: application/json"
+            
+            # ---
+            
+            # acli
+            export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
+            export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
+            
+            acli prompt versions delete PROMPT_ID VERSION_ID
         - lang: python
           label: pctx0
           source: |
             from pctx0 import Pctx0Client
-
+            
             client = Pctx0Client(
                 access_key="YOUR_ACCESS_KEY",
                 workspace_id="YOUR_WORKSPACE_ID",
             )
-
+            
             client.prompt.delete_version("PROMPT_ID", "VERSION_ID")
         - lang: javascript
           label: nctx0
           source: |
             import { Nctx0Client } from "@actx0/nctx0";
-
+            
             const client = new Nctx0Client({
               accessKey: "YOUR_ACCESS_KEY",
               workspaceId: "YOUR_WORKSPACE_ID",
             });
-
+            
             await client.prompt.deleteVersion("PROMPT_ID", "VERSION_ID");
         - lang: go
           label: gtcx0
           source: |
             package main
-
+            
             import (
             	"context"
-
+            
             	"github.com/Actx0/Gctx0"
             )
-
+            
             func main() {
             	client := gctx0.NewClient(
             		gctx0.WithAccessKey("YOUR_ACCESS_KEY"),
@@ -4963,13 +5001,6 @@ paths:
             	err := client.Prompt.DeleteVersion(ctx, "PROMPT_ID", "VERSION_ID")
             	_ = err
             }
-        - lang: bash
-          label: bash
-          source: |
-            export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
-            export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
-
-            acli prompt versions delete PROMPT_ID VERSION_ID
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/PromptId'
@@ -5017,44 +5048,52 @@ paths:
         href: /api-reference/list-documents
       x-codeSamples:
         - lang: curl
-          label: curl
+          label: curl / acli
           source: |
             curl -X GET 'https://app.actx0.com/api/v1/workspaces/<workspaceId>/documents' \
               -H "X-Access-Key: YOUR_ACCESS_KEY" \
               -H "Accept: application/json"
+            
+            # ---
+            
+            # acli
+            export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
+            export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
+            
+            acli knowledge list
         - lang: python
           label: pctx0
           source: |
             from pctx0 import Pctx0Client
-
+            
             client = Pctx0Client(
                 access_key="YOUR_ACCESS_KEY",
                 workspace_id="YOUR_WORKSPACE_ID",
             )
-
+            
             docs = client.knowledge.list(limit=50, offset=0)
         - lang: javascript
           label: nctx0
           source: |
             import { Nctx0Client } from "@actx0/nctx0";
-
+            
             const client = new Nctx0Client({
               accessKey: "YOUR_ACCESS_KEY",
               workspaceId: "YOUR_WORKSPACE_ID",
             });
-
+            
             const docs = await client.knowledge.list({ limit: 50, offset: 0 });
         - lang: go
           label: gtcx0
           source: |
             package main
-
+            
             import (
             	"context"
-
+            
             	"github.com/Actx0/Gctx0"
             )
-
+            
             func main() {
             	client := gctx0.NewClient(
             		gctx0.WithAccessKey("YOUR_ACCESS_KEY"),
@@ -5066,13 +5105,6 @@ paths:
             	_ = docs
             	_ = err
             }
-        - lang: bash
-          label: bash
-          source: |
-            export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
-            export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
-
-            acli knowledge list
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/Limit'
@@ -5127,23 +5159,34 @@ paths:
         href: /api-reference/upload-document
       x-codeSamples:
         - lang: curl
-          label: curl
+          label: curl / acli
           source: |
             curl -X POST 'https://app.actx0.com/api/v1/workspaces/<workspaceId>/documents' \
               -H "X-Access-Key: YOUR_ACCESS_KEY" \
               -H "Accept: application/json" \
               -F "title=Onboarding notes" \
               -F "file=@notes.txt"
+            
+            # ---
+            
+            # acli
+            export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
+            export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
+            
+            acli knowledge upload notes.txt \
+              --title "Onboarding notes" \
+              --label tag=docs \
+              --label team=platform
         - lang: python
           label: pctx0
           source: |
             from pctx0 import Pctx0Client
-
+            
             client = Pctx0Client(
                 access_key="YOUR_ACCESS_KEY",
                 workspace_id="YOUR_WORKSPACE_ID",
             )
-
+            
             doc = client.knowledge.upload(
                 file="notes.txt",
                 title="Onboarding notes",
@@ -5153,12 +5196,12 @@ paths:
           label: nctx0
           source: |
             import { Nctx0Client } from "@actx0/nctx0";
-
+            
             const client = new Nctx0Client({
               accessKey: "YOUR_ACCESS_KEY",
               workspaceId: "YOUR_WORKSPACE_ID",
             });
-
+            
             const doc = await client.knowledge.upload({
               file: "notes.txt",
               title: "Onboarding notes",
@@ -5168,13 +5211,13 @@ paths:
           label: gtcx0
           source: |
             package main
-
+            
             import (
             	"context"
-
+            
             	"github.com/Actx0/Gctx0"
             )
-
+            
             func main() {
             	client := gctx0.NewClient(
             		gctx0.WithAccessKey("YOUR_ACCESS_KEY"),
@@ -5191,16 +5234,6 @@ paths:
             	_ = doc
             	_ = err
             }
-        - lang: bash
-          label: bash
-          source: |
-            export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
-            export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
-
-            acli knowledge upload notes.txt \
-              --title "Onboarding notes" \
-              --label tag=docs \
-              --label team=platform
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -5274,23 +5307,31 @@ paths:
         href: /api-reference/search-documents
       x-codeSamples:
         - lang: curl
-          label: curl
+          label: curl / acli
           source: |
             curl -X POST 'https://app.actx0.com/api/v1/workspaces/<workspaceId>/documents/search' \
               -H "X-Access-Key: YOUR_ACCESS_KEY" \
               -H "Content-Type: application/json" \
               -H "Accept: application/json" \
               -d '{"query": "refund policy", "limit": 10}'
+            
+            # ---
+            
+            # acli
+            export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
+            export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
+            
+            acli knowledge search "onboarding checklist" --limit 10
         - lang: python
           label: pctx0
           source: |
             from pctx0 import Pctx0Client
-
+            
             client = Pctx0Client(
                 access_key="YOUR_ACCESS_KEY",
                 workspace_id="YOUR_WORKSPACE_ID",
             )
-
+            
             hits = client.knowledge.search(
                 query="onboarding checklist",
                 limit=10,
@@ -5299,12 +5340,12 @@ paths:
           label: nctx0
           source: |
             import { Nctx0Client } from "@actx0/nctx0";
-
+            
             const client = new Nctx0Client({
               accessKey: "YOUR_ACCESS_KEY",
               workspaceId: "YOUR_WORKSPACE_ID",
             });
-
+            
             const hits = await client.knowledge.search({
               query: "onboarding checklist",
               limit: 10,
@@ -5313,13 +5354,13 @@ paths:
           label: gtcx0
           source: |
             package main
-
+            
             import (
             	"context"
-
+            
             	"github.com/Actx0/Gctx0"
             )
-
+            
             func main() {
             	client := gctx0.NewClient(
             		gctx0.WithAccessKey("YOUR_ACCESS_KEY"),
@@ -5331,13 +5372,6 @@ paths:
             	_ = hits
             	_ = err
             }
-        - lang: bash
-          label: bash
-          source: |
-            export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
-            export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
-
-            acli knowledge search "onboarding checklist" --limit 10
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -5388,44 +5422,52 @@ paths:
         href: /api-reference/delete-document
       x-codeSamples:
         - lang: curl
-          label: curl
+          label: curl / acli
           source: |
             curl -X DELETE 'https://app.actx0.com/api/v1/workspaces/<workspaceId>/documents/<documentId>' \
               -H "X-Access-Key: YOUR_ACCESS_KEY" \
               -H "Accept: application/json"
+            
+            # ---
+            
+            # acli
+            export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
+            export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
+            
+            acli knowledge delete DOCUMENT_ID
         - lang: python
           label: pctx0
           source: |
             from pctx0 import Pctx0Client
-
+            
             client = Pctx0Client(
                 access_key="YOUR_ACCESS_KEY",
                 workspace_id="YOUR_WORKSPACE_ID",
             )
-
+            
             client.knowledge.delete("DOCUMENT_ID")
         - lang: javascript
           label: nctx0
           source: |
             import { Nctx0Client } from "@actx0/nctx0";
-
+            
             const client = new Nctx0Client({
               accessKey: "YOUR_ACCESS_KEY",
               workspaceId: "YOUR_WORKSPACE_ID",
             });
-
+            
             await client.knowledge.delete("DOCUMENT_ID");
         - lang: go
           label: gtcx0
           source: |
             package main
-
+            
             import (
             	"context"
-
+            
             	"github.com/Actx0/Gctx0"
             )
-
+            
             func main() {
             	client := gctx0.NewClient(
             		gctx0.WithAccessKey("YOUR_ACCESS_KEY"),
@@ -5436,13 +5478,6 @@ paths:
             	err := client.Knowledge.Delete(ctx, "DOCUMENT_ID")
             	_ = err
             }
-        - lang: bash
-          label: bash
-          source: |
-            export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
-            export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
-
-            acli knowledge delete DOCUMENT_ID
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/DocumentId'
