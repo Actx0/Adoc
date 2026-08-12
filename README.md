@@ -14,7 +14,7 @@ mint dev
 | Path | Purpose |
 | --- | --- |
 | `docs.json` | Site config and navigation |
-| `openapi.yaml` | REST API OpenAPI (playground) |
+| `openapi.yaml` | REST API OpenAPI (playground + SDK samples) |
 | `index.mdx` | Docs home |
 | `actx0-platform/` | Platform overview and quickstart |
 | `api-reference/` | API overview |

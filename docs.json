@@ -35,7 +35,7 @@
       "display": "interactive"
     },
     "examples": {
-      "languages": ["curl", "python", "javascript", "go"],
+      "languages": ["curl", "python", "javascript", "go", "cli"],
       "defaults": "required",
       "prefill": true
     }

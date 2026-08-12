@@ -10,9 +10,56 @@ Actx0 exposes a versioned HTTP API under `/api/v1`. Use it to manage workspaces,
 
 Every endpoint page in this reference is generated from the OpenAPI spec — including typed parameters, request/response schemas, language examples, and an interactive **Try it** playground.
 
+Agent, session, message, memory, prompt, and knowledge endpoints include package samples for **pctx0** (Python), **nctx0** (Node.js), **gtcx0** (Go), and **acli** (CLI), alongside curl.
+
 <Info>
   **Quick start:** Create a workspace access key in the Actx0 Dashboard, then call Create Memory with `X-Access-Key`.
 </Info>
+
+***
+
+## SDKs and CLI
+
+| Package | Language | Install |
+| --- | --- | --- |
+| [pctx0](https://github.com/Actx0/Pctx0) | Python | `uv add pctx0` / `pip install pctx0` |
+| [nctx0](https://github.com/Actx0/Nctx0) | Node.js / TypeScript | `npm install @actx0/nctx0` |
+| [gtcx0](https://github.com/Actx0/Gctx0) | Go | `go get github.com/Actx0/Gctx0` |
+| [acli](https://github.com/Actx0/Acli) | CLI | `go install github.com/Actx0/Acli/cmd/acli@latest` |
+
+These clients authenticate with a workspace access key (`X-Access-Key`). API key, workspace, and access-key management endpoints are REST/curl only.
+
+```python
+from pctx0 import Pctx0Client
+
+client = Pctx0Client(
+    access_key="YOUR_ACCESS_KEY",
+    workspace_id="YOUR_WORKSPACE_ID",
+)
+```
+
+```ts
+import { Nctx0Client } from "@actx0/nctx0";
+
+const client = new Nctx0Client({
+  accessKey: "YOUR_ACCESS_KEY",
+  workspaceId: "YOUR_WORKSPACE_ID",
+});
+```
+
+```go
+client := gctx0.NewClient(
+  gctx0.WithAccessKey("YOUR_ACCESS_KEY"),
+  gctx0.WithWorkspaceId("YOUR_WORKSPACE_ID"),
+)
+defer client.Close()
+```
+
+```bash
+export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
+export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
+acli status
+```
 
 ***
 
