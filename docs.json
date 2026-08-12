@@ -84,6 +84,14 @@
             ]
           },
           {
+            "group": "Me",
+            "icon": "user",
+            "openapi": "openapi.yaml",
+            "pages": [
+              "GET /me"
+            ]
+          },
+          {
             "group": "Workspaces",
             "icon": "building-2",
             "openapi": "openapi.yaml",

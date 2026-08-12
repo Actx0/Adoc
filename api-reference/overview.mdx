@@ -95,6 +95,7 @@ X-API-Key: <user-api-key>
 
 ```text
 /api/v1
+  /me
   /workspaces/{workspaceId}
     /prompts
     /promptsByName/{promptName}
@@ -145,6 +146,10 @@ Sessions can also be addressed by external `id` and/or label query params via `/
 ## API categories
 
 <CardGroup cols={2}>
+  <Card title="Me" icon="user" href="/api-reference/get-me">
+    Inspect the authenticated access key or API key
+  </Card>
+
   <Card title="Workspaces" icon="building-2" href="/api-reference/create-workspace">
     Create, list, update, and delete workspaces
   </Card>

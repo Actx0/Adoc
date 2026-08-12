@@ -10,6 +10,8 @@ servers:
 - url: https://app.actx0.com/api/v1
   description: Actx0 cloud
 tags:
+- name: Me
+  description: Current principal introspection for X-Access-Key or X-API-Key
 - name: API Keys
   description: User API keys for X-API-Key auth
 - name: Workspaces
@@ -29,6 +31,135 @@ tags:
 - name: Knowledge
   description: Document upload and semantic search
 paths:
+  /me:
+    get:
+      operationId: getMe
+      summary: Get Me
+      description: |-
+        Return the authenticated principal for the request.
+
+        Send either `X-Access-Key` (workspace runtime key) or `X-API-Key` (user API key).
+        Access-key responses include workspace permissions. API-key responses include the
+        owning user and key metadata.
+      tags:
+      - Me
+      security:
+      - AccessKeyAuth: []
+      - ApiKeyAuth: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MeResponse'
+              examples:
+                accessKey:
+                  summary: Access key principal
+                  value:
+                    principalType: ACCESS_KEY
+                    accessKey:
+                      id: 99999999-9999-9999-9999-999999999999
+                      workspaceId: 11111111-1111-1111-1111-111111111111
+                      name: Agent runtime
+                      permissions:
+                      - CAN_CREATE_SESSION_MEMORY
+                      - CAN_LIST_SESSION_MEMORIES
+                      createdAt: '2026-07-01T12:00:00Z'
+                      updatedAt: '2026-07-01T12:00:00Z'
+                apiKey:
+                  summary: API key principal
+                  value:
+                    principalType: API_KEY
+                    owner:
+                      id: 88888888-8888-8888-8888-888888888888
+                      email: owner@example.com
+                      name: Ada Lovelace
+                      role: user
+                    apiKey:
+                      id: 77777777-7777-7777-7777-777777777777
+                      name: CI key
+                      createdAt: '2026-07-01T12:00:00Z'
+                      updatedAt: '2026-07-01T12:00:00Z'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-mint:
+        href: /api-reference/get-me
+      x-codeSamples:
+        - lang: curl
+          label: curl / acli
+          source: |
+            curl -X GET 'https://app.actx0.com/api/v1/me' \
+              -H "X-Access-Key: YOUR_ACCESS_KEY" \
+              -H "Accept: application/json"
+
+            # ---
+
+            # acli
+            export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
+            export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
+
+            acli me
+        - lang: python
+          label: pctx0
+          source: |
+            from pctx0 import Pctx0Client
+
+            client = Pctx0Client(
+                access_key="YOUR_ACCESS_KEY",
+                workspace_id="YOUR_WORKSPACE_ID",
+            )
+
+            me = client.me.get()
+        - lang: javascript
+          label: nctx0
+          source: |
+            import { Nctx0Client } from "@actx0/nctx0";
+
+            const client = new Nctx0Client({
+              accessKey: "YOUR_ACCESS_KEY",
+              workspaceId: "YOUR_WORKSPACE_ID",
+            });
+
+            const me = await client.me.get();
+        - lang: go
+          label: gtcx0
+          source: |
+            package main
+
+            import (
+            	"context"
+
+            	"github.com/Actx0/Gctx0"
+            )
+
+            func main() {
+            	client := gctx0.NewClient(
+            		gctx0.WithAccessKey("YOUR_ACCESS_KEY"),
+            		gctx0.WithWorkspaceId("YOUR_WORKSPACE_ID"),
+            	)
+            	defer client.Close()
+            	ctx := context.Background()
+            	me, err := client.Me.Get(ctx)
+            	_ = me
+            	_ = err
+            }
   /apiKeys:
     post:
       operationId: createApiKey
@@ -203,8 +334,7 @@ paths:
     post:
       operationId: createWorkspace
       summary: Create Workspace
-      description: Create a workspace and add the authenticated user as owner. Free users are limited
-        to one owned workspace.
+      description: Create a workspace and add the authenticated user as owner.
       tags:
       - Workspaces
       security: *id001
@@ -5663,6 +5793,94 @@ components:
       description: 'Version selector: omitted/latest, production, or a version number like 1 or v1.'
       example: latest
   schemas:
+    MeAccessKeyPrincipal:
+      type: object
+      required:
+      - principalType
+      - accessKey
+      properties:
+        principalType:
+          type: string
+          enum:
+          - ACCESS_KEY
+          example: ACCESS_KEY
+        accessKey:
+          $ref: '#/components/schemas/AccessKey'
+    MeAPIKeyOwner:
+      type: object
+      required:
+      - id
+      - email
+      - name
+      - role
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: 88888888-8888-8888-8888-888888888888
+        email:
+          type: string
+          format: email
+          example: owner@example.com
+        name:
+          type: string
+          example: Ada Lovelace
+        role:
+          type: string
+          example: user
+    MeAPIKeyInfo:
+      type: object
+      required:
+      - id
+      - name
+      - createdAt
+      - updatedAt
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: 77777777-7777-7777-7777-777777777777
+        name:
+          type: string
+          example: CI key
+        expiresAt:
+          type: string
+          format: date-time
+          nullable: true
+          example: '2027-01-01T00:00:00Z'
+        createdAt:
+          type: string
+          format: date-time
+          example: '2026-07-01T12:00:00Z'
+        updatedAt:
+          type: string
+          format: date-time
+          example: '2026-07-01T12:00:00Z'
+    MeAPIKeyPrincipal:
+      type: object
+      required:
+      - principalType
+      - owner
+      - apiKey
+      properties:
+        principalType:
+          type: string
+          enum:
+          - API_KEY
+          example: API_KEY
+        owner:
+          $ref: '#/components/schemas/MeAPIKeyOwner'
+        apiKey:
+          $ref: '#/components/schemas/MeAPIKeyInfo'
+    MeResponse:
+      oneOf:
+      - $ref: '#/components/schemas/MeAccessKeyPrincipal'
+      - $ref: '#/components/schemas/MeAPIKeyPrincipal'
+      discriminator:
+        propertyName: principalType
+        mapping:
+          ACCESS_KEY: '#/components/schemas/MeAccessKeyPrincipal'
+          API_KEY: '#/components/schemas/MeAPIKeyPrincipal'
     Error:
       type: object
       required:
