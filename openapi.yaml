@@ -241,6 +241,15 @@ paths:
                 $ref: '#/components/schemas/Error'
       x-mint:
         href: /api-reference/create-workspace
+      x-codeSamples:
+        - lang: curl
+          label: curl
+          source: |
+            curl -X POST 'https://app.actx0.com/api/v1/workspaces' \
+              -H "X-API-Key: YOUR_API_KEY" \
+              -H "Content-Type: application/json" \
+              -H "Accept: application/json" \
+              -d '{"name": "Acme Support"}'
       requestBody:
         required: true
         content:
@@ -283,6 +292,13 @@ paths:
                 $ref: '#/components/schemas/Error'
       x-mint:
         href: /api-reference/list-workspaces
+      x-codeSamples:
+        - lang: curl
+          label: curl
+          source: |
+            curl -X GET 'https://app.actx0.com/api/v1/workspaces?limit=50&offset=0' \
+              -H "X-API-Key: YOUR_API_KEY" \
+              -H "Accept: application/json"
       parameters:
       - $ref: '#/components/parameters/Limit'
       - $ref: '#/components/parameters/Offset'
@@ -327,6 +343,13 @@ paths:
                 $ref: '#/components/schemas/Error'
       x-mint:
         href: /api-reference/get-workspace
+      x-codeSamples:
+        - lang: curl
+          label: curl
+          source: |
+            curl -X GET 'https://app.actx0.com/api/v1/workspaces/<workspaceId>' \
+              -H "X-API-Key: YOUR_API_KEY" \
+              -H "Accept: application/json"
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
     put:
@@ -375,6 +398,15 @@ paths:
                 $ref: '#/components/schemas/Error'
       x-mint:
         href: /api-reference/update-workspace
+      x-codeSamples:
+        - lang: curl
+          label: curl
+          source: |
+            curl -X PUT 'https://app.actx0.com/api/v1/workspaces/<workspaceId>' \
+              -H "X-API-Key: YOUR_API_KEY" \
+              -H "Content-Type: application/json" \
+              -H "Accept: application/json" \
+              -d '{"name": "Acme Support"}'
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -421,6 +453,13 @@ paths:
                 $ref: '#/components/schemas/Error'
       x-mint:
         href: /api-reference/delete-workspace
+      x-codeSamples:
+        - lang: curl
+          label: curl
+          source: |
+            curl -X DELETE 'https://app.actx0.com/api/v1/workspaces/<workspaceId>' \
+              -H "X-API-Key: YOUR_API_KEY" \
+              -H "Accept: application/json"
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
   /workspaces/{workspaceId}/keys:

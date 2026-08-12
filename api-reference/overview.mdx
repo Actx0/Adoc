@@ -8,7 +8,7 @@ icon: "code"
 
 Actx0 exposes a versioned HTTP API under `/api/v1`. Use it to run agents and sessions, store messages and memories, version prompts, and search knowledge documents.
 
-Endpoints include package samples for **Pctx0** (Python), **Nctx0** (Node.js), and **Gtcx0** (Go), plus a combined **cURL / Acli** sample.
+Endpoints include package samples for **Pctx0** (Python), **Nctx0** (Node.js), and **Gtcx0** (Go), plus a combined **cURL / Acli** sample. Workspace CRUD is curl-only and uses `X-API-Key`.
 
 <Info>
   **Quick start:** [Create a workspace access key in the Actx0 Dashboard](https://app.actx0.com/settings), then call Create Memory with `X-Access-Key`.
@@ -71,13 +71,19 @@ https://app.actx0.com/api/v1
 
 ## Authentication
 
-API requests authenticate with a workspace access key:
+Most API requests authenticate with a workspace access key:
 
 ```bash
 X-Access-Key: <workspace-access-key>
 ```
 
 [Create access keys in the Actx0 Dashboard](https://app.actx0.com/settings) with the permissions your agents need. Agents, sessions, messages, memories, prompts, and knowledge accept the key when it includes the matching permission.
+
+Create Workspace and other workspace CRUD endpoints require a user API key instead:
+
+```bash
+X-API-Key: <user-api-key>
+```
 
 <Warning>
   **Keep your keys secure.** Never expose them in client-side code or public repositories. Use environment variables and server-side requests only.
@@ -139,6 +145,10 @@ Sessions can also be addressed by external `id` and/or label query params via `/
 ## API categories
 
 <CardGroup cols={2}>
+  <Card title="Workspaces" icon="building-2" href="/api-reference/create-workspace">
+    Create, list, update, and delete workspaces
+  </Card>
+
   <Card title="Agents" icon="bot" href="/api-reference/create-agent">
     Create and manage agents in a workspace
   </Card>

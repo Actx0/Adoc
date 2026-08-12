@@ -84,6 +84,18 @@
             ]
           },
           {
+            "group": "Workspaces",
+            "icon": "building-2",
+            "openapi": "openapi.yaml",
+            "pages": [
+              "POST /workspaces",
+              "GET /workspaces",
+              "GET /workspaces/{workspaceId}",
+              "PUT /workspaces/{workspaceId}",
+              "DELETE /workspaces/{workspaceId}"
+            ]
+          },
+          {
             "group": "Agents",
             "icon": "bot",
             "openapi": "openapi.yaml",
