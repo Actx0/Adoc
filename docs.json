@@ -35,10 +35,10 @@
       "display": "interactive"
     },
     "examples": {
-      "languages": ["curl"],
+      "languages": ["python", "javascript", "go", "bash"],
       "defaults": "required",
       "prefill": true,
-      "autogenerate": true
+      "autogenerate": false
     }
   },
   "navigation": {
