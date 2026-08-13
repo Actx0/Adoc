@@ -51,10 +51,7 @@
             "group": "Getting Started",
             "pages": [
               "index",
-              "actx0-platform/quickstart",
-              "actx0-platform/overview",
-              "integrations/overview",
-              "agent-plugins/overview"
+              "actx0-platform/quickstart"
             ]
           }
         ]
@@ -67,7 +64,6 @@
             "group": "Actx0 Platform",
             "pages": [
               "actx0-platform/overview",
-              "actx0-platform/quickstart",
               "actx0-platform/agent",
               "actx0-platform/knowledge",
               "actx0-platform/prompt",
@@ -197,7 +193,7 @@
         "icon": "plug",
         "groups": [
           {
-            "group": "Overview",
+            "group": "Integrations",
             "pages": [
               "integrations/overview"
             ]
@@ -209,7 +205,7 @@
         "icon": "puzzle",
         "groups": [
           {
-            "group": "Overview",
+            "group": "Agent Plugins",
             "pages": [
               "agent-plugins/overview"
             ]
