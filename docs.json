@@ -13,7 +13,8 @@
   },
   "logo": {
     "light": "/logo.png",
-    "dark": "/logo.png"
+    "dark": "/logo.png",
+    "href": "https://actx0.com"
   },
   "favicon": "/favicon.png",
   "navbar": {
