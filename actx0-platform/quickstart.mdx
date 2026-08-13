@@ -1,14 +1,21 @@
 ---
 title: "Quickstart"
-description: "Create a workspace, pick a plan, and run the memory, knowledge, and prompt loop with the Actx0 clients."
+description: "Sign up, get an access key, and make your first API calls."
 icon: "zap"
 ---
 
 ## Quickstart
 
-Get from a new account to saved messages, retrieved memories, indexed knowledge, and a versioned prompt.
+This page walks you through Actx0 for the first time.
 
-You will use the [dashboard](https://app.actx0.com) for workspace, billing, and access keys, then one of [Pctx0](https://github.com/Actx0/Pctx0) (Python), [Nctx0](https://github.com/Actx0/Nctx0) (Node.js), [Gtcx0](https://github.com/Actx0/Gctx0) (Go), **cURL**, or [Acli](https://github.com/Actx0/Acli).
+First you set things up in the [dashboard](https://app.actx0.com): a workspace, a plan, and an access key. Then you pick a client — [Pctx0](https://github.com/Actx0/Pctx0) (Python), [Nctx0](https://github.com/Actx0/Nctx0) (Node.js), [Gtcx0](https://github.com/Actx0/Gctx0) (Go), **cURL**, or [Acli](https://github.com/Actx0/Acli) — and do four things:
+
+1. Send a chat message (Actx0 turns it into a memory)
+2. Search those memories
+3. Upload a document and search it
+4. Save a prompt and load it by name
+
+That is the same path your agent will use in production.
 
 ***
 
@@ -39,8 +46,6 @@ You will use the [dashboard](https://app.actx0.com) for workspace, billing, and 
   <Step title="Install a client">
     <Tabs>
       <Tab title="Python">
-        [Pctx0](https://github.com/Actx0/Pctx0)
-
         ```bash
         uv add pctx0
         # or: pip install pctx0
@@ -56,8 +61,6 @@ You will use the [dashboard](https://app.actx0.com) for workspace, billing, and 
         ```
       </Tab>
       <Tab title="Node.js">
-        [Nctx0](https://github.com/Actx0/Nctx0)
-
         ```bash
         npm install @actx0/nctx0
         ```
@@ -72,8 +75,6 @@ You will use the [dashboard](https://app.actx0.com) for workspace, billing, and 
         ```
       </Tab>
       <Tab title="Go">
-        [Gtcx0](https://github.com/Actx0/Gctx0)
-
         ```bash
         go get github.com/Actx0/Gctx0
         ```
@@ -88,16 +89,12 @@ You will use the [dashboard](https://app.actx0.com) for workspace, billing, and 
         ```
       </Tab>
       <Tab title="cURL">
-        REST base URL: `https://app.actx0.com/api/v1`
-
         ```bash
         export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
         export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
         ```
       </Tab>
       <Tab title="Acli">
-        [Acli](https://github.com/Actx0/Acli)
-
         ```bash
         go install github.com/Actx0/Acli/cmd/acli@latest
 
