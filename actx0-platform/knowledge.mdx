@@ -1,0 +1,128 @@
+---
+title: "Knowledge"
+description: "Upload documents once, then retrieve grounded chunks for your agents."
+icon: "book"
+---
+
+## Knowledge
+
+**Knowledge** is workspace-scoped RAG: you upload documents, Actx0 chunks and embeds them, and your agents search for relevant passages at query time.
+
+Knowledge is shared across agents in the workspace. Session **memories** are personal facts from a conversation. Knowledge is the manual, policy, or FAQ you want every agent to cite.
+
+| | Memories | Knowledge |
+| --- | --- | --- |
+| Scope | Agent session | Workspace |
+| Source | Conversation extraction or explicit writes | Uploaded `.txt` / `.md` files |
+| Best for | Preferences, decisions, user facts | Policies, docs, onboarding, product specs |
+
+***
+
+## The mental model
+
+| Without a knowledge layer | With Actx0 knowledge |
+| --- | --- |
+| Paste manuals into every prompt | Upload once, retrieve only matching chunks |
+| Operate your own vector store | Actx0 indexes and searches for you |
+| Agents invent policy details | Ground replies on scored passages |
+
+Use knowledge when the answer should come from your documents. Use memories when the answer should come from what this user or session already said.
+
+***
+
+## Two phases: index and retrieve
+
+### 1. Index (writing knowledge)
+
+Upload a UTF-8 `.txt` or `.md` file (max 2 MB) with a title and optional labels.
+
+1. **Store.** Actx0 saves the file and creates a document in `processing` status.
+2. **Chunk.** Text is split with a recursive splitter. Chunk size scales with document length (about 2k / 4k / 10k characters, with 20% overlap).
+3. **Embed.** Each chunk is embedded and written to the workspace knowledge index.
+4. **Ready.** Status becomes `indexed`. Failed jobs are marked `failed`.
+
+<Info>
+  Indexing is asynchronous. Search only returns hits from documents that have finished indexing.
+</Info>
+
+### 2. Retrieve (reading knowledge)
+
+Before a model call, search with the user's question. Actx0 embeds the query, filters by workspace (and optional `tag`), and returns scored chunks — `documentId`, `chunkId`, `score`, and `text`.
+
+Pass those passages into the prompt. Your app decides which hits to include.
+
+***
+
+## Labels and filters
+
+Labels are `key=value` pairs (JSON array or comma-separated). Keys must not start with `_`.
+
+The **`tag`** label is indexed for retrieval. Prefer `tag=faq`, `tag=policy`, or similar when you want search to stay inside a subset of the corpus.
+
+```bash
+curl -X POST \
+  "https://app.actx0.com/api/v1/workspaces/{workspaceId}/documents" \
+  -H "X-Access-Key: $ACTX0_ACCESS_KEY" \
+  -H "Accept: application/json" \
+  -F "title=Refund policy" \
+  -F "file=@refund-policy.md" \
+  -F 'labels=["tag=policy"]'
+```
+
+Search can filter on that tag:
+
+```bash
+curl -X POST \
+  "https://app.actx0.com/api/v1/workspaces/{workspaceId}/documents/search" \
+  -H "X-Access-Key: $ACTX0_ACCESS_KEY" \
+  -H "Content-Type: application/json" \
+  -H "Accept: application/json" \
+  -d '{
+    "query": "How long do refunds take?",
+    "labels": { "tag": "policy" },
+    "limit": 10
+  }'
+```
+
+Default search `limit` is 10 (max 100).
+
+***
+
+## Document status
+
+| Status | Meaning |
+| --- | --- |
+| `processing` | Upload accepted; chunking and embedding in progress |
+| `indexed` | Chunks are searchable |
+| `failed` | Indexing failed; re-upload or delete |
+
+You can list documents, inspect size and character count, and delete a document. Delete removes the row immediately; storage and vector cleanup run in the background.
+
+***
+
+## Build against this flow
+
+- Upload canonical docs (policies, FAQs, runbooks), not chat logs — those belong in sessions.
+- Wait for `indexed` before you rely on search in production.
+- Use `tag=` when one workspace holds several corpora.
+- Retrieve a small set of chunks and cite them; do not dump the whole document into the prompt.
+- Document count and storage follow your workspace plan. Search consumes AI usage.
+
+***
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Upload Document" icon="upload" href="/api-reference/upload-document">
+    Multipart upload, labels, and limits
+  </Card>
+  <Card title="Search Documents" icon="search" href="/api-reference/search-documents">
+    Semantic retrieval over indexed chunks
+  </Card>
+  <Card title="Agents" icon="bot" href="/actx0-platform/agent">
+    Sessions, messages, and memory
+  </Card>
+  <Card title="Prompts" icon="file-text" href="/actx0-platform/prompt">
+    Versioned templates to pair with retrieved context
+  </Card>
+</CardGroup>

@@ -1,61 +1,121 @@
 ---
 title: "Overview"
-description: "How the Actx0 platform is organized: workspaces, agents, sessions, and memory."
+description: "How Actx0 works: memory extraction, knowledge, prompts, and access keys."
 icon: "cloud"
 ---
 
-## Actx0 Platform
+## How the platform works
 
-Actx0 is a hosted memory platform for AI agents. Everything is scoped to a **workspace**. Inside a workspace you create **agents**, run **sessions**, store **messages** and **memories**, manage **prompts** and **knowledge**, and issue **access keys** for SDKs and agents.
+Actx0 sits between your application and your model. You send conversation turns as they happen. Actx0 keeps the transcript, pulls out facts worth remembering, and hands back only the relevant ones before the next reply.
+
+You still run the model. Actx0 is the memory layer: store what matters, retrieve it in milliseconds, reuse it across turns without replaying the whole chat.
+
+Everything lives in a **workspace** (your team, billing, and keys). Inside it you create **agents**. Each agent runs **sessions**. A session holds **messages** (what was said) and **memories** (what should be recalled later).
 
 ```text
 Workspace
-  ├── Access keys
-  ├── Prompts
-  ├── Knowledge documents
+  ├── Access keys, prompts, knowledge
   └── Agents
         └── Sessions
-              ├── Messages
-              └── Memories
+              ├── Messages   ← the conversation
+              └── Memories   ← extracted facts
 ```
 
 ***
 
-## Core concepts
+## Messages vs memories
 
-<CardGroup cols={2}>
-  <Card title="Workspaces" icon="building-2">
-    Multi-tenant isolation for teams, billing, and access control
-  </Card>
+A message is a turn in the conversation. A memory is a short, durable fact taken from that conversation.
 
-  <Card title="Agents" icon="bot">
-    Named agents that own sessions and memory within a workspace
-  </Card>
+| User says | Stored memory |
+| --- | --- |
+| `"I prefer aisle seats"` | `User prefers aisle seats` |
+| `"We're switching the billing email to finance@acme.com"` | `User's billing email is finance@acme.com` |
+| `"Hi, can you help?"` | Nothing — greetings are skipped |
 
-  <Card title="Sessions" icon="messages-square">
-    Conversation runs identified by external id and optional labels
-  </Card>
+The transcript stays as messages so you can search or replay it. Memories are what you put in the next prompt: a few sentences, not the whole history.
 
-  <Card title="Memories" icon="cpu">
-    Durable facts, preferences, and summaries with semantic search
-  </Card>
+You can also **write a memory yourself** when you already know the fact. Automatic extraction is for when you want Actx0 to read the chat and decide.
 
-  <Card title="Messages" icon="message-square">
-    Conversation turns that can trigger automatic memory extraction
-  </Card>
+***
 
-  <Card title="Knowledge" icon="book">
-    Uploaded documents indexed for semantic retrieval
-  </Card>
+## Access keys
 
-  <Card title="Prompts" icon="file-text">
-    Versioned prompt templates with production labels
-  </Card>
+Dashboard login is for people. Agents and servers use a **workspace access key**.
 
-  <Card title="Access keys" icon="key">
-    Scoped credentials for SDKs, MCP, and server integrations
-  </Card>
-</CardGroup>
+Create one in [Settings → Access keys](https://app.actx0.com/settings). You choose a name and permissions (messages, memories, knowledge, prompts, and so on). The secret is shown **once**; send it as `X-Access-Key` from the SDK, REST, or MCP. Keep it on the server — never in a browser or a committed config.
+
+Use a different key per environment or integration, and grant only the permissions that integration needs. If a key leaks, delete it and issue a new one.
+
+***
+
+## How a message becomes a memory
+
+Extraction runs in the background after you create a **user** message. Assistant replies are stored and searchable; they do not trigger extraction.
+
+<Steps>
+  <Step title="You send a user message">
+    Your app (or MCP client) POSTs the turn into a session. Actx0 saves it and indexes the text for search.
+  </Step>
+  <Step title="Actx0 reads that one message">
+    A model looks at the user text only — not the full transcript — and asks: is there anything worth remembering later?
+  </Step>
+  <Step title="It writes a short fact, or skips">
+    Greetings, chit-chat, and generic instructions are dropped. Useful content becomes one third-person sentence, tagged `long_lived` (stable identity, preferences, lasting facts) or `short_lived` (task state that fades with this conversation).
+  </Step>
+  <Step title="The fact is indexed">
+    The new memory is embedded so you can search it semantically, the same way you search messages and knowledge.
+  </Step>
+  <Step title="Existing memories are cleaned up">
+    If the session already has memories, Actx0 consolidates them: exact duplicates go away, contradictions keep the newer fact, distinct facts stay separate. Nothing useful is silently discarded.
+  </Step>
+</Steps>
+
+That whole path is asynchronous. The create-message call returns as soon as the turn is stored. Memories show up shortly after.
+
+If you need to rebuild from scratch, regenerate memories from the session's user messages. That deletes current memories and runs extraction again.
+
+***
+
+## How you use it in an app
+
+Two calls, around your model, with that key:
+
+1. **After the user speaks** — create the message. Actx0 extracts memory.
+2. **Before you generate a reply** — fetch the prompt, search memories (and knowledge if the question is about your docs), then put the best hits in the prompt.
+
+<Info>
+  Scope search to the right session. Memories belong to one agent session — they do not leak across users, tickets, or agents unless you put them in the same session.
+</Info>
+
+***
+
+## Why knowledge exists
+
+Memory answers “what did this user tell us?” Knowledge answers “what is true in our docs?”
+
+Without a knowledge layer, teams paste FAQs and policies into every prompt, or they let the model guess. That wastes tokens and drifts from the real document. Actx0 knowledge is workspace RAG: upload a `.txt` or `.md` file once, Actx0 chunks and indexes it, and any agent in the workspace can search for matching passages.
+
+| | Memories | Knowledge |
+| --- | --- | --- |
+| Answers | What this person said or prefers | What your company wrote down |
+| Scope | One agent session | The whole workspace |
+| Source | Chat extraction or a direct write | Uploaded documents |
+| Example | `User prefers dark mode` | Refund policy, onboarding guide, product spec |
+
+Before a reply that should cite a policy, search knowledge with the user’s question and put the scored chunks next to the memories. Do not dump the whole file into the prompt.
+
+Indexing is asynchronous. Search only returns documents that have finished (`indexed`). See [Knowledge](/actx0-platform/knowledge) for upload, labels, and search.
+
+***
+
+## Why prompts are versioned
+
+The system prompt is part of the product. If it lives only in your repo, a copy change means a deploy, and a bad edit has no rollback.
+
+Actx0 stores **prompts** as versioned templates in the workspace. You edit them in the dashboard or API. At runtime your app fetches by **handle** — `latest` for staging, `production` for live traffic, or a specific version like `v3`. Actx0 does not run the model; you substitute variables such as `{{user_name}}`, then send the text along with memories and knowledge hits.
+
+Promote a version when it is ready. Only one version is production at a time. See [Prompts](/actx0-platform/prompt) for handles, types, and fetch-by-name.
 
 ***
 
@@ -63,7 +123,23 @@ Workspace
 
 <CardGroup cols={2}>
   <Card title="Quickstart" icon="rocket" href="/actx0-platform/quickstart">
-    Create an access key and write your first memory
+    Create an access key and store your first memory
+  </Card>
+
+  <Card title="Agents" icon="bot" href="/actx0-platform/agent">
+    Sessions, messages, and how to scope a conversation
+  </Card>
+
+  <Card title="Knowledge" icon="book" href="/actx0-platform/knowledge">
+    Upload documents and retrieve grounded chunks
+  </Card>
+
+  <Card title="Prompts" icon="file-text" href="/actx0-platform/prompt">
+    Versioned templates with production labels
+  </Card>
+
+  <Card title="MCP" icon="plug" href="/actx0-platform/mcp">
+    Memory tools for Cursor and other MCP clients
   </Card>
 
   <Card title="API Reference" icon="code" href="/api-reference/overview">

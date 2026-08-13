@@ -67,7 +67,11 @@
             "group": "Actx0 Platform",
             "pages": [
               "actx0-platform/overview",
-              "actx0-platform/quickstart"
+              "actx0-platform/quickstart",
+              "actx0-platform/agent",
+              "actx0-platform/knowledge",
+              "actx0-platform/prompt",
+              "actx0-platform/mcp"
             ]
           }
         ]

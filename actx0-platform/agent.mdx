@@ -1,0 +1,152 @@
+---
+title: "Agents"
+description: "How agents, sessions, messages, and memories work together on Actx0."
+icon: "bot"
+---
+
+## Agents
+
+An **agent** is the named runtime identity that owns conversations inside a workspace. You run the model; Actx0 stores the sessions, messages, and memories that belong to that agent.
+
+Create agents in the [dashboard](https://app.actx0.com) or with the API. Each agent gets a unique `id` and an auto-generated `handle`. Name and description are yours to set.
+
+```text
+Workspace
+  └── Agent
+        └── Sessions
+              ├── Messages   (conversation turns)
+              └── Memories   (durable facts to reuse)
+```
+
+Use a separate agent per product surface — support bot, coding assistant, internal copilot — so memory stays isolated.
+
+***
+
+## The mental model
+
+| Without Actx0 | With an Actx0 agent |
+| --- | --- |
+| Replay the full transcript every turn | Store facts once, retrieve only what is relevant |
+| Lose context when a chat ends | Sessions keep messages and memories across runs |
+| Mix users, tickets, or projects in one blob | Scope each conversation with an external id or labels |
+
+Actx0 agents are **unmanaged**: they do not execute your model. Your app (or MCP client) calls the API around the model — write after useful turns, search before the next reply.
+
+***
+
+## Sessions
+
+A **session** is one conversation run for an agent. Create it with an external `id` (for example `ticket-4821` or a user id) and optional labels. Actx0 also assigns an internal UUID used on message and memory routes.
+
+| Identifier | Role |
+| --- | --- |
+| External `id` | Your id. Stable across retries; MCP uses this as `X-Session-Id` |
+| Labels | Key/value tags such as `user=42` or `channel=slack` |
+| Internal `id` | UUID returned by the API for `/messages` and `/memories` |
+
+You must pass an external `id` and/or labels when creating a session. If two sessions would share the same external id or the same exact label set on that agent, creation fails.
+
+Typical mapping:
+
+| Your product | Session external id |
+| --- | --- |
+| Support ticket | Ticket number |
+| Chat user | User id |
+| Coding agent | Repo + branch, or a run id |
+
+***
+
+## Messages vs memories
+
+You send Actx0 **messages**. Memories are the durable facts worth retrieving later — not a verbatim transcript.
+
+| Input | What Actx0 stores |
+| --- | --- |
+| User: `"I prefer aisle seats"` | Memory: `User prefers aisle seats` (`preference`) |
+| User: `"We'll use Postgres for this project"` | Memory: `Project decision: use Postgres` (`fact`) |
+| Assistant reply | Indexed as a message; does not trigger extraction |
+
+When you create a **user** message, Actx0:
+
+1. Stores the turn and indexes it for semantic search
+2. Queues LLM extraction of facts, preferences, and summaries
+3. Deduplicates and consolidates as the session grows
+
+Write memories directly when you already know the fact. Use messages when you want extraction from conversation.
+
+Memory kinds: `summary`, `fact`, `preference`, `short_lived`, `long_lived`.
+
+***
+
+## Two phases: capture and recall
+
+Most apps use the agent in two places:
+
+1. **After a useful turn**, create a message (or a memory) so Actx0 can store what should persist.
+2. **Before the next model call**, search memories (and optionally messages or knowledge) and put the best hits in the prompt.
+
+<Steps>
+  <Step title="Create an agent">
+    In the dashboard or via [Create Agent](/api-reference/create-agent), give it a name and description.
+  </Step>
+  <Step title="Open a session">
+    [Create a session](/api-reference/create-session) with an external `id` that matches your user, ticket, or run.
+  </Step>
+  <Step title="Capture the conversation">
+    POST user and assistant messages as the chat proceeds. User messages trigger memory extraction.
+  </Step>
+  <Step title="Recall before you generate">
+    [Search memories](/api-reference/search-memories) with the current user question, then include only the hits that help.
+  </Step>
+</Steps>
+
+***
+
+## Create an agent
+
+```bash
+curl -X POST \
+  "https://app.actx0.com/api/v1/workspaces/{workspaceId}/agents" \
+  -H "X-Access-Key: $ACTX0_ACCESS_KEY" \
+  -H "Content-Type: application/json" \
+  -H "Accept: application/json" \
+  -d '{
+    "name": "Support bot",
+    "description": "Handles customer support conversations"
+  }'
+```
+
+Then create a session (`?id=ticket-4821`) and start writing messages or memories.
+
+<Info>
+  Agent count is limited by your workspace plan. Deleting an agent removes its sessions; vector cleanup runs in the background.
+</Info>
+
+***
+
+## Build against this flow
+
+- One agent per product or persona; one session per user, ticket, or run.
+- Prefer an external session `id` your app already has, so retries do not create duplicates.
+- Search memories before the model responds; write messages after the turn.
+- Store preferences, decisions, and account facts — not secrets or raw credentials.
+- Use [regenerate](/api-reference/regenerate-session-memories) when you need to rebuild memory from session history.
+
+***
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Create Agent" icon="plus" href="/api-reference/create-agent">
+    Name, description, and response shape
+  </Card>
+  <Card title="Create Session" icon="messages-square" href="/api-reference/create-session">
+    External ids, labels, and session lifecycle
+  </Card>
+  <Card title="Knowledge" icon="book" href="/actx0-platform/knowledge">
+    Workspace documents for grounded retrieval
+  </Card>
+  <Card title="MCP" icon="plug" href="/actx0-platform/mcp">
+    Memory tools for Cursor and other MCP clients
+  </Card>
+</CardGroup>

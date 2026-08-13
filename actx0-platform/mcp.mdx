@@ -1,0 +1,132 @@
+---
+title: "MCP"
+description: "Give Cursor and other MCP clients scoped memory tools for an Actx0 session."
+icon: "plug"
+---
+
+## MCP
+
+Actx0 speaks **Model Context Protocol** over streamable HTTP. An MCP client (Cursor, Claude, or any compatible agent) gets tools to add, search, update, and delete **session memories** without calling the REST API directly.
+
+The MCP server is a thin proxy: every tool call uses your workspace access key against the Actx0 API. Scope is fixed per connection — workspace, agent, and session come from headers, not from tool arguments.
+
+Use MCP when the agent already lives in an editor or harness. Use the [REST API](/api-reference/overview) or SDKs when you own the runtime.
+
+***
+
+## The mental model
+
+| REST / SDK | MCP |
+| --- | --- |
+| You pick workspace, agent, and session on every path | Headers pin the scope for the whole connection |
+| Full surface: prompts, knowledge, messages, memories | Memory tools for one session |
+| Your code orchestrates search and write | The model chooses tools during the chat |
+
+Typical loop inside the client:
+
+1. **Before answering**, call `search_memories` with the current question.
+2. **After a useful fact**, call `add_memory` so the next session can recall it.
+3. **Correct or drop** a fact with `update_memory` or `delete_memory`.
+
+***
+
+## Connection scope
+
+Send these headers on the MCP HTTP connection:
+
+| Header | Purpose |
+| --- | --- |
+| `X-Workspace-Id` | Workspace UUID |
+| `X-Agent-Id` | Agent UUID |
+| `X-Session-Id` | External session id (your id, not the internal UUID) |
+| `X-Access-Key` | Workspace access key |
+
+`add_memory` creates the session from `X-Session-Id` if it does not exist yet. The other tools resolve that external id and fail if the session is missing.
+
+<Warning>
+  Keep access keys out of shared repos. Use placeholders in committed `mcp.json`, and put real secrets in a local untracked config.
+</Warning>
+
+***
+
+## Configure Cursor
+
+1. Create an [access key](https://app.actx0.com/settings) with session and memory permissions (see below).
+2. Create an [agent](/actx0-platform/agent) in the workspace.
+3. Add a server entry in `.cursor/mcp.json` (project) or `~/.cursor/mcp.json` (global):
+
+```json
+{
+  "mcpServers": {
+    "actx0": {
+      "url": "<ACTX0_MCP_URL>",
+      "headers": {
+        "X-Workspace-Id": "<workspace-id>",
+        "X-Agent-Id": "<agent-id>",
+        "X-Session-Id": "<external-session-id>",
+        "X-Access-Key": "<access-key>"
+      }
+    }
+  }
+}
+```
+
+4. Reload MCP in **Settings → Tools & MCP**, or restart Cursor.
+
+`url` is the Actx0 MCP streamable HTTP endpoint. Use a stable `X-Session-Id` per user, ticket, or repo so memories accumulate on the same session.
+
+***
+
+## Tools
+
+| Tool | What it does |
+| --- | --- |
+| `add_memory` | Save a memory. `kind` defaults to `long_lived`. Optional `metadata` |
+| `search_memories` | Semantic search over the scoped session |
+| `get_memories` | Paginated list (`limit`, `offset`) |
+| `get_memory` | Fetch one memory by `memory_id` |
+| `update_memory` | Overwrite kind, content, and metadata after you confirm the id |
+| `delete_memory` | Delete one memory |
+| `delete_session` | Delete the scoped session and all of its memories |
+
+Memory `kind` values: `summary`, `fact`, `preference`, `short_lived`, `long_lived`.
+
+***
+
+## Access key permissions
+
+The key must include:
+
+- Session: create, list, get, update, delete
+- Memory: create, list, get, query, update, delete
+
+Create keys in **Settings → Access keys** and copy the secret immediately — it is shown only once.
+
+***
+
+## Build against this flow
+
+- Search before the model writes a reply; add only facts worth reusing.
+- One MCP connection = one session. Change `X-Session-Id` (or use another server entry) to isolate users or projects.
+- Prefer `preference` and `fact` for durable content; use `short_lived` for ephemeral context.
+- Do not store secrets in memories. `delete_session` wipes that session's memory when a run should not persist.
+- For prompts and knowledge, call the [REST API](/api-reference/overview) from your app — those resources are not MCP tools.
+
+***
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Agents" icon="bot" href="/actx0-platform/agent">
+    How sessions and memories are scoped
+  </Card>
+  <Card title="Create Memory" icon="plus" href="/api-reference/create-memory">
+    Same writes over REST
+  </Card>
+  <Card title="Access keys" icon="key" href="https://app.actx0.com/settings">
+    Create a workspace key in the dashboard
+  </Card>
+  <Card title="SDK & Tools" icon="box" href="/release-notes/sdk_tools">
+    Python, Node.js, Go, and MCP releases
+  </Card>
+</CardGroup>

@@ -16,7 +16,7 @@ mint dev
 | `docs.json` | Site config and navigation |
 | `openapi.yaml` | REST API OpenAPI (playground + SDK samples) |
 | `index.mdx` | Docs home |
-| `actx0-platform/` | Platform overview and quickstart |
+| `actx0-platform/` | Platform overview, quickstart, agents, knowledge, prompts, MCP |
 | `api-reference/` | API overview |
 | `integrations/` | Integrations |
 | `agent-plugins/` | Agent plugins |

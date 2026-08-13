@@ -1,0 +1,122 @@
+---
+title: "Prompts"
+description: "Version, label, and fetch production prompt templates from your workspace."
+icon: "file-text"
+---
+
+## Prompts
+
+**Prompts** are versioned templates stored in the workspace. You edit them in the [dashboard](https://app.actx0.com) or API, then fetch the right version at runtime by **handle** — `latest`, `production`, or a specific version number.
+
+Actx0 does not execute the prompt. Your agent loads the template, substitutes variables, and sends it to your model along with memories and knowledge hits.
+
+***
+
+## The mental model
+
+| Without prompt management | With Actx0 prompts |
+| --- | --- |
+| Prompt text hardcoded in deploys | Change copy without shipping a new binary |
+| No history when a change regresses | Every save is a numbered version with a commit message |
+| Staging and prod share one string | Promote a version to `production` when it is ready |
+
+```text
+Prompt (name + handle)
+  ├── v1  labels: []
+  ├── v2  labels: [latest]
+  └── v3  labels: [latest]  production: true
+```
+
+A **prompt** is the parent (name, handle, description). A **version** holds type, content, optional config, labels, and the production flag.
+
+***
+
+## Handles and versions
+
+The handle is derived from the name: lowercase, dashes for spaces, unique in the workspace. `"Support system prompt"` becomes `support-system-prompt`. That handle is what runtime code should call.
+
+| Selector | What you get |
+| --- | --- |
+| `latest` (default) | The newest version. Creating a version moves `latest` onto it |
+| `production` | The version you promoted for live traffic |
+| `1` or `v1` | A specific version number |
+
+```bash
+curl -X GET \
+  "https://app.actx0.com/api/v1/workspaces/{workspaceId}/promptsByName/support-system-prompt?version=production" \
+  -H "X-Access-Key: $ACTX0_ACCESS_KEY" \
+  -H "Accept: application/json"
+```
+
+<Tip>
+  Fetch `production` in live agents and `latest` in staging. Promote a version in the dashboard or by updating it with `"production": true`. Only one version is production at a time.
+</Tip>
+
+***
+
+## Types, variables, and config
+
+| Field | Purpose |
+| --- | --- |
+| `type` | `text` (single string) or `chat` (multi-turn template) |
+| `content` | The template body |
+| `config` | Optional JSON string for model params, tools, or app-specific settings |
+| `commitMessage` | Human note stored with the version |
+| `production` | Set on create or update to mark this version live |
+
+Insert variables as `{{variable}}`. Names must be lowercase with underscores, for example `{{user_name}}` or `{{ticket_id}}`. Actx0 stores the placeholders; your app substitutes values before calling the model.
+
+Treat versions as immutable in the product workflow: saving in the dashboard creates a **new** version rather than silently rewriting history. You can still archive or delete a version, or delete the whole prompt and all of its versions.
+
+***
+
+## Create a prompt
+
+Creating a prompt also creates version 1.
+
+```bash
+curl -X POST \
+  "https://app.actx0.com/api/v1/workspaces/{workspaceId}/prompts" \
+  -H "X-Access-Key: $ACTX0_ACCESS_KEY" \
+  -H "Content-Type: application/json" \
+  -H "Accept: application/json" \
+  -d '{
+    "name": "Support system prompt",
+    "description": "Primary system prompt for support agents",
+    "type": "text",
+    "content": "You are a helpful support agent. Address the user as {{user_name}}.",
+    "commitMessage": "Initial version",
+    "production": true
+  }'
+```
+
+Later, POST a new version on the same prompt id when the copy changes. Prompt count is limited by your workspace plan.
+
+***
+
+## Build against this flow
+
+- Call prompts by **handle**, not by UUID, so deploys stay stable when you add versions.
+- Keep `production` on a known-good version; experiment on `latest`.
+- Pair the fetched template with [memory search](/api-reference/search-memories) and [knowledge search](/api-reference/search-documents) in the same request path.
+- Put model hyperparameters in `config` if your runtime reads them; Actx0 does not apply config itself.
+- Do not put secrets in prompt content.
+
+***
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Create Prompt" icon="plus" href="/api-reference/create-prompt">
+    First version, handle, and production flag
+  </Card>
+  <Card title="Get Prompt by Name" icon="file-text" href="/api-reference/get-prompt-by-name">
+    Resolve latest, production, or a version number
+  </Card>
+  <Card title="Agents" icon="bot" href="/actx0-platform/agent">
+    Where prompts are used at session time
+  </Card>
+  <Card title="Knowledge" icon="book" href="/actx0-platform/knowledge">
+    Ground the same prompt with retrieved documents
+  </Card>
+</CardGroup>
