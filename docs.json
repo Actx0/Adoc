@@ -52,7 +52,7 @@
             "group": "Getting Started",
             "pages": [
               "index",
-              "actx0-platform/quickstart"
+              "platform/quickstart"
             ]
           }
         ]
@@ -64,11 +64,11 @@
           {
             "group": "Actx0 Platform",
             "pages": [
-              "actx0-platform/overview",
-              "actx0-platform/agent",
-              "actx0-platform/knowledge",
-              "actx0-platform/prompt",
-              "actx0-platform/mcp"
+              "platform/overview",
+              "platform/agent",
+              "platform/knowledge",
+              "platform/prompt",
+              "platform/mcp"
             ]
           }
         ]

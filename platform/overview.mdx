@@ -95,7 +95,7 @@ Without a knowledge layer, teams paste FAQs and policies into every prompt, or t
 
 Before a reply that should cite a policy, search knowledge with the user’s question and put the scored chunks next to the memories. Do not dump the whole file into the prompt.
 
-Indexing is asynchronous. Search only returns documents that have finished (`indexed`). See [Knowledge](/actx0-platform/knowledge) for upload, labels, and search.
+Indexing is asynchronous. Search only returns documents that have finished (`indexed`). See [Knowledge](/platform/knowledge) for upload, labels, and search.
 
 ***
 
@@ -105,7 +105,7 @@ The system prompt is part of the product. If it lives only in your repo, a copy 
 
 Actx0 stores **prompts** as versioned templates in the workspace. You edit them in the dashboard or API. At runtime your app fetches by **handle** — `latest` for staging, `production` for live traffic, or a specific version like `v3`. Actx0 does not run the model; you substitute variables such as `{{user_name}}`, then send the text along with memories and knowledge hits.
 
-Promote a version when it is ready. Only one version is production at a time. See [Prompts](/actx0-platform/prompt) for handles, types, and fetch-by-name.
+Promote a version when it is ready. Only one version is production at a time. See [Prompts](/platform/prompt) for handles, types, and fetch-by-name.
 
 ***
 
@@ -122,23 +122,23 @@ Use a different key per environment or integration, and grant only the permissio
 ## Next steps
 
 <CardGroup cols={2}>
-  <Card title="Quickstart" icon="rocket" href="/actx0-platform/quickstart">
+  <Card title="Quickstart" icon="rocket" href="/platform/quickstart">
     Create an access key and store your first memory
   </Card>
 
-  <Card title="Agents" icon="bot" href="/actx0-platform/agent">
+  <Card title="Agents" icon="bot" href="/platform/agent">
     Sessions, messages, and how to scope a conversation
   </Card>
 
-  <Card title="Knowledge" icon="book" href="/actx0-platform/knowledge">
+  <Card title="Knowledge" icon="book" href="/platform/knowledge">
     Upload documents and retrieve grounded chunks
   </Card>
 
-  <Card title="Prompts" icon="file-text" href="/actx0-platform/prompt">
+  <Card title="Prompts" icon="file-text" href="/platform/prompt">
     Versioned templates with production labels
   </Card>
 
-  <Card title="MCP" icon="plug" href="/actx0-platform/mcp">
+  <Card title="MCP" icon="plug" href="/platform/mcp">
     Memory tools for Cursor and other MCP clients
   </Card>
 
