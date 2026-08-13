@@ -39,16 +39,6 @@ You can also **write a memory yourself** when you already know the fact. Automat
 
 ***
 
-## Access keys
-
-Dashboard login is for people. Agents and servers use a **workspace access key**.
-
-Create one in [Settings → Access keys](https://app.actx0.com/settings). You choose a name and permissions (messages, memories, knowledge, prompts, and so on). The secret is shown **once**; send it as `X-Access-Key` from the SDK, REST, or MCP. Keep it on the server — never in a browser or a committed config.
-
-Use a different key per environment or integration, and grant only the permissions that integration needs. If a key leaks, delete it and issue a new one.
-
-***
-
 ## How a message becomes a memory
 
 Extraction runs in the background after you create a **user** message. Assistant replies are stored and searchable; they do not trigger extraction.
@@ -116,6 +106,16 @@ The system prompt is part of the product. If it lives only in your repo, a copy 
 Actx0 stores **prompts** as versioned templates in the workspace. You edit them in the dashboard or API. At runtime your app fetches by **handle** — `latest` for staging, `production` for live traffic, or a specific version like `v3`. Actx0 does not run the model; you substitute variables such as `{{user_name}}`, then send the text along with memories and knowledge hits.
 
 Promote a version when it is ready. Only one version is production at a time. See [Prompts](/actx0-platform/prompt) for handles, types, and fetch-by-name.
+
+***
+
+## Access keys
+
+Dashboard login is for people. Agents and servers use a **workspace access key**.
+
+Create one in [Settings → Access keys](https://app.actx0.com/settings). You choose a name and permissions (messages, memories, knowledge, prompts, and so on). The secret is shown **once**; send it as `X-Access-Key` from the SDK, REST, or MCP. Keep it on the server — never in a browser or a committed config.
+
+Use a different key per environment or integration, and grant only the permissions that integration needs. If a key leaks, delete it and issue a new one.
 
 ***
 
