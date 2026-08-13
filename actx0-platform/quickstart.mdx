@@ -1,73 +1,434 @@
 ---
 title: "Quickstart"
-description: "Create a workspace access key and store your first memory with the Actx0 API."
+description: "Create a workspace, pick a plan, and run the memory, knowledge, and prompt loop with the Actx0 clients."
 icon: "zap"
 ---
 
 ## Quickstart
 
-Get from zero to a stored memory in a few minutes.
+Get from a new account to saved messages, retrieved memories, indexed knowledge, and a versioned prompt.
 
-### 1. Create a workspace access key
+You will use the [dashboard](https://app.actx0.com) for workspace, billing, and access keys, then one of **Pctx0** (Python), **Nctx0** (Node.js), **Gtcx0** (Go), or **cURL / Acli**.
 
-In the [Actx0 Dashboard](https://app.actx0.com/settings), open **Settings → Access keys** and create a key with memory permissions (create, list, query, update, delete).
+***
 
-Copy the key immediately — it is shown only once.
+<Steps>
+  <Step title="Create a workspace">
+    Sign in at [app.actx0.com](https://app.actx0.com). If you are new, register with email, GitHub, or Google.
 
-### 2. Create an agent and session
+    Open **Workspaces**, create a workspace, and copy its id. Everything below is scoped to that workspace.
+  </Step>
 
-Use the dashboard or API to create an agent, then create a session (pass an external `id` query param such as `?id=demo-1`).
+  <Step title="Choose a plan">
+    Open **[Billing](https://app.actx0.com/billing)** and pick a plan. Hobby is free with basic limits. Starter, Growth, and Pro raise capacity for agents, sessions, memories, documents, prompts, API calls, and AI usage (extraction and search).
 
-### 3. Store a memory
+    For this guide, use a paid plan so you do not hit Hobby limits mid-way. Checkout runs in Stripe; manage payment later from the same Billing page.
+  </Step>
 
-```bash
-curl -X POST \
-  "https://api.actx0.io/api/v1/workspaces/{workspaceId}/agents/{agentId}/sessions/{sessionId}/memories" \
-  -H "X-Access-Key: $ACTX0_ACCESS_KEY" \
-  -H "Content-Type: application/json" \
-  -H "Accept: application/json" \
-  -d '{
-    "kind": "preference",
-    "content": "User prefers dark mode"
-  }'
-```
+  <Step title="Create an access key">
+    Open **[Settings → Access keys](https://app.actx0.com/settings)** and create a key. Grant permissions for agents, sessions, messages, memories, prompts, and knowledge (create, list, get, query, update, delete as listed).
 
-### 4. Search memories
+    Copy the secret immediately — it is shown only once. Send it as `X-Access-Key`. Keep it on the server, never in a browser or git.
 
-```bash
-curl -X POST \
-  "https://api.actx0.io/api/v1/workspaces/{workspaceId}/agents/{agentId}/sessions/{sessionId}/memories/search" \
-  -H "X-Access-Key: $ACTX0_ACCESS_KEY" \
-  -H "Content-Type: application/json" \
-  -H "Accept: application/json" \
-  -d '{
-    "query": "UI preferences",
-    "limit": 10
-  }'
-```
+    ```bash
+    export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
+    export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
+    ```
+  </Step>
+
+  <Step title="Install a client">
+    <Tabs>
+      <Tab title="Python">
+        ```bash
+        uv add pctx0
+        # or: pip install pctx0
+        ```
+
+        ```python
+        from pctx0 import Pctx0Client
+
+        client = Pctx0Client(
+            access_key="YOUR_ACCESS_KEY",
+            workspace_id="YOUR_WORKSPACE_ID",
+        )
+        ```
+      </Tab>
+      <Tab title="Node.js">
+        ```bash
+        npm install @actx0/nctx0
+        ```
+
+        ```ts
+        import { Nctx0Client } from "@actx0/nctx0";
+
+        const client = new Nctx0Client({
+          accessKey: "YOUR_ACCESS_KEY",
+          workspaceId: "YOUR_WORKSPACE_ID",
+        });
+        ```
+      </Tab>
+      <Tab title="Go">
+        ```bash
+        go get github.com/Actx0/Gctx0
+        ```
+
+        ```go
+        client := gctx0.NewClient(
+          gctx0.WithAccessKey("YOUR_ACCESS_KEY"),
+          gctx0.WithWorkspaceId("YOUR_WORKSPACE_ID"),
+        )
+        defer client.Close()
+        ctx := context.Background()
+        ```
+      </Tab>
+      <Tab title="cURL / Acli">
+        ```bash
+        go install github.com/Actx0/Acli/cmd/acli@latest
+
+        export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
+        export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
+        acli status
+        ```
+
+        REST base URL: `https://app.actx0.com/api/v1`
+      </Tab>
+    </Tabs>
+  </Step>
+
+  <Step title="Create an agent and session">
+    An agent owns conversations. A session is one run — use an external id you already have (`demo-1`, a user id, a ticket number).
+
+    <Tabs>
+      <Tab title="Python">
+        ```python
+        agent = client.agent.create(
+            name="Support bot",
+            description="Handles customer tickets",
+        )
+
+        session = client.session.create(
+            agent.id,
+            external_id="demo-1",
+            title="Demo session",
+        )
+        ```
+      </Tab>
+      <Tab title="Node.js">
+        ```ts
+        const agent = await client.agent.create({
+          name: "Support bot",
+          description: "Handles customer tickets",
+        });
+
+        const session = await client.session.create(agent.id, {
+          externalId: "demo-1",
+          title: "Demo session",
+        });
+        ```
+      </Tab>
+      <Tab title="Go">
+        ```go
+        agent, err := client.Agent.Create(ctx, "Support bot", "Handles customer tickets", gctx0.AgentWriteOptions{})
+        session, err := client.Session.Create(
+          ctx,
+          agent.Id,
+          gctx0.SessionLookup{ExternalID: "demo-1"},
+          "Demo session",
+        )
+        ```
+      </Tab>
+      <Tab title="cURL / Acli">
+        ```bash
+        curl -X POST "https://app.actx0.com/api/v1/workspaces/$ACTX0_WORKSPACE_ID/agents" \
+          -H "X-Access-Key: $ACTX0_ACCESS_KEY" \
+          -H "Content-Type: application/json" \
+          -H "Accept: application/json" \
+          -d '{"name": "Support bot", "description": "Handles customer tickets"}'
+
+        # copy agent id, then:
+        curl -X POST "https://app.actx0.com/api/v1/workspaces/$ACTX0_WORKSPACE_ID/agents/$AGENT_ID/sessions?id=demo-1" \
+          -H "X-Access-Key: $ACTX0_ACCESS_KEY" \
+          -H "Content-Type: application/json" \
+          -H "Accept: application/json" \
+          -d '{"title": "Demo session"}'
+
+        # ---
+        acli agent create "Support bot" --description "Handles customer tickets"
+        acli session create --agent-id "$AGENT_ID" --external-id demo-1 --title "Demo session"
+        ```
+      </Tab>
+    </Tabs>
+  </Step>
+
+  <Step title="Save a user message">
+    Post the user's turn. Actx0 stores it, indexes it, and **extracts a memory in the background** (greetings are skipped; useful facts become `long_lived` or `short_lived`). Assistant replies do not trigger extraction.
+
+    <Tabs>
+      <Tab title="Python">
+        ```python
+        message = client.message.create(
+            agent.id,
+            session.id,
+            {"role": "user", "content": "I prefer dark mode in the dashboard"},
+        )
+        ```
+      </Tab>
+      <Tab title="Node.js">
+        ```ts
+        const message = await client.message.create(agent.id, session.id, {
+          role: "user",
+          content: "I prefer dark mode in the dashboard",
+        });
+        ```
+      </Tab>
+      <Tab title="Go">
+        ```go
+        message, err := client.Message.Create(ctx, agent.Id, session.Id, gctx0.MessageInput{
+          Role:    gctx0.MessageRoleUser,
+          Content: "I prefer dark mode in the dashboard",
+        })
+        ```
+      </Tab>
+      <Tab title="cURL / Acli">
+        ```bash
+        curl -X POST "https://app.actx0.com/api/v1/workspaces/$ACTX0_WORKSPACE_ID/agents/$AGENT_ID/sessions/$SESSION_ID/messages" \
+          -H "X-Access-Key: $ACTX0_ACCESS_KEY" \
+          -H "Content-Type: application/json" \
+          -H "Accept: application/json" \
+          -d '{"role": "user", "content": "I prefer dark mode in the dashboard"}'
+
+        # ---
+        acli message create "I prefer dark mode in the dashboard" \
+          --agent-id "$AGENT_ID" \
+          --session-id "$SESSION_ID" \
+          --role user
+        ```
+      </Tab>
+    </Tabs>
+  </Step>
+
+  <Step title="Search memories">
+    Wait a few seconds for extraction, then search with the next user question. Put the hits in your model prompt.
+
+    You can also **write a memory yourself** when you already know the fact (`kind`: `summary`, `fact`, `preference`, `short_lived`, `long_lived`).
+
+    <Tabs>
+      <Tab title="Python">
+        ```python
+        hits = client.memory.search(
+            agent.id,
+            session.id,
+            query="UI preferences",
+            limit=10,
+        )
+
+        memory = client.memory.create(
+            agent.id,
+            session.id,
+            {"kind": "preference", "content": "User prefers dark mode"},
+        )
+        ```
+      </Tab>
+      <Tab title="Node.js">
+        ```ts
+        const hits = await client.memory.search(agent.id, session.id, {
+          query: "UI preferences",
+          limit: 10,
+        });
+
+        const memory = await client.memory.create(agent.id, session.id, {
+          kind: "preference",
+          content: "User prefers dark mode",
+        });
+        ```
+      </Tab>
+      <Tab title="Go">
+        ```go
+        hits, err := client.Memory.Search(ctx, agent.Id, session.Id, "UI preferences", 10)
+        memory, err := client.Memory.Create(ctx, agent.Id, session.Id, gctx0.MemoryInput{
+          Kind:    gctx0.MemoryKindPreference,
+          Content: "User prefers dark mode",
+        })
+        ```
+      </Tab>
+      <Tab title="cURL / Acli">
+        ```bash
+        curl -X POST "https://app.actx0.com/api/v1/workspaces/$ACTX0_WORKSPACE_ID/agents/$AGENT_ID/sessions/$SESSION_ID/memories/search" \
+          -H "X-Access-Key: $ACTX0_ACCESS_KEY" \
+          -H "Content-Type: application/json" \
+          -H "Accept: application/json" \
+          -d '{"query": "UI preferences", "limit": 10}'
+
+        curl -X POST "https://app.actx0.com/api/v1/workspaces/$ACTX0_WORKSPACE_ID/agents/$AGENT_ID/sessions/$SESSION_ID/memories" \
+          -H "X-Access-Key: $ACTX0_ACCESS_KEY" \
+          -H "Content-Type: application/json" \
+          -H "Accept: application/json" \
+          -d '{"kind": "preference", "content": "User prefers dark mode"}'
+
+        # ---
+        acli memory search "UI preferences" --agent-id "$AGENT_ID" --session-id "$SESSION_ID" --limit 10
+        acli memory add "User prefers dark mode" --agent-id "$AGENT_ID" --session-id "$SESSION_ID" --kind preference
+        ```
+      </Tab>
+    </Tabs>
+  </Step>
+
+  <Step title="Upload knowledge and search it">
+    Knowledge is workspace-wide (FAQs, policies), not session memory. Upload UTF-8 `.txt` or `.md` (max 2 MB). Wait until status is `indexed`, then search.
+
+    <Tabs>
+      <Tab title="Python">
+        ```python
+        doc = client.knowledge.upload(
+            file="notes.md",
+            title="Onboarding notes",
+            labels={"tag": "docs"},
+        )
+
+        chunks = client.knowledge.search(
+            query="onboarding checklist",
+            limit=10,
+        )
+        ```
+      </Tab>
+      <Tab title="Node.js">
+        ```ts
+        const doc = await client.knowledge.upload({
+          file: "notes.md",
+          title: "Onboarding notes",
+          labels: { tag: "docs" },
+        });
+
+        const chunks = await client.knowledge.search({
+          query: "onboarding checklist",
+          limit: 10,
+        });
+        ```
+      </Tab>
+      <Tab title="Go">
+        ```go
+        doc, err := client.Knowledge.Upload(ctx, "notes.md", "Onboarding notes", map[string]string{"tag": "docs"})
+        chunks, err := client.Knowledge.Search(ctx, "onboarding checklist", nil, 10)
+        ```
+      </Tab>
+      <Tab title="cURL / Acli">
+        ```bash
+        curl -X POST "https://app.actx0.com/api/v1/workspaces/$ACTX0_WORKSPACE_ID/documents" \
+          -H "X-Access-Key: $ACTX0_ACCESS_KEY" \
+          -H "Accept: application/json" \
+          -F "title=Onboarding notes" \
+          -F "file=@notes.md" \
+          -F 'labels=["tag=docs"]'
+
+        curl -X POST "https://app.actx0.com/api/v1/workspaces/$ACTX0_WORKSPACE_ID/documents/search" \
+          -H "X-Access-Key: $ACTX0_ACCESS_KEY" \
+          -H "Content-Type: application/json" \
+          -H "Accept: application/json" \
+          -d '{"query": "onboarding checklist", "limit": 10}'
+
+        # ---
+        acli knowledge upload notes.md --title "Onboarding notes" --label tag=docs
+        acli knowledge search "onboarding checklist" --limit 10
+        ```
+      </Tab>
+    </Tabs>
+  </Step>
+
+  <Step title="Store a prompt and fetch it">
+    Save the system prompt in the workspace. At runtime, fetch by handle: `production` for live traffic, `latest` while you iterate.
+
+    <Tabs>
+      <Tab title="Python">
+        ```python
+        prompt = client.prompt.create(
+            name="Support system prompt",
+            type="text",
+            content="You are a helpful support agent. Address the user as {{user_name}}.",
+            description="Primary system prompt",
+            production=True,
+        )
+
+        live = client.prompt.get_by_name("support-system-prompt", version="production")
+        ```
+      </Tab>
+      <Tab title="Node.js">
+        ```ts
+        const prompt = await client.prompt.create({
+          name: "Support system prompt",
+          type: "text",
+          content: "You are a helpful support agent. Address the user as {{user_name}}.",
+          description: "Primary system prompt",
+          production: true,
+        });
+
+        const live = await client.prompt.getByName("support-system-prompt", {
+          version: "production",
+        });
+        ```
+      </Tab>
+      <Tab title="Go">
+        ```go
+        prompt, err := client.Prompt.Create(
+          ctx,
+          "Support system prompt",
+          gctx0.PromptTypeText,
+          "You are a helpful support agent. Address the user as {{user_name}}.",
+          gctx0.PromptWriteOptions{Description: "Primary system prompt"},
+        )
+        live, err := client.Prompt.GetByName(ctx, "support-system-prompt", "production")
+        ```
+      </Tab>
+      <Tab title="cURL / Acli">
+        ```bash
+        curl -X POST "https://app.actx0.com/api/v1/workspaces/$ACTX0_WORKSPACE_ID/prompts" \
+          -H "X-Access-Key: $ACTX0_ACCESS_KEY" \
+          -H "Content-Type: application/json" \
+          -H "Accept: application/json" \
+          -d '{
+            "name": "Support system prompt",
+            "type": "text",
+            "content": "You are a helpful support agent. Address the user as {{user_name}}.",
+            "description": "Primary system prompt",
+            "production": true
+          }'
+
+        curl -X GET "https://app.actx0.com/api/v1/workspaces/$ACTX0_WORKSPACE_ID/promptsByName/support-system-prompt?version=production" \
+          -H "X-Access-Key: $ACTX0_ACCESS_KEY" \
+          -H "Accept: application/json"
+
+        # ---
+        acli prompt create "Support system prompt" \
+          --type text \
+          --content "You are a helpful support agent. Address the user as {{user_name}}." \
+          --description "Primary system prompt"
+        acli prompt get-by-name support-system-prompt --version production
+        ```
+      </Tab>
+    </Tabs>
+  </Step>
+</Steps>
+
+Before each model reply: fetch the prompt, search memories (and knowledge if the question is about your docs), then generate.
+
+<Warning>
+  Keep access keys server-side. Never expose them in browser or mobile clients.
+</Warning>
 
 ***
 
 ## Next steps
 
 <CardGroup cols={2}>
-  <Card title="Create Memory" icon="plus" href="/api-reference/create-memory">
-    Full request and response reference
+  <Card title="Platform overview" icon="cloud" href="/actx0-platform/overview">
+    How messages become memories
   </Card>
-
-  <Card title="Search Memories" icon="search" href="/api-reference/search-memories">
-    Semantic retrieval options
+  <Card title="Agents" icon="bot" href="/actx0-platform/agent">
+    Sessions, messages, and scope
   </Card>
-
-  <Card title="Access Keys" icon="key" href="https://app.actx0.com/settings">
-    Create a workspace access key in the dashboard
+  <Card title="Knowledge" icon="book" href="/actx0-platform/knowledge">
+    Documents, labels, and search
   </Card>
-
-  <Card title="SDK & Tools" icon="box" href="/release-notes/sdk_tools">
-    Python, Node.js, Go, and MCP releases
+  <Card title="API Reference" icon="code" href="/api-reference/overview">
+    Full REST surface and SDK samples
   </Card>
 </CardGroup>
-
-<Warning>
-  Keep access keys server-side. Never expose them in browser or mobile clients.
-</Warning>
