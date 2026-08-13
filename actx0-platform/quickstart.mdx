@@ -8,7 +8,7 @@ icon: "zap"
 
 Get from a new account to saved messages, retrieved memories, indexed knowledge, and a versioned prompt.
 
-You will use the [dashboard](https://app.actx0.com) for workspace, billing, and access keys, then one of **Pctx0** (Python), **Nctx0** (Node.js), **Gtcx0** (Go), or **cURL / Acli**.
+You will use the [dashboard](https://app.actx0.com) for workspace, billing, and access keys, then one of **Pctx0** (Python), **Nctx0** (Node.js), **Gtcx0** (Go), **cURL**, or **Acli**.
 
 ***
 
@@ -81,7 +81,15 @@ You will use the [dashboard](https://app.actx0.com) for workspace, billing, and 
         ctx := context.Background()
         ```
       </Tab>
-      <Tab title="cURL / Acli">
+      <Tab title="cURL">
+        REST base URL: `https://app.actx0.com/api/v1`
+
+        ```bash
+        export ACTX0_ACCESS_KEY="YOUR_ACCESS_KEY"
+        export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
+        ```
+      </Tab>
+      <Tab title="Acli">
         ```bash
         go install github.com/Actx0/Acli/cmd/acli@latest
 
@@ -89,8 +97,6 @@ You will use the [dashboard](https://app.actx0.com) for workspace, billing, and 
         export ACTX0_WORKSPACE_ID="YOUR_WORKSPACE_ID"
         acli status
         ```
-
-        REST base URL: `https://app.actx0.com/api/v1`
       </Tab>
     </Tabs>
   </Step>
@@ -137,7 +143,7 @@ You will use the [dashboard](https://app.actx0.com) for workspace, billing, and 
         )
         ```
       </Tab>
-      <Tab title="cURL / Acli">
+      <Tab title="cURL">
         ```bash
         curl -X POST "https://app.actx0.com/api/v1/workspaces/$ACTX0_WORKSPACE_ID/agents" \
           -H "X-Access-Key: $ACTX0_ACCESS_KEY" \
@@ -151,8 +157,10 @@ You will use the [dashboard](https://app.actx0.com) for workspace, billing, and 
           -H "Content-Type: application/json" \
           -H "Accept: application/json" \
           -d '{"title": "Demo session"}'
-
-        # ---
+        ```
+      </Tab>
+      <Tab title="Acli">
+        ```bash
         acli agent create "Support bot" --description "Handles customer tickets"
         acli session create --agent-id "$AGENT_ID" --external-id demo-1 --title "Demo session"
         ```
@@ -189,15 +197,17 @@ You will use the [dashboard](https://app.actx0.com) for workspace, billing, and 
         })
         ```
       </Tab>
-      <Tab title="cURL / Acli">
+      <Tab title="cURL">
         ```bash
         curl -X POST "https://app.actx0.com/api/v1/workspaces/$ACTX0_WORKSPACE_ID/agents/$AGENT_ID/sessions/$SESSION_ID/messages" \
           -H "X-Access-Key: $ACTX0_ACCESS_KEY" \
           -H "Content-Type: application/json" \
           -H "Accept: application/json" \
           -d '{"role": "user", "content": "I prefer dark mode in the dashboard"}'
-
-        # ---
+        ```
+      </Tab>
+      <Tab title="Acli">
+        ```bash
         acli message create "I prefer dark mode in the dashboard" \
           --agent-id "$AGENT_ID" \
           --session-id "$SESSION_ID" \
@@ -251,7 +261,7 @@ You will use the [dashboard](https://app.actx0.com) for workspace, billing, and 
         })
         ```
       </Tab>
-      <Tab title="cURL / Acli">
+      <Tab title="cURL">
         ```bash
         curl -X POST "https://app.actx0.com/api/v1/workspaces/$ACTX0_WORKSPACE_ID/agents/$AGENT_ID/sessions/$SESSION_ID/memories/search" \
           -H "X-Access-Key: $ACTX0_ACCESS_KEY" \
@@ -264,8 +274,10 @@ You will use the [dashboard](https://app.actx0.com) for workspace, billing, and 
           -H "Content-Type: application/json" \
           -H "Accept: application/json" \
           -d '{"kind": "preference", "content": "User prefers dark mode"}'
-
-        # ---
+        ```
+      </Tab>
+      <Tab title="Acli">
+        ```bash
         acli memory search "UI preferences" --agent-id "$AGENT_ID" --session-id "$SESSION_ID" --limit 10
         acli memory add "User prefers dark mode" --agent-id "$AGENT_ID" --session-id "$SESSION_ID" --kind preference
         ```
@@ -311,7 +323,7 @@ You will use the [dashboard](https://app.actx0.com) for workspace, billing, and 
         chunks, err := client.Knowledge.Search(ctx, "onboarding checklist", nil, 10)
         ```
       </Tab>
-      <Tab title="cURL / Acli">
+      <Tab title="cURL">
         ```bash
         curl -X POST "https://app.actx0.com/api/v1/workspaces/$ACTX0_WORKSPACE_ID/documents" \
           -H "X-Access-Key: $ACTX0_ACCESS_KEY" \
@@ -325,8 +337,10 @@ You will use the [dashboard](https://app.actx0.com) for workspace, billing, and 
           -H "Content-Type: application/json" \
           -H "Accept: application/json" \
           -d '{"query": "onboarding checklist", "limit": 10}'
-
-        # ---
+        ```
+      </Tab>
+      <Tab title="Acli">
+        ```bash
         acli knowledge upload notes.md --title "Onboarding notes" --label tag=docs
         acli knowledge search "onboarding checklist" --limit 10
         ```
@@ -378,7 +392,7 @@ You will use the [dashboard](https://app.actx0.com) for workspace, billing, and 
         live, err := client.Prompt.GetByName(ctx, "support-system-prompt", "production")
         ```
       </Tab>
-      <Tab title="cURL / Acli">
+      <Tab title="cURL">
         ```bash
         curl -X POST "https://app.actx0.com/api/v1/workspaces/$ACTX0_WORKSPACE_ID/prompts" \
           -H "X-Access-Key: $ACTX0_ACCESS_KEY" \
@@ -395,8 +409,10 @@ You will use the [dashboard](https://app.actx0.com) for workspace, billing, and 
         curl -X GET "https://app.actx0.com/api/v1/workspaces/$ACTX0_WORKSPACE_ID/promptsByName/support-system-prompt?version=production" \
           -H "X-Access-Key: $ACTX0_ACCESS_KEY" \
           -H "Accept: application/json"
-
-        # ---
+        ```
+      </Tab>
+      <Tab title="Acli">
+        ```bash
         acli prompt create "Support system prompt" \
           --type text \
           --content "You are a helpful support agent. Address the user as {{user_name}}." \
