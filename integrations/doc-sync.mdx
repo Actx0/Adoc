@@ -54,7 +54,9 @@ Directories include `.md`, `.mdx`, `.markdown`, and `.txt`. Hidden directories, 
     | `ACTX0_ACCESS_KEY` | Workspace access key |
   </Step>
   <Step title="Add a workflow">
-    A complete sample lives in [Actx0/doc-sync-example](https://github.com/Actx0/doc-sync-example).
+    Copy this into `.github/workflows/sync-docs.yml`, or start from [Actx0/doc-sync-example](https://github.com/Actx0/doc-sync-example).
+
+    Pull requests run in dry-run mode. Pushes to `main` upload and replace documents.
 
     ```yaml
     name: Sync docs to Actx0
@@ -154,24 +156,22 @@ Set `dry_run: "true"` to print skip / upload / replace actions without changing 
 
 ***
 
-## CLI
+## Run from a terminal
 
-The same binary ships as a CLI. Release archives are published when a `v*` tag is pushed on [Actx0/doc-sync](https://github.com/Actx0/doc-sync). Pin that exact tag in `uses:` (currently [`v1.0.0`](https://github.com/Actx0/doc-sync/releases/tag/v1.0.0)).
+Use the CLI when you are not on GitHub Actions — from your machine or another CI system.
 
 ```zsh
-go build -o doc-sync ./cmd
+go install github.com/Actx0/doc-sync/cmd@latest
 
-./doc-sync \
+doc-sync \
   --workspace-id "$ACTX0_WORKSPACE_ID" \
   --access-key "$ACTX0_ACCESS_KEY" \
   --tags $'tag: docs\nteam: platform\nrepo: actx0/app' \
   --repo-dir . \
-  --path docs/ \
-  --path 'docs/*.md' \
-  --path docs/file1.md
+  --path docs/
 ```
 
-Flags map to the action inputs. `--path` is repeatable. `--paths` accepts comma or newline-separated values. `--dry-run` compares checksums without uploading.
+`--path` is repeatable. `--dry-run` compares checksums without uploading. Flags match the action inputs above.
 
 ***
 
