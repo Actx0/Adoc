@@ -5,17 +5,17 @@ info:
   description: |-
     REST API for Actx0 workspaces, access keys, agents, sessions, messages, memories, prompts, and knowledge documents.
 
-    Authenticate with `X-Access-Key` (workspace runtime), `X-API-Key` (user), or the `_actx0_session` cookie (dashboard).
+    Authenticate with `X-Access-Key` (workspace), `X-API-Key` (user), or a dashboard session.
 servers:
 - url: https://app.actx0.com/api/v1
   description: Actx0 cloud
 tags:
 - name: Me
-  description: Current principal introspection for X-Access-Key or X-API-Key
+  description: Inspect the authenticated access key or API key
 - name: API Keys
   description: User API keys for X-API-Key auth
 - name: Workspaces
-  description: Multi-tenant workspaces
+  description: Team workspaces
 - name: Access Keys
   description: Scoped workspace keys for agents and SDKs
 - name: Agents

@@ -8,7 +8,7 @@ icon: "plug"
 
 Actx0 speaks **Model Context Protocol** over streamable HTTP. An MCP client (Cursor, Claude, or any compatible agent) gets tools to add, search, update, and delete **session memories** without calling the REST API directly.
 
-The MCP server is a thin proxy: every tool call uses your workspace access key against the Actx0 API. Scope is fixed per connection — workspace, agent, and session come from headers, not from tool arguments.
+Every tool call uses your workspace access key. Scope is fixed per connection — workspace, agent, and session come from headers, not from tool arguments.
 
 Use MCP when the agent already lives in an editor or harness. Use the [REST API](/api-reference/overview) or SDKs when you own the runtime.
 

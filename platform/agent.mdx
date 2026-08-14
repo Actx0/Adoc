@@ -30,7 +30,7 @@ Use a separate agent per product surface — support bot, coding assistant, inte
 | Lose context when a chat ends | Sessions keep messages and memories across runs |
 | Mix users, tickets, or projects in one blob | Scope each conversation with an external id or labels |
 
-Actx0 agents are **unmanaged**: they do not execute your model. Your app (or MCP client) calls the API around the model — write after useful turns, search before the next reply.
+Actx0 does not run your model. Your app (or MCP client) calls the API around it — write after useful turns, search before the next reply.
 
 ***
 
@@ -68,8 +68,8 @@ You send Actx0 **messages**. Memories are the durable facts worth retrieving lat
 
 When you create a **user** message, Actx0:
 
-1. Stores the turn and indexes it for semantic search
-2. Queues LLM extraction of facts, preferences, and summaries
+1. Stores the turn and indexes it for search
+2. Extracts facts, preferences, and summaries from user messages
 3. Deduplicates and consolidates as the session grows
 
 Write memories directly when you already know the fact. Use messages when you want extraction from conversation.
@@ -119,7 +119,7 @@ curl -X POST \
 Then create a session (`?id=ticket-4821`) and start writing messages or memories.
 
 <Info>
-  Agent count is limited by your workspace plan. Deleting an agent removes its sessions; vector cleanup runs in the background.
+  Agent count is limited by your workspace plan. Deleting an agent removes its sessions. Search stops returning that agent's data.
 </Info>
 
 ***

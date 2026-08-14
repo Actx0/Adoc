@@ -6,7 +6,7 @@ icon: "book"
 
 ## Knowledge
 
-**Knowledge** is workspace-scoped RAG: you upload documents, Actx0 chunks and embeds them, and your agents search for relevant passages at query time.
+**Knowledge** is workspace-scoped RAG: you upload documents, Actx0 indexes them, and your agents search for relevant passages at query time.
 
 Knowledge is shared across agents in the workspace. Session **memories** are personal facts from a conversation. Knowledge is the manual, policy, or FAQ you want every agent to cite.
 
@@ -37,9 +37,8 @@ Use knowledge when the answer should come from your documents. Use memories when
 Upload a UTF-8 `.txt` or `.md` file (max 2 MB) with a title and optional labels.
 
 1. **Store.** Actx0 saves the file and creates a document in `processing` status.
-2. **Chunk.** Text is split with a recursive splitter. Chunk size scales with document length (about 2k / 4k / 10k characters, with 20% overlap).
-3. **Embed.** Each chunk is embedded and written to the workspace knowledge index.
-4. **Ready.** Status becomes `indexed`. Failed jobs are marked `failed`.
+2. **Index.** The text is split into overlapping passages and made searchable.
+3. **Ready.** Status becomes `indexed`. Failed jobs are marked `failed`.
 
 <Info>
   Indexing is asynchronous. Search only returns hits from documents that have finished indexing.
@@ -47,7 +46,7 @@ Upload a UTF-8 `.txt` or `.md` file (max 2 MB) with a title and optional labels.
 
 ### 2. Retrieve (reading knowledge)
 
-Before a model call, search with the user's question. Actx0 embeds the query, filters by workspace (and optional `tag`), and returns scored chunks — `documentId`, `chunkId`, `score`, and `text`.
+Before a model call, search with the user's question. Actx0 filters by workspace (and optional `tag`) and returns scored passages — `documentId`, `chunkId`, `score`, and `text`.
 
 Pass those passages into the prompt. Your app decides which hits to include.
 
@@ -92,11 +91,11 @@ Default search `limit` is 10 (max 100).
 
 | Status | Meaning |
 | --- | --- |
-| `processing` | Upload accepted; chunking and embedding in progress |
+| `processing` | Upload accepted; indexing in progress |
 | `indexed` | Chunks are searchable |
 | `failed` | Indexing failed; re-upload or delete |
 
-You can list documents, inspect size and character count, and delete a document. Delete removes the row immediately; storage and vector cleanup run in the background.
+You can list documents, inspect size and character count, and delete a document. Delete takes effect immediately; search stops returning that document.
 
 ***
 

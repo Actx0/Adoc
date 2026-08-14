@@ -1,6 +1,6 @@
 ---
 title: "Platform"
-description: "Release notes for the Actx0 hosted platform: backend, dashboard, billing, and infrastructure changes."
+description: "Release notes for the Actx0 hosted platform: dashboard, billing, and API."
 icon: "server"
 mode: "wide"
 ---
@@ -35,14 +35,14 @@ mode: "wide"
 **New Features:**
 
 - **Memory:** Multi-tenant memory platform for AI agents — workspaces, agents, sessions, messages, and session memories with kinds `summary`, `fact`, `preference`, `short_lived`, and `long_lived`
-- **Memory:** Async LLM extraction and consolidation on user message create, plus memory regenerate from session history
+- **Memory:** Automatic extraction and consolidation when you create a user message, plus regenerate from session history
 - **Search:** Semantic search over session memories, session messages, and knowledge documents
 - **Knowledge:** Document upload (`.txt` / `.md`) with async indexing
 - **Prompts:** Versioned workspace prompts with get-by-name
 - **Auth:** Email register/login, verify, forgot/reset password; GitHub OAuth; API keys and scoped workspace access keys
 - **Workspaces:** Members, invites, roles (`owner` / `admin`), audit log, and notifications
-- **Billing:** Stripe Checkout and Customer Portal with Hobby, Starter, Growth, and Pro plans
-- **UI:** Dashboard, Agents, Knowledge, Prompts, Integrations, Audits, Billing, Members, Settings (en/fr)
-- **API:** `/api/v1` management API with `X-API-Key`, `X-Access-Key`, or session cookie auth
+- **Billing:** Checkout and self-serve billing portal with Hobby, Starter, Growth, and Pro plans
+- **UI:** Dashboard, Agents, Knowledge, Prompts, Integrations, Audits, Billing, Members, Settings (English and French)
+- **API:** `/api/v1` with workspace access keys, user API keys, and dashboard sign-in
 
 </Update>
