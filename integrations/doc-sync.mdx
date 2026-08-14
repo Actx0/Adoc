@@ -54,7 +54,7 @@ Directories include `.md`, `.mdx`, `.markdown`, and `.txt`. Hidden directories, 
     | `ACTX0_ACCESS_KEY` | Workspace access key |
   </Step>
   <Step title="Add a workflow">
-    Pin the action to `@v1`. Tagged runs download a release binary; untagged refs build from source.
+    A complete sample lives in [Actx0/doc-sync-example](https://github.com/Actx0/doc-sync-example).
 
     ```yaml
     name: Sync docs to Actx0
@@ -62,8 +62,8 @@ Directories include `.md`, `.mdx`, `.markdown`, and `.txt`. Hidden directories, 
     on:
       push:
         branches: [main]
-        paths:
-          - "docs/**"
+      pull_request:
+      workflow_dispatch:
 
     jobs:
       sync:
@@ -71,15 +71,17 @@ Directories include `.md`, `.mdx`, `.markdown`, and `.txt`. Hidden directories, 
         steps:
           - uses: actions/checkout@v4
 
-          - uses: Actx0/doc-sync@v1
+          - uses: Actx0/doc-sync@v1.0.0
             with:
               workspace_id: ${{ secrets.ACTX0_WORKSPACE_ID }}
               access_key: ${{ secrets.ACTX0_ACCESS_KEY }}
               tags: |
                 tag: docs
                 repo: ${{ github.repository }}
+                team: platform
               paths: |
                 docs/
+              dry_run: ${{ github.event_name == 'pull_request' }}
     ```
   </Step>
 </Steps>
@@ -137,7 +139,7 @@ tags: |
 The step also writes a job summary table. If any file fails, the action exits non-zero.
 
 ```yaml
-- uses: Actx0/doc-sync@v1
+- uses: Actx0/doc-sync@v1.0.0
   id: sync
   with:
     workspace_id: ${{ secrets.ACTX0_WORKSPACE_ID }}
@@ -154,7 +156,7 @@ Set `dry_run: "true"` to print skip / upload / replace actions without changing 
 
 ## CLI
 
-The same binary ships as a CLI. Release archives are published when a `v*` tag is pushed on [Actx0/doc-sync](https://github.com/Actx0/doc-sync).
+The same binary ships as a CLI. Release archives are published when a `v*` tag is pushed on [Actx0/doc-sync](https://github.com/Actx0/doc-sync). Pin that exact tag in `uses:` (currently [`v1.0.0`](https://github.com/Actx0/doc-sync/releases/tag/v1.0.0)).
 
 ```zsh
 go build -o doc-sync ./cmd
@@ -179,13 +181,13 @@ Flags map to the action inputs. `--path` is repeatable. `--paths` accepts comma 
   <Card title="Knowledge" icon="book" href="/platform/knowledge">
     How documents are chunked, indexed, and searched
   </Card>
+  <Card title="Example repo" icon="github" href="https://github.com/Actx0/doc-sync-example">
+    Sample docs and a workflow
+  </Card>
   <Card title="Upload Document" icon="upload" href="/api-reference/upload-document">
     Multipart upload, labels, and limits
   </Card>
   <Card title="Search Documents" icon="search" href="/api-reference/search-documents">
     Semantic retrieval over indexed chunks
-  </Card>
-  <Card title="Integrations" icon="plug" href="/integrations/overview">
-    Other connectors for the workspace memory layer
   </Card>
 </CardGroup>
