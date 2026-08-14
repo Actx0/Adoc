@@ -18,7 +18,7 @@ mint dev
 | `index.mdx` | Docs home |
 | `platform/` | Platform overview, quickstart, agents, knowledge, prompts, MCP |
 | `api-reference/` | API overview |
-| `integrations/` | Integrations |
+| `integrations/` | Integrations (Doc Sync and planned connectors) |
 | `agent-plugins/` | Agent plugins |
 | `release-notes/` | Platform and SDK release notes |
 

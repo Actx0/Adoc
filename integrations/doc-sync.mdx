@@ -1,0 +1,193 @@
+---
+title: "Doc Sync"
+description: "Sync repository docs into an Actx0 workspace knowledge base from GitHub Actions."
+icon: "folder-sync"
+---
+
+## Doc Sync
+
+[Doc Sync](https://github.com/Actx0/doc-sync) is a GitHub Action that uploads markdown and text files from your repo into [workspace knowledge](/platform/knowledge). Unchanged files are skipped by checksum. Changed files replace the previous document with the same filename and labels.
+
+Use it when product specs, runbooks, or FAQs already live in git and you want agents to retrieve them without a manual upload step.
+
+***
+
+## The mental model
+
+| Without Doc Sync | With Doc Sync |
+| --- | --- |
+| Upload each `.md` / `.txt` file from the dashboard or API | A workflow keeps knowledge in lockstep with the repo |
+| Stale manuals stay indexed after a docs PR | Checksums skip unchanged files and replace the rest |
+| Filenames and labels drift across uploads | The same path and tags identify a document on every run |
+
+Knowledge is workspace-scoped RAG. Doc Sync only **indexes**. Agents still [search documents](/api-reference/search-documents) at query time.
+
+***
+
+## How a run works
+
+1. Collect files from `paths` (files, directories, or globs) relative to `repo_dir`.
+2. List existing knowledge in the workspace and keep documents whose labels match `tags`.
+3. For each local file, compare checksums against a remote document with the same filename.
+4. **Skip** when the checksum already matches. **Replace** when it changed (delete the old document, then upload). **Upload** when the file is new.
+
+Directories include `.md`, `.mdx`, `.markdown`, and `.txt`. Hidden directories, `node_modules`, and `vendor` are ignored. The document title is derived from the path (extension stripped; `-` and `_` become spaces). The stored filename is the path relative to `repo_dir`.
+
+<Info>
+  Matching is scoped by **filename and labels**. The same path with different tags is a different document. Only documents that carry exactly the tags you pass are skipped, replaced, or cleaned up.
+</Info>
+
+***
+
+## Set up the GitHub Action
+
+<Steps>
+  <Step title="Create an access key">
+    In [Settings → Access keys](https://app.actx0.com/settings), create a key with **knowledge** permissions to list, upload, and delete documents.
+
+    Copy the workspace id and the key secret (shown once). Use a dedicated key for this integration.
+  </Step>
+  <Step title="Add repository secrets">
+    In the GitHub repo, add:
+
+    | Secret | Value |
+    | --- | --- |
+    | `ACTX0_WORKSPACE_ID` | Workspace UUID |
+    | `ACTX0_ACCESS_KEY` | Workspace access key |
+  </Step>
+  <Step title="Add a workflow">
+    Pin the action to `@v1`. Tagged runs download a release binary; untagged refs build from source.
+
+    ```yaml
+    name: Sync docs to Actx0
+
+    on:
+      push:
+        branches: [main]
+        paths:
+          - "docs/**"
+
+    jobs:
+      sync:
+        runs-on: ubuntu-latest
+        steps:
+          - uses: actions/checkout@v4
+
+          - uses: Actx0/doc-sync@v1
+            with:
+              workspace_id: ${{ secrets.ACTX0_WORKSPACE_ID }}
+              access_key: ${{ secrets.ACTX0_ACCESS_KEY }}
+              tags: |
+                tag: docs
+                repo: ${{ github.repository }}
+              paths: |
+                docs/
+    ```
+  </Step>
+</Steps>
+
+<Warning>
+  Keep access keys in GitHub secrets. Do not commit them to the workflow file.
+</Warning>
+
+***
+
+## Inputs
+
+| Input | Required | Default | Description |
+| --- | --- | --- | --- |
+| `workspace_id` | Yes | — | Actx0 workspace id |
+| `access_key` | Yes | — | Workspace access key |
+| `paths` | Yes | — | Files, directories, or globs to sync, one per line |
+| `tags` | No | empty | Knowledge labels, one `key: value` per line |
+| `repo_dir` | No | `github.workspace` | Repository root used to resolve paths |
+| `base_url` | No | `https://app.actx0.com` | Actx0 API base URL |
+| `dry_run` | No | `false` | Compare checksums without uploading or deleting |
+
+`paths` examples:
+
+```yaml
+paths: |
+  docs/
+  docs/*.md
+  docs/file1.md
+  README.md
+```
+
+A directory walk only picks markdown and text files. A glob or explicit file can select any matching path. A glob that matches nothing fails the step.
+
+`tags` become knowledge labels (`key=value`). Prefer a `tag` label so [document search](/platform/knowledge#labels-and-filters) can filter the corpus:
+
+```yaml
+tags: |
+  tag: docs
+  repo: ${{ github.repository }}
+  team: platform
+```
+
+***
+
+## Outputs
+
+| Output | Meaning |
+| --- | --- |
+| `uploaded` | New documents created |
+| `replaced` | Documents replaced after a checksum change |
+| `skipped` | Documents whose checksum already matched |
+| `failed` | Documents that failed to sync |
+
+The step also writes a job summary table. If any file fails, the action exits non-zero.
+
+```yaml
+- uses: Actx0/doc-sync@v1
+  id: sync
+  with:
+    workspace_id: ${{ secrets.ACTX0_WORKSPACE_ID }}
+    access_key: ${{ secrets.ACTX0_ACCESS_KEY }}
+    paths: |
+      docs/
+
+- run: echo "uploaded=${{ steps.sync.outputs.uploaded }}"
+```
+
+Set `dry_run: "true"` to print skip / upload / replace actions without changing knowledge.
+
+***
+
+## CLI
+
+The same binary ships as a CLI. Release archives are published when a `v*` tag is pushed on [Actx0/doc-sync](https://github.com/Actx0/doc-sync).
+
+```zsh
+go build -o doc-sync ./cmd
+
+./doc-sync \
+  --workspace-id "$ACTX0_WORKSPACE_ID" \
+  --access-key "$ACTX0_ACCESS_KEY" \
+  --tags $'tag: docs\nteam: platform\nrepo: actx0/app' \
+  --repo-dir . \
+  --path docs/ \
+  --path 'docs/*.md' \
+  --path docs/file1.md
+```
+
+Flags map to the action inputs. `--path` is repeatable. `--paths` accepts comma or newline-separated values. `--dry-run` compares checksums without uploading.
+
+***
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Knowledge" icon="book" href="/platform/knowledge">
+    How documents are chunked, indexed, and searched
+  </Card>
+  <Card title="Upload Document" icon="upload" href="/api-reference/upload-document">
+    Multipart upload, labels, and limits
+  </Card>
+  <Card title="Search Documents" icon="search" href="/api-reference/search-documents">
+    Semantic retrieval over indexed chunks
+  </Card>
+  <Card title="Integrations" icon="plug" href="/integrations/overview">
+    Other connectors for the workspace memory layer
+  </Card>
+</CardGroup>
