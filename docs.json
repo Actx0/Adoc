@@ -36,6 +36,11 @@
       "measurementId": "G-2YXJJ248DY"
     }
   },
+  "seo": {
+    "metatags": {
+      "canonical": "https://docs.actx0.com"
+    }
+  },
   "api": {
     "playground": {
       "display": "interactive"
